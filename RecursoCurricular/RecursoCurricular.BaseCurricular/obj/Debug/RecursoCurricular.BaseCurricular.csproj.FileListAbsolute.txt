@@ -1,0 +1,11 @@
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\bin\Debug\RecursoCurricular.BaseCurricular.dll
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\bin\Debug\RecursoCurricular.BaseCurricular.pdb
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\bin\Debug\FluentLinqToSql.dll
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\bin\Debug\RecursoCurricular.dll
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\bin\Debug\RecursoCurricular.Educacion.dll
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\bin\Debug\FluentLinqToSql.pdb
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\bin\Debug\RecursoCurricular.Educacion.pdb
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\bin\Debug\RecursoCurricular.pdb
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\obj\Debug\RecursoCurricular.BaseCurricular.csprojResolveAssemblyReference.cache
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\obj\Debug\RecursoCurricular.BaseCurricular.dll
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\obj\Debug\RecursoCurricular.BaseCurricular.pdb

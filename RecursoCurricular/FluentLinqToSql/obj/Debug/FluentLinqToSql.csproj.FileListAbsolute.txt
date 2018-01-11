@@ -1,0 +1,14 @@
+C:\Proyectos\Animate\FluentLinqToSql\bin\Debug\FluentLinqToSql.dll
+C:\Proyectos\Animate\FluentLinqToSql\bin\Debug\FluentLinqToSql.pdb
+C:\Proyectos\Animate\FluentLinqToSql\obj\Debug\FluentLinqToSql.dll
+C:\Proyectos\Animate\FluentLinqToSql\obj\Debug\FluentLinqToSql.pdb
+C:\Proyectos\Evaluaciones\Evaluaciones\FluentLinqToSql\bin\Debug\FluentLinqToSql.dll
+C:\Proyectos\Evaluaciones\Evaluaciones\FluentLinqToSql\bin\Debug\FluentLinqToSql.pdb
+C:\Proyectos\Evaluaciones\Evaluaciones\FluentLinqToSql\obj\Debug\FluentLinqToSql.dll
+C:\Proyectos\Evaluaciones\Evaluaciones\FluentLinqToSql\obj\Debug\FluentLinqToSql.pdb
+C:\Proyectos\Evaluaciones\Evaluaciones\FluentLinqToSql\obj\Debug\FluentLinqToSql.csprojResolveAssemblyReference.cache
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\FluentLinqToSql\bin\Debug\FluentLinqToSql.dll
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\FluentLinqToSql\bin\Debug\FluentLinqToSql.pdb
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\FluentLinqToSql\obj\Debug\FluentLinqToSql.csprojResolveAssemblyReference.cache
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\FluentLinqToSql\obj\Debug\FluentLinqToSql.dll
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\FluentLinqToSql\obj\Debug\FluentLinqToSql.pdb

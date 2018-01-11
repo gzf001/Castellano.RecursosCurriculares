@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{040ED32E-58E8-45FD-91EE-6F205F8353A8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RecursoCurricular.RecursosCurriculares</RootNamespace>
+    <AssemblyName>RecursoCurricular.RecursosCurriculares</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Business\Aprendizaje.cs" />
+    <Compile Include="Business\AprendizajeContenido.cs" />
+    <Compile Include="Business\AprendizajeIndicador.cs" />
+    <Compile Include="Business\AprendizajeObjetivoVertical.cs" />
+    <Compile Include="Business\Contenido.cs" />
+    <Compile Include="Business\Eje.cs" />
+    <Compile Include="Business\ObjetivoTransversal.cs" />
+    <Compile Include="Business\ObjetivoTransversalIndicador.cs" />
+    <Compile Include="Business\ObjetivoVertical.cs" />
+    <Compile Include="Business\Unidad.cs" />
+    <Compile Include="Business\UnidadAprendizaje.cs" />
+    <Compile Include="Context.cs" />
+    <Compile Include="Entity\Aprendizaje.cs" />
+    <Compile Include="Entity\AprendizajeContenido.cs" />
+    <Compile Include="Entity\AprendizajeIndicador.cs" />
+    <Compile Include="Entity\AprendizajeObjetivoVertical.cs" />
+    <Compile Include="Entity\Contenido.cs" />
+    <Compile Include="Entity\Eje.cs" />
+    <Compile Include="Entity\ObjetivoTransversal.cs" />
+    <Compile Include="Entity\ObjetivoTransversalIndicador.cs" />
+    <Compile Include="Entity\ObjetivoVertical.cs" />
+    <Compile Include="Entity\Unidad.cs" />
+    <Compile Include="Entity\UnidadAprendizaje.cs" />
+    <Compile Include="Persistent\Aprendizaje.cs" />
+    <Compile Include="Persistent\AprendizajeContenido.cs" />
+    <Compile Include="Persistent\AprendizajeIndicador.cs" />
+    <Compile Include="Persistent\AprendizajeObjetivoVertical.cs" />
+    <Compile Include="Persistent\Contenido.cs" />
+    <Compile Include="Persistent\Eje.cs" />
+    <Compile Include="Persistent\ObjetivoTransversal.cs" />
+    <Compile Include="Persistent\ObjetivoTransversalIndicador.cs" />
+    <Compile Include="Persistent\ObjetivoVertical.cs" />
+    <Compile Include="Persistent\Unidad.cs" />
+    <Compile Include="Persistent\UnidadAprendizaje.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Query.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FluentLinqToSql\FluentLinqToSql.csproj">
+      <Project>{7814be78-9a53-41f1-af08-a845203c900a}</Project>
+      <Name>FluentLinqToSql</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RecursoCurricular.Educacion\RecursoCurricular.Educacion.csproj">
+      <Project>{f2f77c22-b3a6-4ea8-8f88-58c9234ab08e}</Project>
+      <Name>RecursoCurricular.Educacion</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RecursoCurricular\RecursoCurricular.csproj">
+      <Project>{31fe3606-5aba-44fb-9284-3ddbb8f68ffe}</Project>
+      <Name>RecursoCurricular</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
