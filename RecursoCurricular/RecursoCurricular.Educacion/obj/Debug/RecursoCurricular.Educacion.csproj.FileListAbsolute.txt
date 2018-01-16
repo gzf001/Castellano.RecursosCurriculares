@@ -2,17 +2,14 @@ C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Educacion\bin\Debug\RecursoCurricular.Educacion.pdb
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Educacion\bin\Debug\FluentLinqToSql.dll
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Educacion\bin\Debug\RecursoCurricular.dll
-C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Educacion\bin\Debug\FluentLinqToSql.pdb
-C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Educacion\bin\Debug\RecursoCurricular.pdb
-C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Educacion\obj\Debug\RecursoCurricular.Educacion.csprojResolveAssemblyReference.cache
-C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Educacion\obj\Debug\RecursoCurricular.Educacion.dll
-C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Educacion\obj\Debug\RecursoCurricular.Educacion.pdb
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Educacion\bin\Debug\System.Web.Mvc.dll
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Educacion\bin\Debug\System.Web.Razor.dll
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Educacion\bin\Debug\System.Web.WebPages.Razor.dll
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Educacion\bin\Debug\System.Web.WebPages.dll
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Educacion\bin\Debug\Microsoft.Web.Infrastructure.dll
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Educacion\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Educacion\bin\Debug\FluentLinqToSql.pdb
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Educacion\bin\Debug\RecursoCurricular.pdb
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Educacion\bin\Debug\System.Web.Mvc.xml
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Educacion\bin\Debug\System.Web.Razor.xml
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Educacion\bin\Debug\System.Web.WebPages.Razor.xml
@@ -23,3 +20,6 @@ C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Educacion\bin\Debug\es\System.Web.WebPages.Razor.resources.dll
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Educacion\bin\Debug\es\System.Web.WebPages.resources.dll
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Educacion\bin\Debug\es\System.Web.WebPages.Deployment.resources.dll
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Educacion\obj\Debug\RecursoCurricular.Educacion.csprojResolveAssemblyReference.cache
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Educacion\obj\Debug\RecursoCurricular.Educacion.dll
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Educacion\obj\Debug\RecursoCurricular.Educacion.pdb

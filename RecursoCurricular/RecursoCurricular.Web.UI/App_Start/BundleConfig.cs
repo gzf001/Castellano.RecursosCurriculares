@@ -1,7 +1,10 @@
-﻿using System.Web;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using System.Web.Optimization;
 
-namespace RecursoCurricular.Web.UI
+namespace RecursoCurricular.Web.UI.App_Start
 {
     public class BundleConfig
     {
@@ -81,7 +84,7 @@ namespace RecursoCurricular.Web.UI
             bundles.Add(address.Include("~/Content/theme/vendor/plugins/xeditable/inputs/address/address.css"));
 
             bundles.Add(typeahead_bootstrap.Include("~/Content/theme/vendor/plugins/xeditable/inputs/typeaheadjs/lib/typeahead.js-bootstrap.css"));
-
+            
             #endregion
 
             #region JS
@@ -112,7 +115,7 @@ namespace RecursoCurricular.Web.UI
             //Debe ser implmentado directamente en la página que lo requiera
             ScriptBundle steps = new ScriptBundle("~/Content/steps");
 
-            ScriptBundle masks = new ScriptBundle("~/Content/Masks");
+            ScriptBundle masks = new ScriptBundle("~/Content/masks");
 
             ScriptBundle dataTables = new ScriptBundle("~/Content/dataTables");
 
@@ -204,14 +207,6 @@ namespace RecursoCurricular.Web.UI
             bundles.Add(empresa.Include("~/Content/js/admin/empresas/empresas.js"));
             bundles.Add(centroCosto.Include("~/Content/js/admin/centrosCosto/centrosCosto.js"));
             bundles.Add(usuariosConectados.Include("~/Content/js/admin/usuariosConectados/usuariosConectados.js"));
-
-            #endregion
-
-            #region Banco de preguntas
-
-            ScriptBundle bancoPregunta = new ScriptBundle("~/js/bancoPregunta");
-
-            bundles.Add(bancoPregunta.Include("~/Content/js/bancoPreguntas/bancoPreguntas.js"));
 
             #endregion
 
