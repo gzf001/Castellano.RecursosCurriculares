@@ -12,10 +12,18 @@ namespace RecursoCurricular.Web.UI.Models
         {
             RecursoCurricular.Membresia.Usuario usuario = RecursoCurricular.Membresia.Usuario.Get(id);
 
+            RecursoCurricular.Membresia.Perfil perfil = RecursoCurricular.Membresia.Perfil.PerfilAnio;
+
+            RecursoCurricular.Membresia.PerfilUsuario perfilUsuario = RecursoCurricular.Membresia.PerfilUsuario.Get(perfil, usuario);
+
             this.UserName = string.Format("{0} {1} {2}", usuario.Persona.Nombres, usuario.Persona.ApellidoPaterno, string.IsNullOrEmpty(usuario.Persona.ApellidoMaterno) ? usuario.Persona.ApellidoMaterno : string.Empty);
+
+            this.Anio = perfilUsuario == null ? string.Empty : perfilUsuario.Valor;
         }
 
         private string userName;
+        private string anio;
+
         public string UserName
         {
             get
@@ -28,21 +36,16 @@ namespace RecursoCurricular.Web.UI.Models
             }
         }
 
-        [Display(Name = "Unidad:")]
-        public string Unidad
+        [Display(Name = "Año:")]
+        public string Anio
         {
             get
             {
-                return "Unidad en duro";
+                return anio;
             }
-        }
-
-        [Display(Name = "Nivel:")]
-        public string Nivel
-        {
-            get
+            set
             {
-                return "Nivel en duro";
+                anio = value;
             }
         }
     }

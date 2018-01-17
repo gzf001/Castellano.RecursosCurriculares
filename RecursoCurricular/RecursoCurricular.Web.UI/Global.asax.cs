@@ -17,6 +17,30 @@ namespace RecursoCurricular.Web.UI
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            this.Application["NumberUsers"] = 0;
+        }
+
+        protected void Session_Start(object sender, EventArgs e)
+        {
+            this.Application["NumberUsers"] = ((int)this.Application["NumberUsers"]) + 1;
+        }
+
+        void Session_End(object sender, EventArgs e)
+        {
+            this.Application["NumberUsers"] = ((int)this.Application["NumberUsers"]) - 1;
+        }
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            if ((sender as System.Web.HttpApplication).Context.AllErrors.Select<Exception, string>(x => x.Message).Contains(RecursoCurricular.Web.CustomError.SinPermiso_403.ToString()))
+            {
+                this.Response.Redirect("/Utils/Error", true);
+            }
+            else if (((sender as System.Web.HttpApplication).Context.AllErrors.Select<Exception, string>(x => x.Message).Contains(RecursoCurricular.Web.CustomError.SinPerfilEstablecido_500.ToString())))
+            {
+                this.Response.Redirect("/Selector/Selector", true);
+            }
         }
     }
 }

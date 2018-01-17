@@ -2,6 +2,7 @@
 {
     public enum CustomError
     {
-        SinPermiso_403
+        SinPermiso_403,
+        SinPerfilEstablecido_500
     }
 }

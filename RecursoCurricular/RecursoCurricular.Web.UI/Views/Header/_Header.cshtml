@@ -1,13 +1,9 @@
 ﻿@model RecursoCurricular.Web.UI.Models.PartialHeader
 
 <ul class="nav navbar-nav navbar-right">
-    @*<li>
-        <span class="label bg-primary mr10">Unidad: @Model.Unidad</span>
-    </li>
     <li>
-        <span class="label bg-primary mr10">Nivel: @Model.Nivel</span>
-    </li>*@
-
+         @Html.ActionLink(string.Format("Año: {0}", @Model.Anio), "Selector", "Selector", new { area = "" }, new { @class = "btn active btn-block text-white" })
+    </li>
     <li class="dropdown">
         <a href="#" class="dropdown-toggle fw600 p15" data-toggle="dropdown">
             <img src="/Content/images/avatars/avatar_incognito.png" alt="avatar" class="mw30 br64 mr15"> @Model.UserName

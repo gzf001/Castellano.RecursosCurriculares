@@ -2,7 +2,6 @@
 {
 	public enum PerfilType
 	{
-        Aplicacion,
 		Anio
 	}
 }

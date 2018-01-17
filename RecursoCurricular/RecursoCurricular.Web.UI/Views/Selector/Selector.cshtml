@@ -1,0 +1,40 @@
+﻿@model RecursoCurricular.Web.UI.Models.Selector
+
+@{
+    ViewBag.Title = "Selector";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="tray tray-center">
+    <div class="center-block center-children">
+        <div class="admin-form theme-primary mw320 active">
+            <div class="panel panel-primary heading-border">
+                <div class="panel-heading">
+                    <span class="panel-title">
+                        <i class="fa fa-crosshairs"></i>Selección de Año
+                    </span>
+                </div>
+                @using (Html.BeginForm("Selector", "Selector", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="panel-body p25 text-center">
+                        <div class="col-sm-12 pl15">
+                            @foreach (RecursoCurricular.Anio anio in RecursoCurricular.Anio.GetAll())
+                            {
+                                <div class="bs-component">
+                                    <div class="radio-custom radio-primary mb5">
+                                        @Html.RadioButtonFor(x => x.Numero, anio.Numero, new { @id = anio.Numero })
+                                        <label for=@anio.Numero>@anio.Numero</label>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="panel-footer pull-right">
+                        <button type="submit" id="save" class="button btn-primary">Establecer</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

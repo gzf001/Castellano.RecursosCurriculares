@@ -1,0 +1,363 @@
+﻿@model RecursoCurricular.Web.UI.Areas.Administracion.Models.Usuario
+
+@{
+    ViewBag.Title = "Usuarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="row">
+        <div id="form" class="admin-form">
+            <div class="panel">
+                <div class="panel-heading">
+                    <span class="panel-title">Administración de usuarios</span>
+                </div>
+                <div class="form-horizontal">
+                    <div class="panel-body">
+                        <div class="section row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(x => x.Persona.Nombres, new { @for = "searchName", @class = "field-label" })
+                                <label class="field select">
+                                    @Html.TextBoxFor(x => x.Persona.Nombres, new { @class = "gui-input", @id = "searchName", @placeholder = "Nombre", @maxLength = "60" })
+                                </label>
+                                <label for="FindType" class="field prepend-icon">
+                                    <label class="radio-inline mr10">
+                                        @Html.RadioButtonFor(x => x.FindType, RecursoCurricular.FindType.Equals, new { @id = "findType" })
+                                        Igual
+                                    </label>
+                                    <label class="radio-inline mr10">
+                                        @Html.RadioButtonFor(x => x.FindType, RecursoCurricular.FindType.Contains, new { @id = "findType" })
+                                        Contiene
+                                    </label>
+                                    <label class="radio-inline mr10">
+                                        @Html.RadioButtonFor(x => x.FindType, RecursoCurricular.FindType.StartsWith, new { @id = "findType" })
+                                        Inicia
+                                    </label>
+                                    <label class="radio-inline mr10">
+                                        @Html.RadioButtonFor(x => x.FindType, RecursoCurricular.FindType.EndsWith, new { @id = "findType" })
+                                        Termina
+                                    </label>
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(x => x.Persona.Run, new { @for = "searchRun", @class = "field-label" })
+                                <label class="field select">
+                                    @Html.TextBoxFor(x => x.Persona.Run, new { @class = "gui-input rut", @id = "searchRun", @placeholder = "R.U.N.", @maxLength = "11" })
+                                </label>
+                            </div>
+                        </div>
+                        <div class="pull-left col-md-3">
+                            <a class="btn btn-success btn-xs" href="#" title="Agregar usuario" typebutton="Add"><i class="fa fa-plus"></i></a>
+                        </div>
+                        <div class="pull-right col-md-3">
+                            <button type="button" id="cancel" class="button btn-dark">Cancelar</button>
+                            <button id="search" class="button btn-primary" typeButton="Accept">Buscar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="panel panel-visible" id="spy2">
+            <div class="panel-heading">
+                <div class="panel-title hidden-xs">
+                    <span class="glyphicon glyphicon-tasks"></span>Buscar y Filtrar
+                </div>
+            </div>
+            <div class="panel-body pn">
+                <table class="table table-striped table-hover" id="gridView" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>R.U.N.</th>
+                            <th>Estado</th>
+                            <th>Último acceso</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-form-principal" class="popup-basic admin-form mfp-with-anim mfp-hide mw800">
+    <div class="panel">
+        <div class="panel-heading">
+            <span class="panel-title">Datos personales</span>
+        </div>
+        <form id="formModalUser" method="post">
+            <div class="panel-body">
+                <div class="section row">
+                    <div class="col-md-4">
+                        @Html.LabelFor(x => x.Persona.Run, new { @for = "run", @class = "field-label" })
+                        <label for="run" class="field prepend-icon">
+                            @Html.TextBoxFor(x => x.Persona.Run, new { @class = "gui-input rut", @id = "run", @placeholder = "R.U.N.", @maxLength = "14" })
+                            <label for="run" class="field-icon">
+                                <i class="fa fa-user"></i>
+                            </label>
+                        </label>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="field-label">&nbsp;</span>
+                        <button type="button" id="searchPerson" class="button btn-primary" typeButton="Accept">Buscar</button>
+                    </div>
+                </div>
+                <div class="section row">
+                    <div class="col-md-4">
+                        @Html.LabelFor(x => x.Persona.Nombres, new { @for = "nombres", @class = "field-label" })
+                        <label for="nombres" class="field prepend-icon">
+                            @Html.TextBoxFor(x => x.Persona.Nombres, new { @class = "gui-input", @id = "nombres", @placeholder = "Nombres", @maxLength = "45" })
+                            <label for="nombres" class="field-icon">
+                                <i class="fa fa-user"></i>
+                            </label>
+                        </label>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.LabelFor(x => x.Persona.ApellidoPaterno, new { @for = "apellidoPaterno", @class = "field-label" })
+                        <label for="apellidoPaterno" class="field prepend-icon">
+                            @Html.TextBoxFor(x => x.Persona.ApellidoPaterno, new { @class = "gui-input", @id = "apellidoPaterno", @placeholder = "Apellido paterno", @maxLength = "45" })
+                            <label for="apellidoPaterno" class="field-icon">
+                                <i class="fa fa-user"></i>
+                            </label>
+                        </label>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.LabelFor(x => x.Persona.ApellidoMaterno, new { @for = "apellidoMaterno", @class = "field-label" })
+                        <label for="apellidoMaterno" class="field prepend-icon">
+                            @Html.TextBoxFor(x => x.Persona.ApellidoMaterno, new { @class = "gui-input", @id = "apellidoMaterno", @placeholder = "Apellido materno", @maxLength = "45" })
+                            <label for="apellidoMaterno" class="field-icon">
+                                <i class="fa fa-user"></i>
+                            </label>
+                        </label>
+                    </div>
+                </div>
+                <div class="section row">
+                    <div class="col-md-4">
+                        @Html.LabelFor(x => x.Persona.Email, new { @for = "email", @class = "field-label" })
+                        <label for="email" class="field prepend-icon">
+                            @Html.TextBoxFor(x => x.Persona.Email, new { @class = "gui-input", @id = "email", @placeholder = "Email", @maxLength = "70" })
+                            <label for="email" class="field-icon">
+                                <i class="fa fa-envelope"></i>
+                            </label>
+                        </label>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.LabelFor(x => x.Persona.SexoCodigo, new { @for = "SexoCodigo", @class = "field-label" })
+                        <label for="SexoCodigo" class="field prepend-icon">
+                            @foreach (RecursoCurricular.Sexo sexo in RecursoCurricular.Sexo.GetAll())
+                            {
+                                <label class="radio-inline mr10">
+                                    @Html.RadioButtonFor(x => x.Persona.SexoCodigo, sexo.Codigo, new { @id = "sexo" })
+                                    @sexo.Nombre
+                                </label>
+                            }
+                        </label>
+                    </div>
+                </div>
+                <div class="section row">
+                    <div class="col-md-4">
+                        @Html.LabelFor(x => x.Persona.FechaNacimiento, new { @for = "fechaNacimiento", @class = "field-label" })
+                        <label for="fechaNacimiento" class="field prepend-icon">
+                            @Html.TextBoxFor(x => x.Persona.FechaNacimiento, string.Empty, new { @class = "gui-input hasDatePicker", @id = "fechaNacimiento", @placeholder = "Fecha de nacimiento", @maxLength = "10" })
+                            <label class="field-icon">
+                                <i class="fa fa-calendar-o"></i>
+                            </label>
+                        </label>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.LabelFor(x => x.Persona.NacionalidadCodigo, new { @for = "nacionalidad", @class = "field-label" })
+                        <label class="field select">
+                            @Html.DropDownListFor(x => x.Persona.NacionalidadCodigo, RecursoCurricular.Nacionalidad.Nacionalidades, new { @class = "", @id = "nacionalidad" })
+                            <i class="arrow"></i>
+                        </label>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.LabelFor(x => x.Persona.EstadoCivilCodigo, new { @for = "estadoCivil", @class = "field-label" })
+                        <label class="field select">
+                            @Html.DropDownListFor(x => x.Persona.EstadoCivilCodigo, RecursoCurricular.EstadoCivil.EstadosCiviles, new { @class = "", @id = "estadoCivil" })
+                            <i class="arrow"></i>
+                        </label>
+                    </div>
+                </div>
+                <div class="section row">
+                    <div class="col-md-4">
+                        @Html.LabelFor(x => x.Persona.NivelEducacionalCodigo, new { @for = "nivelEducacional", @class = "field-label" })
+                        <label class="field select">
+                            @Html.DropDownListFor(x => x.Persona.NivelEducacionalCodigo, RecursoCurricular.NivelEducacional.NivelesEducacionales, new { @class = "", @id = "nivelEducacional" })
+                            <i class="arrow"></i>
+                        </label>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.LabelFor(x => x.Persona.Telefono, new { @for = "telefono", @class = "field-label" })
+                        <label for="telefono" class="field prepend-icon">
+                            @Html.TextBoxFor(x => x.Persona.Telefono, new { @class = "gui-input", @id = "telefono", @placeholder = "Teléfono", @onlyNumbers = "true" })
+                            <label for="telefono" class="field-icon">
+                                <i class="fa fa-phone-square"></i>
+                            </label>
+                        </label>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.LabelFor(x => x.Persona.Celular, new { @for = "celular", @class = "field-label" })
+                        <label for="celular" class="field prepend-icon">
+                            @Html.TextBoxFor(x => x.Persona.Celular, new { @class = "gui-input", @id = "celular", @placeholder = "Celular", @onlyNumbers = "true" })
+                            <label for="celular" class="field-icon">
+                                <i class="fa fa-phone-square"></i>
+                            </label>
+                        </label>
+                    </div>
+                </div>
+                <div class="section row">
+                    <div class="col-md-4">
+                        @Html.LabelFor(x => x.Persona.RegionCodigo, new { @for = "region", @class = "field-label" })
+                        <label class="field select">
+                            @Html.DropDownListFor(x => x.Persona.RegionCodigo, RecursoCurricular.Region.Regiones, new { @class = "", @id = "region" })
+                            <i class="arrow"></i>
+                        </label>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.LabelFor(x => x.Persona.CiudadCodigo, new { @for = "ciudad", @class = "field-label" })
+                        <label class="field select">
+                            @Html.DropDownListFor(x => x.Persona.CiudadCodigo, RecursoCurricular.Ciudad.DefaultItem, new { @id = "ciudad" })
+                            <i class="arrow"></i>
+                        </label>
+                    </div>
+                    <div class="col-md-4">
+                        @Html.LabelFor(x => x.Persona.ComunaCodigo, new { @for = "comuna", @class = "field-label" })
+                        <label class="field select">
+                            @Html.DropDownListFor(x => x.Persona.ComunaCodigo, RecursoCurricular.Ciudad.DefaultItem, new { @id = "comuna" })
+                            <i class="arrow"></i>
+                        </label>
+                    </div>
+                </div>
+                <div class="section row">
+                    <div class="col-md-6">
+                        @Html.LabelFor(x => x.Persona.Direccion, new { @for = "direccion", @class = "field-label" })
+                        <label class="field textarea-grow">
+                            @Html.TextAreaFor(x => x.Persona.Direccion, new { @class = "gui-textarea", @id = "direccion", @placeholder = "" })
+                        </label>
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(x => x.Persona.VillaPoblacion, new { @for = "villaPoblacion", @class = "field-label" })
+                        @Html.TextBoxFor(x => x.Persona.VillaPoblacion, new { @class = "gui-input", @id = "villaPoblacion", @placeholder = "Villa o población", @maxLength = "60" })
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button type="button" id="cancelSave" class="button btn-dark" typeButton="Cancel">Cancelar</button>
+                <button type="submit" id="save" class="button btn-primary">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="modal-form-changePass" class="popup-basic admin-form mfp-with-anim mfp-hide mw800">
+    <div class="panel">
+        <div class="panel-heading">
+            <span class="panel-title">Contraseña</span>
+        </div>
+        <form id="formModalUserChangePass" method="post">
+            <div class="panel-body">
+                <div class="section row">
+                    <div class="col-md-12">
+                        @Html.LabelFor(x => x.Persona.Run, new { @class = "field-label" })
+                        <label for="email" class="field prepend-icon">
+                            @Html.TextBoxFor(x => x.Persona.Run, new { @class = "textBoxDisabled", @id = "runChangePass", @disabled = false })
+                            <label for="email" class="field-icon">
+                                <i class="fa fa-user"></i>
+                            </label>
+                        </label>
+                    </div>
+                </div>
+                <div class="section row">
+                    <div class="col-md-12">
+                        @Html.LabelFor(x => x.Persona.Nombres, new { @class = "field-label" })
+                        <label class="field prepend-icon">
+                            @Html.TextBoxFor(x => x.Persona.Nombres, new { @class = "textBoxDisabled", @id = "nombresChangePass", @disabled = false })
+                            <label class="field-icon">
+                                <i class="fa fa-user"></i>
+                            </label>
+                        </label>
+                    </div>
+                </div>
+                <div class="section row">
+                    <div class="col-md-12">
+                        @Html.LabelFor(x => x.ChangePass.Password1, new { @for = "password1", @class = "field-label" })
+                        <label for="password1" class="field prepend-icon">
+                            @Html.PasswordFor(x => x.ChangePass.Password1, new { @class = "gui-input", @id = "password1", @placeholder = "Contraseña", @maxLength = "45" })
+                            <label for="password1" class="field-icon">
+                                <i class="fa fa-key"></i>
+                            </label>
+                        </label>
+                    </div>
+                </div>
+                <div class="section row">
+                    <div class="col-md-12">
+                        @Html.LabelFor(x => x.ChangePass.Password2, new { @for = "password2", @class = "field-label" })
+                        <label for="password2" class="field prepend-icon">
+                            @Html.PasswordFor(x => x.ChangePass.Password2, new { @class = "gui-input", @id = "password2", @placeholder = "Contraseña", @maxLength = "45" })
+                            <label for="password2" class="field-icon">
+                                <i class="fa fa-key"></i>
+                            </label>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button type="button" id="cancelChangePassSave" class="button btn-dark" typeButton="Cancel">Cancelar</button>
+                <button type="submit" id="saveChangePass" class="button btn-primary">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="modal-form-rol" class="popup-basic admin-form mfp-with-anim mfp-hide mw800">
+    <div class="panel">
+        <div class="panel-heading">
+            <span class="panel-title">Roles</span>
+        </div>
+        <form id="formModalRol" method="post">
+            <div class="panel-body">
+                <div class="section row">
+                    <div class="col-md-6">
+                        @Html.LabelFor(x => x.Persona.Run, new { @class = "field-label", @for = "runRol" })
+                        <label class="field prepend-icon">
+                            @Html.TextBoxFor(x => x.Persona.Run, new { @class = "textBoxDisabled", @id = "runRol", @disabled = false })
+                            <label class="field-icon">
+                                <i class="fa fa-user"></i>
+                            </label>
+                        </label>
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(x => x.Persona.Nombres, new { @class = "field-label", @for = "nombreRol" })
+                        <label class="field prepend-icon">
+                            @Html.TextBoxFor(x => x.Persona.Nombres, new { @class = "textBoxDisabled", @id = "nombreRol", @disabled = false })
+                            <label class="field-icon">
+                                <i class="fa fa-user"></i>
+                            </label>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button type="button" id="cancelRoleAssignment" class="button btn-dark" typeButton="Cancel">Cancelar</button>
+                <button type="submit" id="saveRoleAssignment" class="button btn-primary">Guardar</button>
+            </div>
+            <div class="panel-body pn">
+                <table class="table table-striped table-hover" id="gridViewRol" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Asignación</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+
+@Html.HiddenFor(x => x.Id, new { @id = "userId" })
+
+@Scripts.Render("~/js/usuarios")

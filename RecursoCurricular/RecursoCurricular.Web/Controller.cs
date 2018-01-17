@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace RecursoCurricular.Web
 {
@@ -14,18 +15,25 @@ namespace RecursoCurricular.Web
         {
             get
             {
-                RecursoCurricular.Membresia.MenuItem menuItem;
-
-                if (this.Request.UrlReferrer == null)
+                if (this.Request == null)
                 {
-                    menuItem = RecursoCurricular.Membresia.MenuItem.Get(this.Request.CurrentExecutionFilePath);
+                    return null;
                 }
                 else
                 {
-                    menuItem = RecursoCurricular.Membresia.MenuItem.Get(this.Request.UrlReferrer.AbsolutePath);
-                }
+                    RecursoCurricular.Membresia.MenuItem menuItem;
 
-                return menuItem;
+                    if (this.Request.UrlReferrer == null)
+                    {
+                        menuItem = RecursoCurricular.Membresia.MenuItem.Get(this.Request.CurrentExecutionFilePath);
+                    }
+                    else
+                    {
+                        menuItem = RecursoCurricular.Membresia.MenuItem.Get(this.Request.UrlReferrer.AbsolutePath);
+                    }
+
+                    return menuItem;
+                }
             }
         }
 

@@ -1,4 +1,3 @@
-C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Membresia\obj\Debug\RecursoCurricular.Membresia.csprojResolveAssemblyReference.cache
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Membresia\bin\Debug\RecursoCurricular.Membresia.dll
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Membresia\bin\Debug\RecursoCurricular.Membresia.pdb
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Membresia\bin\Debug\FluentLinqToSql.dll
@@ -26,5 +25,6 @@ C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Membresia\bin\Debug\es\System.Web.WebPages.resources.dll
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Membresia\bin\Debug\es\System.Web.WebPages.Deployment.resources.dll
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Membresia\bin\Debug\es\System.Web.WebPages.Razor.resources.dll
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Membresia\obj\Debug\RecursoCurricular.Membresia.csprojResolveAssemblyReference.cache
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Membresia\obj\Debug\RecursoCurricular.Membresia.dll
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Membresia\obj\Debug\RecursoCurricular.Membresia.pdb

@@ -1,6 +1,8 @@
 ﻿jQuery(document).ready(function () {
 
-    var table;
+    var table = gridView();
+
+    $("div.dataTables_length").append('<br /><a class="btn btn-success btn-xs" href="#" title="Agregar rol" typebutton="Add"><i class="fa fa-plus"></i></a>');
 
     var validator = $('#formModal').validate({
 
@@ -30,7 +32,6 @@
 
             var obj = {
                 id: $('#rolId').val(),
-                ambitoCodigo: $('#ambito').val(),
                 nombre: $('#nombre').val(),
                 clave: $('#clave').val(),
             };
@@ -55,16 +56,9 @@
         }
     })
 
-    $('#ambito').change(function () {
-
-        table = gridView();
-
-        $("div.dataTables_length").append('<br /><a class="btn btn-success btn-xs" href="#" title="Agregar rol" typebutton="Add"><i class="fa fa-plus"></i></a>');
-    })
-
     $(document).on('click', 'a[typebutton=Add]', function () {
 
-        $.getJSON('/Administracion/Admin/AddRol/' + $('#ambito').val(), function (data) {
+        $.getJSON('/Administracion/Admin/AddRol/', function (data) {
 
             popUp();
 
@@ -136,7 +130,7 @@ $('#cancel').click(function (e) {
 function gridView() {
 
     var table = $('#gridView').DataTable({
-        "ajax": "/Administracion/Admin/GetRoles/" + $('#ambito').val(),
+        "ajax": "/Administracion/Admin/GetRoles/",
         "columns": [
             { "data": "Nombre" },
             { "data": "Clave" },
@@ -165,8 +159,6 @@ function gridView() {
 function popUp() {
 
     var form = $('#modal-form');
-
-    $('#ambitoCodigo').val($('#ambito option:selected').text());
 
     form.find(".state-error").removeClass("state-error");
     form.find(".state-success").removeClass("state-success");

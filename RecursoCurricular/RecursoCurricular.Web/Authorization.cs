@@ -42,6 +42,20 @@ namespace RecursoCurricular.Web
 
             RecursoCurricular.Membresia.MenuItem menuItem = RecursoCurricular.Membresia.MenuItem.Get(string.Format("/{0}/{1}/{2}", this.Area, controller, this.Root));
 
+            RecursoCurricular.Membresia.AplicacionPerfil aplicacionPerfil = RecursoCurricular.Membresia.AplicacionPerfil.Get(menuItem == null ? default(Guid) : menuItem.AplicacionId, RecursoCurricular.Membresia.Perfil.PerfilAnio.Codigo);
+
+            if (aplicacionPerfil != null)
+            {
+                RecursoCurricular.Membresia.PerfilUsuario perfilUsuario = RecursoCurricular.Membresia.PerfilUsuario.Get(RecursoCurricular.Membresia.Perfil.PerfilAnio, usuario);
+
+                if (perfilUsuario == null)
+                {
+
+
+                    throw new Exception(CustomError.SinPerfilEstablecido_500.ToString());
+                }
+            }
+
             #region Permisos Efectivos
 
             if (this.ActionType.Contains<RecursoCurricular.Web.ActionType>(RecursoCurricular.Web.ActionType.Access))

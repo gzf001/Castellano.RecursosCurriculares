@@ -87,7 +87,7 @@
                     </a>
                 </li>
             </ul>
-            @Html.Partial("../Utils/_Header", new RecursoCurricular.Web.UI.Models.PartialHeader(new Guid(this.User.Identity.Name)))
+            @Html.Partial("../Header/_Header", new RecursoCurricular.Web.UI.Models.PartialHeader(new Guid(this.User.Identity.Name)))
         </header>
         @*-- End: Header *@
 
@@ -296,6 +296,7 @@
     <script type="text/javascript">
         jQuery(document).ready(function () {
             "use strict";
+
             // Init Theme Core
             Core.init();
 

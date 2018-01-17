@@ -331,16 +331,6 @@ jQuery(document).ready(function () {
             $('#runRol').val(data.Persona.Run);
             $('#nombreRol').val(data.Persona.Nombre);
 
-            $('#ambitoRol').val('-1');
-
-            $('#empresaRol').val('-1');
-
-            $('#centroCostoRol').val('-1');
-
-            $('#empresaRolDiv').hide();
-
-            $('#centroCostoRolDiv').hide();
-
             rol.length = 0;
 
             loadGridViewRol();
@@ -361,78 +351,6 @@ jQuery(document).ready(function () {
 
             loadGridView();
         });
-    })
-
-    $('#ambitoRol').change(function () {
-
-        var ambitoCodigo = $('#ambitoRol').val();
-
-        switch (ambitoCodigo) {
-
-            case '1': {
-
-                $('#empresaRolDiv').hide();
-                $('#centroCostoRolDiv').hide();
-
-                break;
-            }
-            case '2': {
-
-                $('#empresaRolDiv').show();
-                $('#centroCostoRolDiv').hide();
-
-                break;
-            }
-            case '3': {
-
-                $('#empresaRolDiv').show();
-                $('#centroCostoRolDiv').show();
-
-                break;
-            }
-            default: {
-
-                $('#empresaRolDiv').hide();
-                $('#centroCostoRolDiv').hide();
-
-                break;
-            }
-        }
-
-        loadGridViewRol();
-    })
-
-    $('#empresaRol').change(function () {
-
-        var ambitoCodigo = $('#ambitoRol').val();
-        var empresaId = $('#empresaRol').val();
-
-        $.getJSON('/RecursoCurricular/CentrosCosto?empresaId=' + $('#empresaRol').val(), function (data) {
-
-            var items = "";
-
-            $.each(data, function (i, centroCosto) {
-                items += "<option value='" + centroCosto.Value + "'>" + centroCosto.Text + "</option>";
-            });
-
-            $("#centroCostoRol").html(items);
-
-            if (ambitoCodigo == 2 && empresaId != '-1') {
-
-                loadGridViewRol();
-            }
-        });
-    })
-
-    $('#centroCostoRol').change(function () {
-
-        var ambitoCodigo = $('#ambitoRol').val();
-        var centroCostoId = $('#centroCostoRol').val();
-
-        if (ambitoCodigo == 3 && centroCostoId != '-1') {
-
-            loadGridViewRol();
-        }
     })
 
     jQuery.validator.addMethod("notEqual", function (value, element, param) {
@@ -704,25 +622,8 @@ function loadGridView() {
 
 function loadGridViewRol() {
 
-    var ambitoCodigo = $('#ambitoRol').val();
-    var empresaId = $("#empresaRol").is(":visible") ? $('#empresaRol').val() == '-1' ? null : $('#empresaRol').val() : null;
-    var centroCostoId = $("#centroCostoRol").is(":visible") ? $('#centroCostoRol').val() == '-1' ? null : $('#centroCostoRol').val() : null;
-
-    if (ambitoCodigo == '-1') {
-
-        $('#gridViewRol').empty();
-    }
-    else if (ambitoCodigo == 2 && empresaId == '-1') {
-
-        $('#gridViewRol').empty();
-    }
-    else if (ambitoCodigo == 3 && centroCostoId == '-1') {
-
-        $('#gridViewRol').empty();
-    }
-
     $('#gridViewRol').DataTable({
-        "ajax": "/Administracion/Admin/UsuarioRol/" + $("#userId").val() + "/" + $("#ambitoRol").val() + "/" + empresaId + "/" + centroCostoId,
+        "ajax": "/Administracion/Admin/UsuarioRol/" + $("#userId").val(),
         "columns": [
             { "data": "Accion" },
             { "data": "Nombre" }

@@ -101,7 +101,6 @@
     <Compile Include="Persistent\Auditoria.cs" />
     <Compile Include="Persistent\MenuItem.cs" />
     <Compile Include="Persistent\MenuItemAccion.cs" />
-    <Compile Include="Persistent\Perfil.cs" />
     <Compile Include="Persistent\PerfilUsuario.cs" />
     <Compile Include="Persistent\Rol.cs" />
     <Compile Include="Persistent\RolAccion.cs" />

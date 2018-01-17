@@ -39,14 +39,14 @@ namespace RecursoCurricular.Web.UI
 
             routes.MapRoute(
                 name: "Ciudades",
-                url: "Evaluaciones/Ciudades/{regionCodigo}",
-                defaults: new { controller = "Evaluaciones", action = "Ciudades", regionCodigo = "" }
+                url: "RecursoCurricular/Ciudades/{regionCodigo}",
+                defaults: new { controller = "RecursoCurricular", action = "Ciudades", regionCodigo = "" }
             );
 
             routes.MapRoute(
                 name: "Comunas",
-                url: "Evaluaciones/Comunas/{regionCodigo}/{ciudadCodigo}",
-                defaults: new { controller = "Evaluaciones", action = "Comunas", regionCodigo = "", ciudadCodigo = "" }
+                url: "RecursoCurricular/Comunas/{regionCodigo}/{ciudadCodigo}",
+                defaults: new { controller = "RecursoCurricular", action = "Comunas", regionCodigo = "", ciudadCodigo = "" }
             );
 
             #endregion

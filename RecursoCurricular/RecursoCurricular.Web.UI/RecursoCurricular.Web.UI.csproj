@@ -51,6 +51,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -142,17 +143,35 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Administracion\AdministracionAreaRegistration.cs" />
+    <Compile Include="Areas\Administracion\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Administracion\Controllers\UserController.cs" />
+    <Compile Include="Areas\Administracion\Models\Aplicacion.cs" />
+    <Compile Include="Areas\Administracion\Models\ChangePassword.cs" />
+    <Compile Include="Areas\Administracion\Models\MenuItem.cs" />
+    <Compile Include="Areas\Administracion\Models\Persona.cs" />
+    <Compile Include="Areas\Administracion\Models\Rol.cs" />
+    <Compile Include="Areas\Administracion\Models\RolAccion.cs" />
+    <Compile Include="Areas\Administracion\Models\Usuario.cs" />
+    <Compile Include="Areas\Administracion\Models\UsuariosConectados.cs" />
     <Compile Include="Areas\Home\Controllers\AccountController.cs" />
     <Compile Include="Areas\Home\HomeAreaRegistration.cs" />
     <Compile Include="Areas\Home\Models\Login.cs" />
     <Compile Include="Areas\Home\Models\RecoveryPass.cs" />
+    <Compile Include="Areas\Tic\Controllers\HabilidadTicController.cs" />
+    <Compile Include="Areas\Tic\Models\Dimension.cs" />
+    <Compile Include="Areas\Tic\Models\HabilidadTic.cs" />
+    <Compile Include="Areas\Tic\TicAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RecursoCurricularController.cs" />
+    <Compile Include="Controllers\SelectorController.cs" />
+    <Compile Include="Controllers\UtilsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\TreeViewExtension.cs" />
     <Compile Include="Models\PartialHeader.cs" />
     <Compile Include="Models\PartialSwal.cs" />
+    <Compile Include="Models\Selector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -175,8 +194,6 @@
     <Content Include="Content\images\slide-2.jpg" />
     <Content Include="Content\images\slide-3.jpg" />
     <Content Include="Content\js\admin\aplicaciones\aplicaciones.js" />
-    <Content Include="Content\js\admin\centrosCosto\centrosCosto.js" />
-    <Content Include="Content\js\admin\empresas\empresas.js" />
     <Content Include="Content\js\admin\menuItem\menuItem.js" />
     <Content Include="Content\js\admin\rolPermiso\permisos.js" />
     <Content Include="Content\js\admin\rolPermiso\roles.js" />
@@ -185,6 +202,8 @@
     <Content Include="Content\js\bootstrap.sweetalert\sweetalert.css" />
     <Content Include="Content\js\bootstrap.sweetalert\sweetalert.js" />
     <Content Include="Content\js\bootstrap.sweetalert\sweetalert.min.js" />
+    <Content Include="Content\js\habilidadTic\dimensiones\dimensiones.js" />
+    <Content Include="Content\js\habilidadTic\habilidades\habilidades.js" />
     <Content Include="Content\js\jquery-3.2.0.js" />
     <Content Include="Content\js\jquery-3.2.0.min.js" />
     <Content Include="Content\js\jquery.Rut.js" />
@@ -3587,6 +3606,17 @@
     <Content Include="Areas\Home\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Home\Views\Account\Login.cshtml" />
     <Content Include="Areas\Home\Views\Account\RecoveryPass.cshtml" />
+    <Content Include="Areas\Administracion\Views\Admin\Aplicaciones.cshtml" />
+    <Content Include="Areas\Administracion\Views\Admin\GetPermissions.cshtml" />
+    <Content Include="Areas\Administracion\Views\Admin\Index.cshtml" />
+    <Content Include="Areas\Administracion\Views\Admin\ItemsMenu.cshtml" />
+    <Content Include="Areas\Administracion\Views\Admin\Roles.cshtml" />
+    <Content Include="Areas\Administracion\Views\Admin\UsuarioConectados.cshtml" />
+    <Content Include="Areas\Administracion\Views\Admin\Usuarios.cshtml" />
+    <Content Include="Areas\Administracion\Views\User\ChangePassword.cshtml" />
+    <Content Include="Areas\Administracion\Views\User\MisDatos.cshtml" />
+    <Content Include="Areas\Tic\Views\web.config" />
+    <Content Include="Areas\Tic\Views\HabilidadTic\Dimensiones.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -3608,14 +3638,12 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Utils\Error.cshtml" />
-    <Content Include="Views\Utils\_Header.cshtml" />
     <Content Include="Views\Utils\_SwalAlert.cshtml" />
+    <Content Include="Views\Header\_Header.cshtml" />
+    <Content Include="Views\Selector\Selector.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Administracion\Controllers\" />
-    <Folder Include="Areas\Administracion\Models\" />
-    <Folder Include="Areas\Administracion\Views\Shared\" />
     <Folder Include="Content\theme\assets\js\demo\charts\" />
     <Folder Include="Content\theme\assets\js\utility\admindock\" />
     <Folder Include="Content\theme\assets\js\utility\adminpanels\" />
@@ -3751,6 +3779,14 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RecursoCurricular.BaseCurricular\RecursoCurricular.BaseCurricular.csproj">
+      <Project>{14a87217-6121-4e06-9361-d5e8385ee09e}</Project>
+      <Name>RecursoCurricular.BaseCurricular</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RecursoCurricular.Educacion\RecursoCurricular.Educacion.csproj">
+      <Project>{f2f77c22-b3a6-4ea8-8f88-58c9234ab08e}</Project>
+      <Name>RecursoCurricular.Educacion</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RecursoCurricular.Helpers\RecursoCurricular.Helpers.csproj">
       <Project>{644d997a-ad2e-4ae4-9f90-f6b1b1173fe3}</Project>
       <Name>RecursoCurricular.Helpers</Name>
@@ -3758,6 +3794,14 @@
     <ProjectReference Include="..\RecursoCurricular.Membresia\RecursoCurricular.Membresia.csproj">
       <Project>{379b4626-9dd2-4fc4-9bae-fc56bd68f82e}</Project>
       <Name>RecursoCurricular.Membresia</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RecursoCurricular.RecursosCurriculares\RecursoCurricular.RecursosCurriculares.csproj">
+      <Project>{040ed32e-58e8-45fd-91ee-6f205f8353a8}</Project>
+      <Name>RecursoCurricular.RecursosCurriculares</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RecursoCurricular.Web\RecursoCurricular.Web.csproj">
+      <Project>{f7016762-0635-4ea2-8b16-044a161eca9b}</Project>
+      <Name>RecursoCurricular.Web</Name>
     </ProjectReference>
     <ProjectReference Include="..\RecursoCurricular\RecursoCurricular.csproj">
       <Project>{31fe3606-5aba-44fb-9284-3ddbb8f68ffe}</Project>
