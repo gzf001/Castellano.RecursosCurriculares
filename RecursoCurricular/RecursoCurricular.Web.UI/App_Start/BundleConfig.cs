@@ -213,8 +213,10 @@ namespace RecursoCurricular.Web.UI.App_Start
             #region Tic
 
             ScriptBundle dimension = new ScriptBundle("~/js/dimensiones");
+            ScriptBundle habilidad = new ScriptBundle("~/js/habilidades");
 
             bundles.Add(dimension.Include("~/Content/js/habilidadTic/dimensiones/dimensiones.js"));
+            bundles.Add(habilidad.Include("~/Content/js/habilidadTic/habilidades/habilidades.js"));
 
             #endregion
 

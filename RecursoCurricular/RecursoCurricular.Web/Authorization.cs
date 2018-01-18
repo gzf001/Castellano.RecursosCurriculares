@@ -50,9 +50,15 @@ namespace RecursoCurricular.Web
 
                 if (perfilUsuario == null)
                 {
+                    string url = string.Format("/{0}/Home/Index", this.Area);
 
+                    RecursoCurricular.Membresia.PerfilUsuario.SetPerfil(usuario, url, string.Empty);
 
                     throw new Exception(CustomError.SinPerfilEstablecido_500.ToString());
+                }
+                else
+                {
+                    RecursoCurricular.Membresia.PerfilUsuario.SetPerfil(usuario, menuItem.Url, perfilUsuario.Valor);
                 }
             }
 

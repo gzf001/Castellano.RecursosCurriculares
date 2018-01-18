@@ -118,9 +118,9 @@ namespace RecursoCurricular.Web.UI.Areas.Administracion.Controllers
                         Orden = model.Orden
                     }.Save(context);
 
-                    context.SubmitChanges();
-                }
+                context.SubmitChanges();
             }
+        }
 
             return this.Json("ok 200", JsonRequestBehavior.DenyGet);
         }

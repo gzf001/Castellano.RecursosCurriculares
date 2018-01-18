@@ -19,14 +19,26 @@
                     @Html.AntiForgeryToken()
                     <div class="panel-body p25 text-center">
                         <div class="col-sm-12 pl15">
-                            @foreach (RecursoCurricular.Anio anio in RecursoCurricular.Anio.GetAll())
+                            @foreach (RecursoCurricular.Anio anio in RecursoCurricular.Anio.GetAll(true))
                             {
-                                <div class="bs-component">
-                                    <div class="radio-custom radio-primary mb5">
-                                        @Html.RadioButtonFor(x => x.Numero, anio.Numero, new { @id = anio.Numero })
-                                        <label for=@anio.Numero>@anio.Numero</label>
+                                if (anio.Numero.Equals(DateTime.Today.Year))
+                                {
+                                    <div class="bs-component">
+                                        <div class="radio-custom radio-success mb5">
+                                            @Html.RadioButtonFor(x => x.Numero, anio.Numero, new { @id = anio.Numero })
+                                            <label for=@anio.Numero>@anio.Numero</label>
+                                        </div>
                                     </div>
-                                </div>
+                                }
+                                else
+                                {
+                                    <div class="bs-component">
+                                        <div class="radio-custom radio-primary mb5">
+                                            @Html.RadioButtonFor(x => x.Numero, anio.Numero, new { @id = anio.Numero })
+                                            <label for=@anio.Numero>@anio.Numero</label>
+                                        </div>
+                                    </div>
+                                }
                             }
                         </div>
                     </div>

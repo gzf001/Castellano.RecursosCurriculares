@@ -6,7 +6,7 @@
 
     $(document).on('click', 'a[typebutton=Add]', function () {
 
-        $.getJSON('/Tic/HabilidadTic/AddDimension', function (data) {
+        $.getJSON('/Tic/Dimension/AddDimension', function (data) {
 
             $('#dimensionId').val(data.Id);
             $('#numero').val(data.Numero);
@@ -19,7 +19,7 @@
 
     $(document).on('click', 'a[typebutton=Edit]', function () {
 
-        $.getJSON('/Tic/HabilidadTic/EditDimension/' + $(this).attr('data-value'), function (data) {
+        $.getJSON('/Tic/Dimension/EditDimension/' + $(this).attr('data-value'), function (data) {
 
             $('#dimensionId').val(data.Id);
             $('#numero').val(data.Numero);
@@ -48,7 +48,7 @@
 
                 $.ajax({
                     type: 'GET',
-                    url: '/Tic/HabilidadTic/DeleteDimension/' + id,
+                    url: '/Tic/Dimension/DeleteDimension/' + id,
                     success: function (data) {
 
                         if (data === "200") {
@@ -105,7 +105,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "/Tic/HabilidadTic/Dimensiones",
+                url: "/Tic/Dimension/Dimensiones",
                 data: obj,
                 success: function (data) {
 
@@ -141,7 +141,7 @@ $('#cancel').click(function (e) {
 function gridView() {
 
     var table = $('#gridView').DataTable({
-        "ajax": "/Tic/HabilidadTic/GetDimensiones",
+        "ajax": "/Tic/Dimension/GetDimensiones",
         "columns": [
             { "data": "Numero" },
             { "data": "Nombre" },

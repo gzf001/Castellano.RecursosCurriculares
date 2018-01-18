@@ -11,6 +11,14 @@ namespace RecursoCurricular.Web
     //[AuthorizeSessionAttribute]
     public abstract class Controller : System.Web.Mvc.Controller
     {
+        public RecursoCurricular.Anio CurrentAnio
+        {
+            get
+            {
+                return RecursoCurricular.Membresia.Perfil.GetAnio(this.CurrentUsuario);
+            }
+        }
+
         public RecursoCurricular.Membresia.MenuItem CurrentMenuItem
         {
             get

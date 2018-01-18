@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace RecursoCurricular.Web.UI.Areas.Tic.Controllers
 {
-    public class HabilidadTicController : RecursoCurricular.Web.Controller
+    public class DimensionController : RecursoCurricular.Web.Controller
     {
         const string Area = "Tic";
 
@@ -25,19 +25,19 @@ namespace RecursoCurricular.Web.UI.Areas.Tic.Controllers
         {
             if (!this.ModelState.IsValid)
             {
-                return this.View(model);
+                return this.Json(this.GetError());
             }
 
             try
             {
-                RecursoCurricular.DimensionHabilidadTic dimensionHabilidadTic = RecursoCurricular.DimensionHabilidadTic.Get(model.Id, 2018);
+                RecursoCurricular.DimensionHabilidadTic dimensionHabilidadTic = RecursoCurricular.DimensionHabilidadTic.Get(model.Id, this.CurrentAnio.Numero);
 
                 using (RecursoCurricular.Context context = new RecursoCurricular.Context())
                 {
                     new RecursoCurricular.DimensionHabilidadTic
                     {
                         Id = model.Id,
-                        AnoNumero = 2018,
+                        AnoNumero = this.CurrentAnio.Numero,
                         Numero = model.Numero,
                         Nombre = model.Nombre.Trim(),
                         Descripcion = string.IsNullOrEmpty(model.Descripcion) ? default(string) : model.Descripcion.Trim()
@@ -59,9 +59,7 @@ namespace RecursoCurricular.Web.UI.Areas.Tic.Controllers
         [RecursoCurricular.Web.Authorization(ActionType = new RecursoCurricular.Web.ActionType[] { RecursoCurricular.Web.ActionType.Add }, Root = "Dimensiones", Area = Area)]
         public ActionResult AddDimension()
         {
-            RecursoCurricular.Anio anio = RecursoCurricular.Anio.Get(2018);
-
-            int numero = RecursoCurricular.DimensionHabilidadTic.Last(anio);
+            int numero = RecursoCurricular.DimensionHabilidadTic.Last(this.CurrentAnio);
 
             return this.Json(new RecursoCurricular.DimensionHabilidadTic { Numero = numero }, JsonRequestBehavior.AllowGet);
         }
@@ -71,7 +69,7 @@ namespace RecursoCurricular.Web.UI.Areas.Tic.Controllers
         [RecursoCurricular.Web.Authorization(ActionType = new RecursoCurricular.Web.ActionType[] { RecursoCurricular.Web.ActionType.Edit }, Root = "Dimensiones", Area = Area)]
         public ActionResult EditDimension(Guid id)
         {
-            RecursoCurricular.DimensionHabilidadTic dimensionHabilidadTic = RecursoCurricular.DimensionHabilidadTic.Get(id, 2018);
+            RecursoCurricular.DimensionHabilidadTic dimensionHabilidadTic = RecursoCurricular.DimensionHabilidadTic.Get(id, this.CurrentAnio.Numero);
 
             return this.Json(new RecursoCurricular.Web.UI.Areas.Tic.Models.Dimension
             {
@@ -87,7 +85,7 @@ namespace RecursoCurricular.Web.UI.Areas.Tic.Controllers
         [RecursoCurricular.Web.Authorization(ActionType = new RecursoCurricular.Web.ActionType[] { RecursoCurricular.Web.ActionType.Delete }, Root = "Dimensiones", Area = Area)]
         public JsonResult DeleteDimension(Guid id)
         {
-            RecursoCurricular.DimensionHabilidadTic dimensionHabilidadTic = RecursoCurricular.DimensionHabilidadTic.Get(id, 2018);
+            RecursoCurricular.DimensionHabilidadTic dimensionHabilidadTic = RecursoCurricular.DimensionHabilidadTic.Get(id, this.CurrentAnio.Numero);
 
             try
             {
@@ -121,7 +119,7 @@ namespace RecursoCurricular.Web.UI.Areas.Tic.Controllers
 
             dimensiones.data = new List<RecursoCurricular.Web.UI.Areas.Tic.Models.Dimension>();
 
-            foreach (RecursoCurricular.DimensionHabilidadTic dimensionHabilidadTic in RecursoCurricular.DimensionHabilidadTic.GetAll())
+            foreach (RecursoCurricular.DimensionHabilidadTic dimensionHabilidadTic in RecursoCurricular.DimensionHabilidadTic.GetAll(this.CurrentAnio))
             {
                 dimensiones.data.Add(new RecursoCurricular.Web.UI.Areas.Tic.Models.Dimension
                 {

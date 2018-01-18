@@ -19,19 +19,24 @@ namespace RecursoCurricular.Web.UI.Controllers
         [Authorize]
         public ActionResult Selector(RecursoCurricular.Web.UI.Models.Selector model)
         {
+            RecursoCurricular.Membresia.PerfilUsuario perfilUsuario = RecursoCurricular.Membresia.PerfilUsuario.Get(RecursoCurricular.Membresia.Perfil.PerfilAnio.Codigo, new Guid(this.User.Identity.Name));
+
             using (RecursoCurricular.Membresia.Context context = new RecursoCurricular.Membresia.Context())
             {
                 new RecursoCurricular.Membresia.PerfilUsuario
                 {
                     PerfilCodigo = RecursoCurricular.Membresia.Perfil.PerfilAnio.Codigo,
                     UsuarioId = this.CurrentUsuario.Id,
+                    Url = perfilUsuario.Url,
                     Valor = model.Numero.ToString()
                 }.Save(context);
 
                 context.SubmitChanges();
             }
 
-            return View();
+            return this.Redirect(perfilUsuario.Url);
+
+            //return View();
         }
     }
 }
