@@ -223,8 +223,10 @@ namespace RecursoCurricular.Web.UI.App_Start
             #region EducacionParvularia
 
             ScriptBundle nucleo = new ScriptBundle("~/js/nucleos");
+            ScriptBundle eje = new ScriptBundle("~/js/ejes");
 
             bundles.Add(nucleo.Include("~/Content/js/educacionParvularia/nucleos/nucleos.js"));
+            bundles.Add(eje.Include("~/Content/js/educacionParvularia/ejes/ejes.js"));
 
             #endregion
 

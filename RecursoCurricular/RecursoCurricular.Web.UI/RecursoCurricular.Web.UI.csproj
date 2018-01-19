@@ -156,6 +156,7 @@
     <Compile Include="Areas\EducacionParvularia\Controllers\HomeController.cs" />
     <Compile Include="Areas\EducacionParvularia\Controllers\NucleoController.cs" />
     <Compile Include="Areas\EducacionParvularia\EducacionParvulariaAreaRegistration.cs" />
+    <Compile Include="Areas\EducacionParvularia\Models\Eje.cs" />
     <Compile Include="Areas\EducacionParvularia\Models\Nucleo.cs" />
     <Compile Include="Areas\Home\Controllers\AccountController.cs" />
     <Compile Include="Areas\Home\HomeAreaRegistration.cs" />
@@ -208,6 +209,7 @@
     <Content Include="Content\js\bootstrap.sweetalert\sweetalert.css" />
     <Content Include="Content\js\bootstrap.sweetalert\sweetalert.js" />
     <Content Include="Content\js\bootstrap.sweetalert\sweetalert.min.js" />
+    <Content Include="Content\js\educacionParvularia\ejes\ejes.js" />
     <Content Include="Content\js\educacionParvularia\nucleos\nucleos.js" />
     <Content Include="Content\js\habilidadTic\dimensiones\dimensiones.js" />
     <Content Include="Content\js\habilidadTic\habilidades\habilidades.js" />
@@ -3629,6 +3631,7 @@
     <Content Include="Areas\EducacionParvularia\Views\Home\Index.cshtml" />
     <Content Include="Areas\Tic\Views\Habilidad\Habilidades.cshtml" />
     <Content Include="Areas\EducacionParvularia\Views\Nucleo\Nucleos.cshtml" />
+    <Content Include="Areas\EducacionParvularia\Views\Eje\Ejes.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -3656,7 +3659,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\EducacionParvularia\Views\Eje\" />
     <Folder Include="Content\theme\assets\js\demo\charts\" />
     <Folder Include="Content\theme\assets\js\utility\admindock\" />
     <Folder Include="Content\theme\assets\js\utility\adminpanels\" />

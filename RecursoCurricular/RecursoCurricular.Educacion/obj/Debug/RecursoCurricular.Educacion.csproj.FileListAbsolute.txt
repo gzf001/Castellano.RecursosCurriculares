@@ -23,3 +23,6 @@ C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Educacion\obj\Debug\RecursoCurricular.Educacion.csprojResolveAssemblyReference.cache
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Educacion\obj\Debug\RecursoCurricular.Educacion.dll
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Educacion\obj\Debug\RecursoCurricular.Educacion.pdb
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Educacion\bin\Debug\System.Web.Helpers.dll
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Educacion\bin\Debug\System.Web.Helpers.xml
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.Educacion\bin\Debug\es\System.Web.Helpers.resources.dll

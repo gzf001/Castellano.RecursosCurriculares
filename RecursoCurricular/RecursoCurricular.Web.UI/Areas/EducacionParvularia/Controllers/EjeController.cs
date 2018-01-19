@@ -8,19 +8,49 @@ namespace RecursoCurricular.Web.UI.Areas.EducacionParvularia.Controllers
 {
     public class EjeController : Controller
     {
-        const string Area = "Tic";
+        const string Area = "EducacionParvularia";
 
         [Authorize]
         [HttpGet]
-        [RecursoCurricular.Web.Authorization(ActionType = new RecursoCurricular.Web.ActionType[] { RecursoCurricular.Web.ActionType.Access }, Root = "Dimensiones", Area = Area)]
-        public ActionResult Dimensiones()
+        [RecursoCurricular.Web.Authorization(ActionType = new RecursoCurricular.Web.ActionType[] { RecursoCurricular.Web.ActionType.Access }, Root = "Ejes", Area = Area)]
+        public ActionResult Ejes()
         {
-            return this.View();
+            RecursoCurricular.Web.UI.Areas.EducacionParvularia.Models.Eje model = new RecursoCurricular.Web.UI.Areas.EducacionParvularia.Models.Eje
+            {
+                Anio = this.CurrentAnio
+            };
+
+            return this.View(model);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public JsonResult Nucleos(string ambitoExperienciaAprendizajeCodigo)
+        {
+            int ambito;
+
+            if (int.TryParse(ambitoExperienciaAprendizajeCodigo, out ambito))
+            {
+                IEnumerable<SelectListItem> selectList = RecursoCurricular.BaseCurricular.NucleoAprendizaje.Nucleos(this.CurrentAnio.Numero, ambito);
+
+                return this.Json(selectList, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                throw new Exception("Intento fallido de extracción de información");
+            }
+        }
+
+        [Authorize]
+        [HttpGet]
+        public JsonResult Ciclos()
+        {
+            return this.Json(RecursoCurricular.Educacion.Ciclo.Ciclos, JsonRequestBehavior.AllowGet);
         }
 
         [Authorize]
         [HttpPost]
-        [RecursoCurricular.Web.Authorization(ActionType = new RecursoCurricular.Web.ActionType[] { RecursoCurricular.Web.ActionType.Accept }, Root = "Dimensiones", Area = Area)]
+        [RecursoCurricular.Web.Authorization(ActionType = new RecursoCurricular.Web.ActionType[] { RecursoCurricular.Web.ActionType.Accept }, Root = "Ejes", Area = Area)]
         public ActionResult Dimensiones(RecursoCurricular.Web.UI.Areas.Tic.Models.Dimension model)
         {
             if (!this.ModelState.IsValid)
@@ -56,7 +86,7 @@ namespace RecursoCurricular.Web.UI.Areas.EducacionParvularia.Controllers
 
         [Authorize]
         [HttpGet]
-        [RecursoCurricular.Web.Authorization(ActionType = new RecursoCurricular.Web.ActionType[] { RecursoCurricular.Web.ActionType.Add }, Root = "Dimensiones", Area = Area)]
+        [RecursoCurricular.Web.Authorization(ActionType = new RecursoCurricular.Web.ActionType[] { RecursoCurricular.Web.ActionType.Add }, Root = "Ejes", Area = Area)]
         public ActionResult AddDimension()
         {
             int numero = RecursoCurricular.DimensionHabilidadTic.Last(this.CurrentAnio);
@@ -66,7 +96,7 @@ namespace RecursoCurricular.Web.UI.Areas.EducacionParvularia.Controllers
 
         [Authorize]
         [HttpGet]
-        [RecursoCurricular.Web.Authorization(ActionType = new RecursoCurricular.Web.ActionType[] { RecursoCurricular.Web.ActionType.Edit }, Root = "Dimensiones", Area = Area)]
+        [RecursoCurricular.Web.Authorization(ActionType = new RecursoCurricular.Web.ActionType[] { RecursoCurricular.Web.ActionType.Edit }, Root = "Ejes", Area = Area)]
         public ActionResult EditDimension(Guid id)
         {
             RecursoCurricular.DimensionHabilidadTic dimensionHabilidadTic = RecursoCurricular.DimensionHabilidadTic.Get(id, this.CurrentAnio.Numero);
@@ -82,7 +112,7 @@ namespace RecursoCurricular.Web.UI.Areas.EducacionParvularia.Controllers
 
         [Authorize]
         [HttpGet]
-        [RecursoCurricular.Web.Authorization(ActionType = new RecursoCurricular.Web.ActionType[] { RecursoCurricular.Web.ActionType.Delete }, Root = "Dimensiones", Area = Area)]
+        [RecursoCurricular.Web.Authorization(ActionType = new RecursoCurricular.Web.ActionType[] { RecursoCurricular.Web.ActionType.Delete }, Root = "Ejes", Area = Area)]
         public JsonResult DeleteDimension(Guid id)
         {
             RecursoCurricular.DimensionHabilidadTic dimensionHabilidadTic = RecursoCurricular.DimensionHabilidadTic.Get(id, this.CurrentAnio.Numero);
@@ -113,26 +143,40 @@ namespace RecursoCurricular.Web.UI.Areas.EducacionParvularia.Controllers
 
         [Authorize]
         [HttpGet]
-        public JsonResult GetDimensiones()
+        public JsonResult GetEjes(string ambitoExperienciaAprendizajeCodigo, string nucleoId, string cicloCodigo)
         {
-            RecursoCurricular.Web.UI.Areas.Tic.Models.Dimension.DimensionHabilidadTices dimensiones = new RecursoCurricular.Web.UI.Areas.Tic.Models.Dimension.DimensionHabilidadTices();
+            int a;
+            Guid n;
+            int c;
 
-            dimensiones.data = new List<RecursoCurricular.Web.UI.Areas.Tic.Models.Dimension>();
-
-            foreach (RecursoCurricular.DimensionHabilidadTic dimensionHabilidadTic in RecursoCurricular.DimensionHabilidadTic.GetAll(this.CurrentAnio))
+            if (int.TryParse(ambitoExperienciaAprendizajeCodigo, out a) && Guid.TryParse(nucleoId, out n) && int.TryParse(cicloCodigo, out c))
             {
-                dimensiones.data.Add(new RecursoCurricular.Web.UI.Areas.Tic.Models.Dimension
-                {
-                    Id = dimensionHabilidadTic.Id,
-                    Numero = dimensionHabilidadTic.Numero,
-                    Nombre = dimensionHabilidadTic.Nombre,
-                    Descripcion = string.IsNullOrEmpty(dimensionHabilidadTic.Descripcion) ? string.Empty : dimensionHabilidadTic.Descripcion.Length > 70 ? string.Format("{0}...", dimensionHabilidadTic.Descripcion.Substring(0, 70)) : dimensionHabilidadTic.Descripcion,
-                    Accion = string.Format("{0}{1}", RecursoCurricular.Helpers.ActionLinkExtension.ActionLinkCrudEmbedded(dimensionHabilidadTic.Id, null, RecursoCurricular.Helpers.TypeButton.Edit, this),
-                                                     RecursoCurricular.Helpers.ActionLinkExtension.ActionLinkCrudEmbedded(dimensionHabilidadTic.Id, null, RecursoCurricular.Helpers.TypeButton.Delete, this))
-                });
-            }
+                RecursoCurricular.Web.UI.Areas.EducacionParvularia.Models.Eje.Ejes ejes = new RecursoCurricular.Web.UI.Areas.EducacionParvularia.Models.Eje.Ejes();
 
-            return this.Json(dimensiones, JsonRequestBehavior.AllowGet);
+                ejes.data = new List<RecursoCurricular.Web.UI.Areas.EducacionParvularia.Models.Eje>();
+
+                RecursoCurricular.BaseCurricular.AmbitoExperienciaAprendizaje ambitoExperienciaAprendizaje = RecursoCurricular.BaseCurricular.AmbitoExperienciaAprendizaje.Get(this.CurrentAnio.Numero, a);
+                RecursoCurricular.BaseCurricular.NucleoAprendizaje nucleAprendizaje = BaseCurricular.NucleoAprendizaje.Get(this.CurrentAnio.Numero, a, n);
+                RecursoCurricular.Educacion.Ciclo ciclo = RecursoCurricular.Educacion.Ciclo.Get(c);
+
+                foreach (RecursoCurricular.BaseCurricular.EjeParvulo ejeParvulo in RecursoCurricular.BaseCurricular.EjeParvulo.GetAll(ambitoExperienciaAprendizaje, nucleAprendizaje, ciclo))
+                {
+                    ejes.data.Add(new RecursoCurricular.Web.UI.Areas.EducacionParvularia.Models.Eje
+                    {
+                        Id = ejeParvulo.Id,
+                        Numero = ejeParvulo.Numero,
+                        Nombre = ejeParvulo.Nombre,
+                        Accion = string.Format("{0}{1}", RecursoCurricular.Helpers.ActionLinkExtension.ActionLinkCrudEmbedded(ejeParvulo.Id, null, RecursoCurricular.Helpers.TypeButton.Edit, this),
+                                                         RecursoCurricular.Helpers.ActionLinkExtension.ActionLinkCrudEmbedded(ejeParvulo.Id, null, RecursoCurricular.Helpers.TypeButton.Delete, this))
+                    });
+                }
+
+                return this.Json(ejes, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return this.Json(new RecursoCurricular.Web.UI.Areas.EducacionParvularia.Models.Eje.Ejes { data = new List<RecursoCurricular.Web.UI.Areas.EducacionParvularia.Models.Eje>() }, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

@@ -42,6 +42,28 @@ namespace RecursoCurricular.Web.UI.Areas.EducacionParvularia
 
             #endregion
 
+            #region Eje
+
+            context.MapRoute(
+                   name: "EjeNucleos",
+                   url: "EducacionParvularia/Eje/Nucleos/{ambitoExperienciaAprendizajeCodigo}",
+                   defaults: new { area = "EducacionParvularia", controller = "Eje", action = "Nucleos", ambitoExperienciaAprendizajeCodigo = "" }
+               );
+
+            context.MapRoute(
+                   name: "EjeCiclos",
+                   url: "EducacionParvularia/Eje/Ciclos",
+                   defaults: new { area = "EducacionParvularia", controller = "Eje", action = "Ciclos" }
+               );
+
+            context.MapRoute(
+                   name: "GetEjes",
+                   url: "EducacionParvularia/Eje/GetEjes/{ambitoExperienciaAprendizajeCodigo}/{nucleoId}/{cicloCodigo}",
+                   defaults: new { area = "EducacionParvularia", controller = "Eje", action = "GetEjes" }
+               );
+
+            #endregion
+
             context.MapRoute(
                 "EducacionParvularia_default",
                 "EducacionParvularia/{controller}/{action}/{id}",
