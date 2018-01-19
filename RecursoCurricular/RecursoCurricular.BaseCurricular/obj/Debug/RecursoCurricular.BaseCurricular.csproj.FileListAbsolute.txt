@@ -25,3 +25,6 @@ C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\obj\Debug\RecursoCurricular.BaseCurricular.csprojResolveAssemblyReference.cache
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\obj\Debug\RecursoCurricular.BaseCurricular.dll
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\obj\Debug\RecursoCurricular.BaseCurricular.pdb
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\bin\Debug\System.Web.Helpers.dll
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\bin\Debug\System.Web.Helpers.xml
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\bin\Debug\es\System.Web.Helpers.resources.dll

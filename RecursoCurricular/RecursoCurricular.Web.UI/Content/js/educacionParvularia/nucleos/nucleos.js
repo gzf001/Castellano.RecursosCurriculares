@@ -2,27 +2,27 @@
 
     var table;
 
-    $('#dimension').change(function () {
+    $('#ambito').change(function () {
 
         table = gridView();
 
-        $("div.dataTables_length").append('<br /><a class="btn btn-success btn-xs" href="#" title="Agregar habilidad" typebutton="Add"><i class="fa fa-plus"></i></a>');
+        $("div.dataTables_length").append('<br /><a class="btn btn-success btn-xs" href="#" title="Agregar núcleo" typebutton="Add"><i class="fa fa-plus"></i></a>');
     })
 
     $(document).on('click', 'a[typebutton=Add]', function () {
 
-        $.getJSON('/Tic/Habilidad/AddHabilidad/' + $("#dimension").val(), function (data) {
+        $.getJSON('/EducacionParvularia/Nucleo/AddNucleo/' + $("#ambito").val(), function (data) {
 
             if (data === "500") {
 
-                swal("Error!", "Seleccione la dimensión", "error");
+                swal("Error!", "Seleccione el ámbito de aprendizaje", "error");
             }
             else {
-                $('#habilidadId').val(data.Id);
-                $('#dimensionId').val(data.DimensionHabilidadTIC.Nombre)
+
+                $('#nucleoId').val(data.Id);
+                $('#ambitoCodigo').val(data.AmbitoExperienciaAprendizaje.Nombre)
                 $('#numero').val(data.Numero);
                 $('#nombre').val(data.Nombre);
-                $('#descripcion').val(data.Descripcion);
 
                 popUp();
             }
@@ -31,13 +31,12 @@
 
     $(document).on('click', 'a[typebutton=Edit]', function () {
 
-        $.getJSON('/Tic/Habilidad/EditHabilidad/' + $("#dimension").val() + '/' + $(this).attr('data-value'), function (data) {
+        $.getJSON('/EducacionParvularia/Nucleo/EditNucleo/' + $("#ambito").val() + '/' + $(this).attr('data-value'), function (data) {
 
-            $('#habilidadId').val(data.Id);
-            $('#dimensionId').val(data.DimensionHabilidadTIC.Nombre)
+            $('#nucleoId').val(data.Id);
+            $('#ambitoCodigo').val(data.AmbitoExperienciaAprendizaje.Nombre)
             $('#numero').val(data.Numero);
             $('#nombre').val(data.Nombre);
-            $('#descripcion').val(data.Descripcion);
 
             popUp();
         });
@@ -49,35 +48,35 @@
 
         swal({
             title: "¿Esta seguro?",
-            text: "Se eliminará la habilidad",
+            text: "Se eliminará el núcleo",
             type: "warning",
             showCancelButton: true,
             cancelButtonText: "Cancelar",
             confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Si, eliminala",
+            confirmButtonText: "Si, eliminalo",
             closeOnConfirm: false
         },
             function () {
 
                 $.ajax({
                     type: 'GET',
-                    url: '/Tic/Habilidad/DeleteHabilidad/' + $("#dimension").val() + '/' + id,
+                    url: '/EducacionParvularia/Nucleo/DeleteNucleo/' + $("#ambito").val() + '/' + id,
                     success: function (data) {
 
                         if (data === "200") {
 
                             table.ajax.reload();
 
-                            swal("Eliminado!", "La habilidad fue eliminada de forma correcta", "success");
+                            swal("Eliminado!", "El núcleo fue eliminado de forma correcta", "success");
                         }
                         else {
 
-                            swal("Error!", "La habilidad no puede ser eliminada", "error");
+                            swal("Error!", "El núcleo no puede ser eliminado", "error");
                         }
                     },
                     error: function (data) {
 
-                        swal("Error!", "La habilidad no puede ser eliminada", "error");
+                        swal("Error!", "El núcleo no puede ser eliminado", "error");
                     }
                 });
             });
@@ -110,16 +109,15 @@
         submitHandler: function (form) {
 
             var obj = {
-                id: $('#habilidadId').val(),
-                dimensionHabilidadTicId: $("#dimension").val(),
+                id: $('#nucleoId').val(),
+                ambitoExperienciaAprendizajeCodigo: $("#ambito").val(),
                 numero: $('#numero').val(),
-                nombre: $('#nombre').val(),
-                descripcion: $('#descripcion').val()
+                nombre: $('#nombre').val()
             };
 
             $.ajax({
                 type: "POST",
-                url: "/Tic/Habilidad/Habilidades",
+                url: "/EducacionParvularia/Nucleo/Nucleos",
                 data: obj,
                 success: function (data) {
 
@@ -155,23 +153,27 @@ $('#cancel').click(function (e) {
 function gridView() {
 
     var table = $('#gridView').DataTable({
-        "ajax": "/Tic/Habilidad/GetHabilidades/" + $("#dimension").val(),
+        "ajax": "/EducacionParvularia/Nucleo/GetNucleos/" + $("#ambito").val(),
         "columns": [
             { "data": "Numero" },
             { "data": "Nombre" },
-            { "data": "Descripcion" },
             { "data": "Accion" }
         ],
         "destroy": true,
         "order": [[0, "asc"]],
         "columnDefs": [
             {
-                "targets": [2],
-                "searchable": false,
-                "sortable": false
+                "targets": [0],
+                "searchable": true,
+                "sortable": true
             },
             {
-                "targets": [3],
+                "targets": [1],
+                "searchable": true,
+                "sortable": true
+            },
+            {
+                "targets": [2],
                 "searchable": false,
                 "sortable": false
             }

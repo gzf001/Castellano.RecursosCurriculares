@@ -63,13 +63,20 @@ namespace RecursoCurricular.Web.UI.Areas.Tic.Controllers
         [Authorize]
         [HttpGet]
         [RecursoCurricular.Web.Authorization(ActionType = new RecursoCurricular.Web.ActionType[] { RecursoCurricular.Web.ActionType.Add }, Root = "Habilidades", Area = Area)]
-        public ActionResult AddHabilidad(Guid dimensionId)
+        public ActionResult AddHabilidad(string dimensionId)
         {
-            RecursoCurricular.DimensionHabilidadTic dimension = RecursoCurricular.DimensionHabilidadTic.Get(dimensionId, this.CurrentAnio.Numero);
+            if (dimensionId == "-1")
+            {
+                return this.Json("500", JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                RecursoCurricular.DimensionHabilidadTic dimension = RecursoCurricular.DimensionHabilidadTic.Get(new Guid(dimensionId), this.CurrentAnio.Numero);
 
-            int numero = RecursoCurricular.HabilidadTic.Last(this.CurrentAnio);
+                int numero = RecursoCurricular.HabilidadTic.Last(this.CurrentAnio);
 
-            return this.Json(new RecursoCurricular.HabilidadTic { DimensionHabilidadTIC = dimension, Numero = numero }, JsonRequestBehavior.AllowGet);
+                return this.Json(new RecursoCurricular.HabilidadTic { DimensionHabilidadTIC = dimension, Numero = numero }, JsonRequestBehavior.AllowGet);
+            }
         }
 
         [Authorize]

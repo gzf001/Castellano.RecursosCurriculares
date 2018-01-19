@@ -1,22 +1,22 @@
-﻿@model RecursoCurricular.Web.UI.Areas.Tic.Models.HabilidadTic
+﻿@model RecursoCurricular.Web.UI.Areas.EducacionParvularia.Models.Nucleo
 
 @{
-    ViewBag.Title = "Habilidades";
+    ViewBag.Title = "Nucleos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div id="form" class="admin-form">
     <div class="panel">
         <div class="panel-heading">
-            <span class="panel-title">Administración de Habilidades T.I.C.</span>
+            <span class="panel-title">Nucleos de Aprendizaje</span>
         </div>
         <div class="form-horizontal">
             <div class="row">
                 <div class="panel-body">
                     <div class="form-group">
-                        @Html.LabelFor(x => x.DimensionHabilidadTIC.Nombre, new { @for = "dimension", @class = "col-sm-4 control-label" })
+                        @Html.LabelFor(x => x.AmbitoExperienciaAprendizaje.Nombre, new { @for = "ambito", @class = "col-sm-4 control-label" })
                         <div class="col-sm-4">
-                            @Html.DropDownListFor(x => x.DimensionHabilidadTIC.Nombre, RecursoCurricular.DimensionHabilidadTic.Dimensiones(Model.Anio), new { @id = "dimension", @class = "form-control" })
+                            @Html.DropDownListFor(x => x.AmbitoExperienciaAprendizaje.Nombre, RecursoCurricular.BaseCurricular.AmbitoExperienciaAprendizaje.AmbitosExperienciaAprendizaje(Model.Anio), new { @id = "ambito", @class = "form-control" })
                         </div>
                     </div>
                 </div>
@@ -31,7 +31,6 @@
                         <tr>
                             <th>Número</th>
                             <th>Nombre</th>
-                            <th>Descripción</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -44,20 +43,20 @@
 <div id="modal-form" class="popup-basic admin-form mfp-with-anim mfp-hide mw800">
     <div class="panel">
         <div class="panel-heading">
-            <span class="panel-title">Habilidades T.I.C.</span>
+            <span class="panel-title">Nucleos de Aprendizaje</span>
         </div>
         <form id="formModal" method="post">
 
             @Html.AntiForgeryToken()
 
-            @Html.Hidden("habilidadId")
+            @Html.Hidden("nucleoId")
 
             <div class="panel-body">
                 <div class="section row">
                     <div class="col-md-12">
-                        @Html.LabelFor(x => x.DimensionHabilidadTIC.Nombre, new { @for = "dimensionId", @class = "field-label" })
+                        @Html.LabelFor(x => x.AmbitoExperienciaAprendizaje.Nombre, new { @for = "ambitoCodigo", @class = "field-label" })
                         <label class="field select">
-                            @Html.TextBoxFor(x => x.DimensionHabilidadTIC.Nombre, new { @class = "textBoxDisabled", @id = "dimensionId", @disabled = true })
+                            @Html.TextBoxFor(x => x.AmbitoExperienciaAprendizaje.Nombre, new { @class = "textBoxDisabled", @id = "ambitoCodigo", @disabled = true })
                         </label>
                     </div>
                 </div>
@@ -73,15 +72,7 @@
                     <div class="col-md-12">
                         @Html.LabelFor(x => x.Nombre, new { @for = "nombre", @class = "field-label" })
                         <label class="field select">
-                            @Html.TextBoxFor(x => x.Nombre, new { @class = "gui-input", @id = "nombre", @placeholder = "Nombre", @maxLength = "150" })
-                        </label>
-                    </div>
-                </div>
-                <div class="section row">
-                    <div class="col-md-12">
-                        @Html.LabelFor(x => x.Descripcion, new { @for = "descripcion", @class = "field-label" })
-                        <label class="field textarea-grow">
-                            @Html.TextAreaFor(x => x.Descripcion, new { @class = "gui-textarea", @id = "descripcion", @placeholder = "Descripcion" })
+                            @Html.TextBoxFor(x => x.Nombre, new { @class = "gui-input", @id = "nombre", @placeholder = "Nombre", @maxLength = "75" })
                         </label>
                     </div>
                 </div>
@@ -94,4 +85,4 @@
     </div>
 </div>
 
-@Scripts.Render("~/js/habilidades")
+@Scripts.Render("~/js/nucleos")
