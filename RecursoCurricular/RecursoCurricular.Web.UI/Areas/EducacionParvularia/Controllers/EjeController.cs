@@ -24,34 +24,9 @@ namespace RecursoCurricular.Web.UI.Areas.EducacionParvularia.Controllers
         }
 
         [Authorize]
-        [HttpGet]
-        public JsonResult Nucleos(string ambitoExperienciaAprendizajeCodigo)
-        {
-            int ambito;
-
-            if (int.TryParse(ambitoExperienciaAprendizajeCodigo, out ambito))
-            {
-                IEnumerable<SelectListItem> selectList = RecursoCurricular.BaseCurricular.NucleoAprendizaje.Nucleos(this.CurrentAnio.Numero, ambito);
-
-                return this.Json(selectList, JsonRequestBehavior.AllowGet);
-            }
-            else
-            {
-                throw new Exception("Intento fallido de extracción de información");
-            }
-        }
-
-        [Authorize]
-        [HttpGet]
-        public JsonResult Ciclos()
-        {
-            return this.Json(RecursoCurricular.Educacion.Ciclo.Ciclos, JsonRequestBehavior.AllowGet);
-        }
-
-        [Authorize]
         [HttpPost]
         [RecursoCurricular.Web.Authorization(ActionType = new RecursoCurricular.Web.ActionType[] { RecursoCurricular.Web.ActionType.Accept }, Root = "Ejes", Area = Area)]
-        public ActionResult Dimensiones(RecursoCurricular.Web.UI.Areas.Tic.Models.Dimension model)
+        public ActionResult Ejes(RecursoCurricular.Web.UI.Areas.EducacionParvularia.Models.Eje model)
         {
             if (!this.ModelState.IsValid)
             {
@@ -60,17 +35,17 @@ namespace RecursoCurricular.Web.UI.Areas.EducacionParvularia.Controllers
 
             try
             {
-                RecursoCurricular.DimensionHabilidadTic dimensionHabilidadTic = RecursoCurricular.DimensionHabilidadTic.Get(model.Id, this.CurrentAnio.Numero);
-
-                using (RecursoCurricular.Context context = new RecursoCurricular.Context())
+                using (RecursoCurricular.BaseCurricular.Context context = new RecursoCurricular.BaseCurricular.Context())
                 {
-                    new RecursoCurricular.DimensionHabilidadTic
+                    new RecursoCurricular.BaseCurricular.EjeParvulo
                     {
-                        Id = model.Id,
                         AnoNumero = this.CurrentAnio.Numero,
+                        AmbitoExperienciaAprendizajeCodigo = model.AmbitoExperienciaAprendizajeCodigo,
+                        NucleoId = model.NucleoId,
+                        CicloCodigo = model.CicloCodigo,
+                        Id = model.Id,
                         Numero = model.Numero,
-                        Nombre = model.Nombre.Trim(),
-                        Descripcion = string.IsNullOrEmpty(model.Descripcion) ? default(string) : model.Descripcion.Trim()
+                        Nombre = model.Nombre.Trim()
                     }.Save(context);
 
                     context.SubmitChanges();
@@ -87,53 +62,89 @@ namespace RecursoCurricular.Web.UI.Areas.EducacionParvularia.Controllers
         [Authorize]
         [HttpGet]
         [RecursoCurricular.Web.Authorization(ActionType = new RecursoCurricular.Web.ActionType[] { RecursoCurricular.Web.ActionType.Add }, Root = "Ejes", Area = Area)]
-        public ActionResult AddDimension()
+        public JsonResult AddEje(string ambitoExperienciaAprendizajeCodigo, string nucleoId, string cicloCodigo)
         {
-            int numero = RecursoCurricular.DimensionHabilidadTic.Last(this.CurrentAnio);
+            int a;
+            Guid n;
+            short c;
 
-            return this.Json(new RecursoCurricular.DimensionHabilidadTic { Numero = numero }, JsonRequestBehavior.AllowGet);
+            if (int.TryParse(ambitoExperienciaAprendizajeCodigo, out a) && Guid.TryParse(nucleoId, out n) && short.TryParse(cicloCodigo, out c) && a > 0 && c > 0)
+            {
+                RecursoCurricular.BaseCurricular.AmbitoExperienciaAprendizaje ambitoExperienciaAprendizaje = RecursoCurricular.BaseCurricular.AmbitoExperienciaAprendizaje.Get(this.CurrentAnio.Numero, a);
+                RecursoCurricular.BaseCurricular.NucleoAprendizaje nucleAprendizaje = BaseCurricular.NucleoAprendizaje.Get(this.CurrentAnio.Numero, a, n);
+                RecursoCurricular.Educacion.Ciclo ciclo = RecursoCurricular.Educacion.Ciclo.Get(c);
+
+                int numero = RecursoCurricular.BaseCurricular.EjeParvulo.Last(ambitoExperienciaAprendizaje, nucleAprendizaje, ciclo);
+
+                return this.Json(new RecursoCurricular.BaseCurricular.EjeParvulo
+                {
+                    AmbitoExperienciaAprendizaje = ambitoExperienciaAprendizaje,
+                    NucleoAprendizaje = nucleAprendizaje,
+                    Ciclo = ciclo,
+                    Numero = numero
+                }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return this.Json("500", JsonRequestBehavior.AllowGet);
+            }
         }
 
         [Authorize]
         [HttpGet]
         [RecursoCurricular.Web.Authorization(ActionType = new RecursoCurricular.Web.ActionType[] { RecursoCurricular.Web.ActionType.Edit }, Root = "Ejes", Area = Area)]
-        public ActionResult EditDimension(Guid id)
+        public JsonResult EditEje(string ambitoExperienciaAprendizajeCodigo, string nucleoId, string cicloCodigo, string id)
         {
-            RecursoCurricular.DimensionHabilidadTic dimensionHabilidadTic = RecursoCurricular.DimensionHabilidadTic.Get(id, this.CurrentAnio.Numero);
+            int a;
+            Guid n;
+            int c;
+            Guid e;
 
-            return this.Json(new RecursoCurricular.Web.UI.Areas.Tic.Models.Dimension
+            if (int.TryParse(ambitoExperienciaAprendizajeCodigo, out a) && Guid.TryParse(nucleoId, out n) && int.TryParse(cicloCodigo, out c) && Guid.TryParse(id, out e))
             {
-                Id = dimensionHabilidadTic.Id,
-                Numero = dimensionHabilidadTic.Numero,
-                Nombre = dimensionHabilidadTic.Nombre,
-                Descripcion = dimensionHabilidadTic.Descripcion
-            }, JsonRequestBehavior.AllowGet);
+                RecursoCurricular.BaseCurricular.EjeParvulo eje = RecursoCurricular.BaseCurricular.EjeParvulo.Get(this.CurrentAnio.Numero, a, n, c, e);
+
+                return this.Json(eje, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return this.Json("500", JsonRequestBehavior.AllowGet);
+            }
         }
 
         [Authorize]
         [HttpGet]
         [RecursoCurricular.Web.Authorization(ActionType = new RecursoCurricular.Web.ActionType[] { RecursoCurricular.Web.ActionType.Delete }, Root = "Ejes", Area = Area)]
-        public JsonResult DeleteDimension(Guid id)
+        public JsonResult DeleteEje(string ambitoExperienciaAprendizajeCodigo, string nucleoId, string cicloCodigo, string id)
         {
-            RecursoCurricular.DimensionHabilidadTic dimensionHabilidadTic = RecursoCurricular.DimensionHabilidadTic.Get(id, this.CurrentAnio.Numero);
-
             try
             {
-                using (RecursoCurricular.Context context = new RecursoCurricular.Context())
+                int a;
+                Guid n;
+                int c;
+                Guid e;
+
+                if (int.TryParse(ambitoExperienciaAprendizajeCodigo, out a) && Guid.TryParse(nucleoId, out n) && int.TryParse(cicloCodigo, out c) && Guid.TryParse(id, out e))
                 {
-                    new RecursoCurricular.DimensionHabilidadTic
+                    RecursoCurricular.BaseCurricular.AmbitoExperienciaAprendizaje ambitoExperienciaAprendizaje = RecursoCurricular.BaseCurricular.AmbitoExperienciaAprendizaje.Get(this.CurrentAnio.Numero, a);
+                    RecursoCurricular.BaseCurricular.NucleoAprendizaje nucleAprendizaje = BaseCurricular.NucleoAprendizaje.Get(this.CurrentAnio.Numero, a, n);
+                    RecursoCurricular.Educacion.Ciclo ciclo = RecursoCurricular.Educacion.Ciclo.Get(c);
+
+                    RecursoCurricular.BaseCurricular.EjeParvulo eje = RecursoCurricular.BaseCurricular.EjeParvulo.Get(this.CurrentAnio.Numero, a, n, c, e);
+
+                    using (RecursoCurricular.BaseCurricular.Context context = new RecursoCurricular.BaseCurricular.Context())
                     {
-                        Id = dimensionHabilidadTic.Id,
-                        AnoNumero = dimensionHabilidadTic.AnoNumero,
-                        Numero = dimensionHabilidadTic.Numero,
-                        Nombre = dimensionHabilidadTic.Nombre,
-                        Descripcion = dimensionHabilidadTic.Descripcion
-                    }.Delete(context);
+                        eje.Delete(context);
 
-                    context.SubmitChanges();
+                        context.SubmitChanges();
+                    }
+
+                    return this.Json("200", JsonRequestBehavior.AllowGet);
                 }
-
-                return this.Json("200", JsonRequestBehavior.AllowGet);
+                else
+                {
+                    return this.Json("500", JsonRequestBehavior.AllowGet);
+                }
             }
             catch
             {

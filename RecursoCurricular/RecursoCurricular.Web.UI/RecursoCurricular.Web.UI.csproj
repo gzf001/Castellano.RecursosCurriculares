@@ -152,12 +152,16 @@
     <Compile Include="Areas\Administracion\Models\RolAccion.cs" />
     <Compile Include="Areas\Administracion\Models\Usuario.cs" />
     <Compile Include="Areas\Administracion\Models\UsuariosConectados.cs" />
+    <Compile Include="Areas\EducacionParvularia\Controllers\AprendizajeEsperadoController.cs" />
     <Compile Include="Areas\EducacionParvularia\Controllers\EjeController.cs" />
     <Compile Include="Areas\EducacionParvularia\Controllers\HomeController.cs" />
     <Compile Include="Areas\EducacionParvularia\Controllers\NucleoController.cs" />
     <Compile Include="Areas\EducacionParvularia\EducacionParvulariaAreaRegistration.cs" />
+    <Compile Include="Areas\EducacionParvularia\Models\AprendizajeEsperado.cs" />
     <Compile Include="Areas\EducacionParvularia\Models\Eje.cs" />
     <Compile Include="Areas\EducacionParvularia\Models\Nucleo.cs" />
+    <Compile Include="Areas\Educacion\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Educacion\EducacionAreaRegistration.cs" />
     <Compile Include="Areas\Home\Controllers\AccountController.cs" />
     <Compile Include="Areas\Home\HomeAreaRegistration.cs" />
     <Compile Include="Areas\Home\Models\Login.cs" />
@@ -209,6 +213,7 @@
     <Content Include="Content\js\bootstrap.sweetalert\sweetalert.css" />
     <Content Include="Content\js\bootstrap.sweetalert\sweetalert.js" />
     <Content Include="Content\js\bootstrap.sweetalert\sweetalert.min.js" />
+    <Content Include="Content\js\educacionParvularia\aprendizajesEsperados\aprendizajesEsperados.js" />
     <Content Include="Content\js\educacionParvularia\ejes\ejes.js" />
     <Content Include="Content\js\educacionParvularia\nucleos\nucleos.js" />
     <Content Include="Content\js\habilidadTic\dimensiones\dimensiones.js" />
@@ -3632,6 +3637,9 @@
     <Content Include="Areas\Tic\Views\Habilidad\Habilidades.cshtml" />
     <Content Include="Areas\EducacionParvularia\Views\Nucleo\Nucleos.cshtml" />
     <Content Include="Areas\EducacionParvularia\Views\Eje\Ejes.cshtml" />
+    <Content Include="Areas\EducacionParvularia\Views\AprendizajeEsperado\AprendizajesEsperados.cshtml" />
+    <Content Include="Areas\Educacion\Views\web.config" />
+    <Content Include="Areas\Educacion\Views\Home\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -3659,6 +3667,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Educacion\Models\" />
     <Folder Include="Content\theme\assets\js\demo\charts\" />
     <Folder Include="Content\theme\assets\js\utility\admindock\" />
     <Folder Include="Content\theme\assets\js\utility\adminpanels\" />

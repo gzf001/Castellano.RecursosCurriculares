@@ -134,12 +134,12 @@ namespace RecursoCurricular.Web.UI.Areas.Tic.Controllers
         {
             Guid id;
 
-            RecursoCurricular.Web.UI.Areas.Tic.Models.HabilidadTic.HabilidadTices habilidadTices = new RecursoCurricular.Web.UI.Areas.Tic.Models.HabilidadTic.HabilidadTices();
-
-            habilidadTices.data = new List<RecursoCurricular.Web.UI.Areas.Tic.Models.HabilidadTic>();
-
             if (Guid.TryParse(dimensionId, out id))
             {
+                RecursoCurricular.Web.UI.Areas.Tic.Models.HabilidadTic.HabilidadTices habilidadTices = new RecursoCurricular.Web.UI.Areas.Tic.Models.HabilidadTic.HabilidadTices();
+
+                habilidadTices.data = new List<RecursoCurricular.Web.UI.Areas.Tic.Models.HabilidadTic>();
+
                 RecursoCurricular.DimensionHabilidadTic dimension = RecursoCurricular.DimensionHabilidadTic.Get(id, this.CurrentAnio.Numero);
 
                 foreach (RecursoCurricular.HabilidadTic habilidadTic in RecursoCurricular.HabilidadTic.GetAll(dimension))
@@ -159,7 +159,7 @@ namespace RecursoCurricular.Web.UI.Areas.Tic.Controllers
             }
             else
             {
-                return this.Json(habilidadTices, JsonRequestBehavior.AllowGet);
+                return this.Json(new RecursoCurricular.Web.UI.Areas.Tic.Models.HabilidadTic.HabilidadTices { data = new List<RecursoCurricular.Web.UI.Areas.Tic.Models.HabilidadTic>() }, JsonRequestBehavior.AllowGet);
             }
         }
     }

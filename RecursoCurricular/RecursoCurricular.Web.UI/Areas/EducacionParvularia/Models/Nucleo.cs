@@ -13,7 +13,7 @@ namespace RecursoCurricular.Web.UI.Areas.EducacionParvularia.Models
             set;
         }
 
-        public class Nucleos
+        public new class Nucleos
         {
             public List<Nucleo> data
             {

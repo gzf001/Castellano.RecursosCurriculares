@@ -224,9 +224,11 @@ namespace RecursoCurricular.Web.UI.App_Start
 
             ScriptBundle nucleo = new ScriptBundle("~/js/nucleos");
             ScriptBundle eje = new ScriptBundle("~/js/ejes");
+            ScriptBundle aprendizajeEsperado = new ScriptBundle("~/js/aprendizajesEsperados");
 
             bundles.Add(nucleo.Include("~/Content/js/educacionParvularia/nucleos/nucleos.js"));
             bundles.Add(eje.Include("~/Content/js/educacionParvularia/ejes/ejes.js"));
+            bundles.Add(aprendizajeEsperado.Include("~/Content/js/educacionParvularia/aprendizajesEsperados/aprendizajesEsperados.js"));
 
             #endregion
 

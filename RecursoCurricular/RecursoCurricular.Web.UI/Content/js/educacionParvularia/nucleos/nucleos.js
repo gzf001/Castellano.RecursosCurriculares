@@ -5,8 +5,6 @@
     $('#ambito').change(function () {
 
         table = gridView();
-
-        $("div.dataTables_length").append('<br /><a class="btn btn-success btn-xs" href="#" title="Agregar núcleo" typebutton="Add"><i class="fa fa-plus"></i></a>');
     })
 
     $(document).on('click', 'a[typebutton=Add]', function () {
@@ -178,6 +176,12 @@ function gridView() {
                 "sortable": false
             }
         ],
+        "fnInitComplete": function (oSettings, json) {
+
+            if (json.data.length > 0) {
+                $("div.dataTables_length").append('<br /><a class="btn btn-success btn-xs" href="#" title="Agregar núcleo" typebutton="Add"><i class="fa fa-plus"></i></a>');
+            }
+        },
         "iDisplayLength": 15,
         "aLengthMenu": [
             [15, 20, 25, 30, -1],

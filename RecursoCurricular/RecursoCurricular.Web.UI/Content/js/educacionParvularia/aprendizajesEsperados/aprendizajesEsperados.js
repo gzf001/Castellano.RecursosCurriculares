@@ -50,19 +50,13 @@
         e.preventDefault();
 
         table = gridView();
-        //var a = !table.api().data().any() ;
-        //if (!table.rows().data()) {
-
-        //    alert('aqui');
-
-        //}
-
-        //$("div.dataTables_length").append('<br /><a class="btn btn-success btn-xs" href="#" title="Agregar núcleo" typebutton="Add"><i class="fa fa-plus"></i></a>');
     })
 
-    $(document).on('click', 'a[typebutton=Add]', function () {
+    $(document).on('click', 'a[typebutton=Add]', function (e) {
 
-        $.getJSON("/EducacionParvularia/Eje/AddEje/" + $("#ambito").val() + "/" + $('#nucleo').val() + "/" + $('#ciclo').val(), function (data) {
+        e.preventDefault();
+
+        $.getJSON("/EducacionParvularia/AprendizajeEsperado/AddAprendizajeEsperado/" + $("#ambito").val() + "/" + $('#nucleo').val() + "/" + $('#ciclo').val(), function (data) {
 
             if (data === "500") {
 
@@ -73,18 +67,29 @@
                 $('#ambitoCodigo').val(data.AmbitoExperienciaAprendizaje.Nombre);
                 $('#nucleoId').val(data.NucleoAprendizaje.Nombre)
                 $('#cicloCodigo').val(data.Ciclo.Nombre);
-                $('#ejeId').val(data.Id);
+                $('#aprendizajeEsperadoId').val(data.Id);
                 $('#numero').val(data.Numero);
-                $('#nombre').val(data.Nombre);
+                $('#descripcion').val(data.Descripcion);
 
-                popUp();
+                $.getJSON("/EducacionParvularia/Home/GetEjes/" + $("#ambito").val() + "/" + $('#nucleo').val() + "/" + $('#ciclo').val(), function (data) {
+
+                    var items = "";
+
+                    $.each(data, function (i, eje) {
+                        items += "<option value='" + eje.Value + "'>" + eje.Text + "</option>";
+                    });
+
+                    $("#eje").html(items);
+
+                    popUp();
+                });
             }
         })
     })
 
     $(document).on('click', 'a[typebutton=Edit]', function () {
 
-        $.getJSON("/EducacionParvularia/Eje/EditEje/" + $("#ambito").val() + "/" + $('#nucleo').val() + "/" + $('#ciclo').val() + "/" + $(this).attr('data-value'), function (data) {
+        $.getJSON("/EducacionParvularia/AprendizajeEsperado/EditAprendizajeEsperado/" + $("#ambito").val() + "/" + $('#nucleo').val() + "/" + $('#ciclo').val() + "/" + $(this).attr('data-value'), function (data) {
 
             if (data === "500") {
 
@@ -92,14 +97,29 @@
             }
             else {
 
+                var ejeId = data.IdEje;
+
                 $('#ambitoCodigo').val(data.AmbitoExperienciaAprendizaje.Nombre);
                 $('#nucleoId').val(data.NucleoAprendizaje.Nombre)
                 $('#cicloCodigo').val(data.Ciclo.Nombre);
-                $('#ejeId').val(data.Id);
+                $('#aprendizajeEsperadoId').val(data.Id);
                 $('#numero').val(data.Numero);
-                $('#nombre').val(data.Nombre);
+                $('#descripcion').val(data.Descripcion);
 
-                popUp();
+                $.getJSON("/EducacionParvularia/Home/GetEjes/" + $("#ambito").val() + "/" + $('#nucleo').val() + "/" + $('#ciclo').val(), function (data) {
+
+                    var items = "";
+
+                    $.each(data, function (i, eje) {
+                        items += "<option value='" + eje.Value + "'>" + eje.Text + "</option>";
+                    });
+
+                    $("#eje").html(items);
+
+                    $("#eje").val(ejeId);
+
+                    popUp();
+                });
             }
         })
     })
@@ -110,7 +130,7 @@
 
         swal({
             title: "¿Esta seguro?",
-            text: "Se eliminará el eje",
+            text: "Se eliminará el aprendizaje esperado",
             type: "warning",
             showCancelButton: true,
             cancelButtonText: "Cancelar",
@@ -122,26 +142,38 @@
 
                 $.ajax({
                     type: 'GET',
-                    url: '/EducacionParvularia/Eje/DeleteEje/' + $("#ambito").val() + "/" + $('#nucleo').val() + "/" + $('#ciclo').val() + "/" + id,
+                    url: '/EducacionParvularia/AprendizajeEsperado/DeleteAprendizajeEsperado/' + $("#ambito").val() + "/" + $('#nucleo').val() + "/" + $('#ciclo').val() + "/" + id,
                     success: function (data) {
 
                         if (data === "200") {
 
                             table.ajax.reload();
 
-                            swal("Eliminado!", "El eje fue eliminado de forma correcta", "success");
+                            swal("Eliminado!", "El aprendizaje esperado fue eliminado de forma correcta", "success");
                         }
                         else {
 
-                            swal("Error!", "El eje no puede ser eliminado", "error");
+                            swal("Error!", "El aprendizaje esperado no puede ser eliminado", "error");
                         }
                     },
                     error: function (data) {
 
-                        swal("Error!", "El eje no puede ser eliminado", "error");
+                        swal("Error!", "El aprendizaje esperado no puede ser eliminado", "error");
                     }
                 });
             });
+    })
+
+    $('#eje').change(function (e) {
+
+        e.preventDefault();
+
+        $.getJSON("/EducacionParvularia/AprendizajeEsperado/NumeroAprendizajeEsperado/" + $("#ambito").val() + "/" + $('#nucleo').val() + "/" + $('#ciclo').val() + "/" + $('#eje').val(), function (data) {
+
+            var numero = data;
+
+            $('#numero').val(data);
+        });
     })
 
     var validator = $('#formModal').validate({
@@ -150,13 +182,13 @@
         validClass: 'state-success',
         errorElement: 'em',
         rules: {
-            Nombre: {
+            Descripcion: {
                 required: true
             }
         },
         messages: {
-            Nombre: {
-                required: 'Ingrese el nombre'
+            Descripcion: {
+                required: 'Ingrese la descripción'
             }
         },
         highlight: function (element, errorClass, validClass) {
@@ -172,16 +204,17 @@
 
             var obj = {
                 ambitoExperienciaAprendizajeCodigo: $('#ambito').val(),
-                nucleoId: $('#nucleo').val(),
+                nucleoAprendizajeId: $('#nucleo').val(),
                 cicloCodigo: $('#ciclo').val(),
-                id: $('#ejeId').val(),
+                id: $('#aprendizajeEsperadoId').val(),
+                idEje: $('#eje').val(),
                 numero: $('#numero').val(),
-                nombre: $('#nombre').val()
+                descripcion: $('#descripcion').val()
             };
 
             $.ajax({
                 type: "POST",
-                url: "/EducacionParvularia/Eje/Ejes",
+                url: "/EducacionParvularia/AprendizajeEsperado/AprendizajesEsperados",
                 data: obj,
                 success: function (data) {
 
@@ -217,10 +250,11 @@ $('#cancel').click(function (e) {
 function gridView() {
 
     var table = $('#gridView').DataTable({
-        "ajax": "/EducacionParvularia/Eje/GetEjes/" + $("#ambito").val() + "/" + $('#nucleo').val() + "/" + $('#ciclo').val(),
+        "ajax": "/EducacionParvularia/AprendizajeEsperado/GetAprendizajesEsperados/" + $("#ambito").val() + "/" + $('#nucleo').val() + "/" + $('#ciclo').val(),
         "columns": [
             { "data": "Numero" },
-            { "data": "Nombre" },
+            { "data": "EjeNombre" },
+            { "data": "Descripcion" },
             { "data": "Accion" }
         ],
         "destroy": true,
@@ -240,6 +274,11 @@ function gridView() {
                 "targets": [2],
                 "searchable": false,
                 "sortable": false
+            },
+            {
+                "targets": [3],
+                "searchable": false,
+                "sortable": false
             }
         ],
         "iDisplayLength": 15,
@@ -249,7 +288,7 @@ function gridView() {
         ],
         "fnInitComplete": function (oSettings, json) {
 
-            if (json.data.length > 0) {
+            if ($('#ciclo').val() > 0) {
                 $("div.dataTables_length").append('<br /><a class="btn btn-success btn-xs" href="#" title="Agregar núcleo" typebutton="Add"><i class="fa fa-plus"></i></a>');
             }
         },

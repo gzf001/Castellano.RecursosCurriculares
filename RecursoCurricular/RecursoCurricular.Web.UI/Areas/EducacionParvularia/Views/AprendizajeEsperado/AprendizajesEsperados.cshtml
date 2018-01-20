@@ -1,14 +1,14 @@
-﻿@model RecursoCurricular.Web.UI.Areas.EducacionParvularia.Models.Eje
+﻿@model RecursoCurricular.Web.UI.Areas.EducacionParvularia.Models.AprendizajeEsperado
 
 @{
-    ViewBag.Title = "Ejes";
+    ViewBag.Title = "AprendizajesEsperados";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div id="form" class="admin-form">
     <div class="panel">
         <div class="panel-heading">
-            <span class="panel-title">Ejes de Aprendizaje</span>
+            <span class="panel-title">Aprendizajes Esperados</span>
         </div>
         <div class="form-horizontal">
             <div class="panel-body">
@@ -46,7 +46,8 @@
                     <thead>
                         <tr>
                             <th>Número</th>
-                            <th>Nombre</th>
+                            <th>Eje</th>
+                            <th>Descripción</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -65,19 +66,17 @@
 
             @Html.AntiForgeryToken()
 
-            @Html.Hidden("ejeId")
+            @Html.Hidden("aprendizajeEsperadoId")
 
             <div class="panel-body">
                 <div class="section row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         @Html.LabelFor(x => x.AmbitoExperienciaAprendizaje.Nombre, new { @for = "ambitoCodigo", @class = "field-label" })
                         <label class="field select">
                             @Html.TextBoxFor(x => x.AmbitoExperienciaAprendizaje.Nombre, new { @class = "textBoxDisabled", @id = "ambitoCodigo", @disabled = true })
                         </label>
                     </div>
-                </div>
-                <div class="section row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         @Html.LabelFor(x => x.NucleoAprendizaje.Nombre, new { @for = "nucleoId", @class = "field-label" })
                         <label class="field select">
                             @Html.TextBoxFor(x => x.NucleoAprendizaje.Nombre, new { @class = "textBoxDisabled", @id = "nucleoId", @disabled = true })
@@ -85,15 +84,13 @@
                     </div>
                 </div>
                 <div class="section row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         @Html.LabelFor(x => x.Ciclo.Nombre, new { @for = "cicloCodigo", @class = "field-label" })
                         <label class="field select">
                             @Html.TextBoxFor(x => x.Ciclo.Nombre, new { @class = "textBoxDisabled", @id = "cicloCodigo", @disabled = true })
                         </label>
                     </div>
-                </div>
-                <div class="section row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         @Html.LabelFor(x => x.Numero, new { @for = "numero", @class = "field-label" })
                         <label class="field select">
                             @Html.TextBoxFor(x => x.Numero, new { @class = "textBoxDisabled", @id = "numero", @disabled = true })
@@ -102,9 +99,17 @@
                 </div>
                 <div class="section row">
                     <div class="col-md-12">
-                        @Html.LabelFor(x => x.Nombre, new { @for = "nombre", @class = "field-label" })
+                        @Html.LabelFor(x => x.EjeParvulo.Nombre, new { @for = "eje", @class = "field-label" })
                         <label class="field select">
-                            @Html.TextBoxFor(x => x.Nombre, new { @class = "gui-input", @id = "nombre", @placeholder = "Nombre", @maxLength = "80" })
+                            @Html.DropDownListFor(x => x.EjeParvulo.Nombre, RecursoCurricular.BaseCurricular.EjeParvulo.DefaultItem, new { @id = "eje", @class = "form-control" })
+                        </label>
+                    </div>
+                </div>
+                <div class="section row">
+                    <div class="col-md-12">
+                        @Html.LabelFor(x => x.Descripcion, new { @for = "descripcion", @class = "field-label" })
+                        <label class="field textarea-grow">
+                            @Html.TextAreaFor(x => x.Descripcion, new { @class = "gui-textarea", @id = "descripcion", @placeholder = "" })
                         </label>
                     </div>
                 </div>
@@ -117,4 +122,4 @@
     </div>
 </div>
 
-@Scripts.Render("~/js/ejes")
+@Scripts.Render("~/js/aprendizajesEsperados")
