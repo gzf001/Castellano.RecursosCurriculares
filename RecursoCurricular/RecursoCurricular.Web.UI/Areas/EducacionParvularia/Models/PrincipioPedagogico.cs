@@ -5,17 +5,11 @@ using System.Web;
 
 namespace RecursoCurricular.Web.UI.Areas.EducacionParvularia.Models
 {
-    public class Eje : RecursoCurricular.BaseCurricular.EjeParvulo
+    public class PrincipioPedagogico : RecursoCurricular.BaseCurricular.PrincipioPedagogico
     {
-        public string Accion
+        public class PrincipiosPedagogicos
         {
-            get;
-            set;
-        }
-
-        public new class Ejes
-        {
-            public List<Eje> data
+            public List<PrincipioPedagogico> data
             {
                 get;
                 set;

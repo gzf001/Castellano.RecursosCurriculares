@@ -2,50 +2,7 @@
 
     var table;
 
-    $('#ambito').change(function (e) {
-
-        e.preventDefault();
-
-        $("#nucleo").html("<option value='-1'>[Seleccione]</option>");
-        $("#ciclo").html("<option value='-1'>[Seleccione]</option>");
-
-        var ambito = $('#ambito').val();
-
-        $.getJSON('/EducacionParvularia/Home/Nucleos/' + ambito, function (data) {
-
-            var items = "";
-
-            $.each(data, function (i, nucleo) {
-                items += "<option value='" + nucleo.Value + "'>" + nucleo.Text + "</option>";
-            });
-
-            $("#nucleo").html(items);
-        });
-
-        gridView();
-    })
-
-    $('#nucleo').change(function (e) {
-
-        e.preventDefault();
-
-        $("#ciclo").html("<option value='-1'>[Seleccione]</option>");
-
-        $.getJSON('/Educacion/Home/Ciclos/', function (data) {
-
-            var items = "";
-
-            $.each(data, function (i, ciclo) {
-                items += "<option value='" + ciclo.Value + "'>" + ciclo.Text + "</option>";
-            });
-
-            $("#ciclo").html(items);
-        });
-
-        gridView();
-    })
-
-    $('#ciclo').change(function (e) {
+    $('#sector').change(function (e) {
 
         e.preventDefault();
 
@@ -54,20 +11,24 @@
 
     $(document).on('click', 'a[typebutton=Add]', function () {
 
-        $.getJSON("/EducacionParvularia/Eje/AddEje/" + $("#ambito").val() + "/" + $('#nucleo').val() + "/" + $('#ciclo').val(), function (data) {
+        $.getJSON("/BasesCurriculares/Eje/AddEje/" + $("#sector").val(), function (data) {
 
             if (data === "500") {
 
-                swal("Error!", "Seleccione el ciclo", "error");
+                swal("Error!", "Seleccione el sector", "error");
             }
             else {
 
-                $('#ambitoCodigo').val(data.AmbitoExperienciaAprendizaje.Nombre);
-                $('#nucleoId').val(data.NucleoAprendizaje.Nombre)
-                $('#cicloCodigo').val(data.Ciclo.Nombre);
                 $('#ejeId').val(data.Id);
-                $('#numero').val(data.Numero);
+                $('#sectorId').val(data.Sector.Nombre);
+                $('#numero').val(data.Numero)
                 $('#nombre').val(data.Nombre);
+
+                $('#formModal input[type=checkbox]').each(function () {
+
+                    $(this).prop('checked', false);
+                });
+
 
                 popUp();
             }
@@ -76,7 +37,7 @@
 
     $(document).on('click', 'a[typebutton=Edit]', function () {
 
-        $.getJSON("/EducacionParvularia/Eje/EditEje/" + $("#ambito").val() + "/" + $('#nucleo').val() + "/" + $('#ciclo').val() + "/" + $(this).attr('data-value'), function (data) {
+        $.getJSON("/BasesCurriculares/Eje/EditEje/" + $("#sector").val() + "/" + $(this).attr('data-value'), function (data) {
 
             if (data === "500") {
 
@@ -84,12 +45,16 @@
             }
             else {
 
-                $('#ambitoCodigo').val(data.AmbitoExperienciaAprendizaje.Nombre);
-                $('#nucleoId').val(data.NucleoAprendizaje.Nombre)
-                $('#cicloCodigo').val(data.Ciclo.Nombre);
                 $('#ejeId').val(data.Id);
+                $('#sectorId').val(data.Sector.Nombre)
                 $('#numero').val(data.Numero);
                 $('#nombre').val(data.Nombre);
+
+                $.each(data.SelectedTipoEducacion, function (i, item) {
+
+                    $('[value=' + item + ']').prop('checked', true);
+
+                });
 
                 popUp();
             }
@@ -114,7 +79,7 @@
 
                 $.ajax({
                     type: 'GET',
-                    url: '/EducacionParvularia/Eje/DeleteEje/' + $("#ambito").val() + "/" + $('#nucleo').val() + "/" + $('#ciclo').val() + "/" + id,
+                    url: '/BasesCurriculares/Eje/DeleteEje/' + $("#sector").val() + "/" + id,
                     success: function (data) {
 
                         if (data === "200") {
@@ -144,11 +109,17 @@
         rules: {
             Nombre: {
                 required: true
+            },
+            SelectedTipoEducacion: {
+                tipoEducacionSelected: true
             }
         },
         messages: {
             Nombre: {
                 required: 'Ingrese el nombre'
+            },
+            SelectedTipoEducacion: {
+                tipoEducacionSelected: 'Seleccione al menos un tipo de educación'
             }
         },
         highlight: function (element, errorClass, validClass) {
@@ -162,18 +133,23 @@
         },
         submitHandler: function (form) {
 
+            var selectedTipoEducacion = [];
+
+            $(":checkbox:checked").each(function () {
+                selectedTipoEducacion.push($(this).attr('value'));
+            });
+
             var obj = {
-                ambitoExperienciaAprendizajeCodigo: $('#ambito').val(),
-                nucleoId: $('#nucleo').val(),
-                cicloCodigo: $('#ciclo').val(),
+                sectorId: $('#sector').val(),
                 id: $('#ejeId').val(),
                 numero: $('#numero').val(),
-                nombre: $('#nombre').val()
+                nombre: $('#nombre').val(),
+                selectedTipoEducacion: selectedTipoEducacion
             };
 
             $.ajax({
                 type: "POST",
-                url: "/EducacionParvularia/Eje/Ejes",
+                url: "/BasesCurriculares/Eje/Ejes",
                 data: obj,
                 success: function (data) {
 
@@ -197,6 +173,18 @@
             });
         }
     })
+
+    jQuery.validator.addMethod("tipoEducacionSelected", function (value, element, param) {
+
+        var selectedTipoEducacion = $("input[name='SelectedTipoEducacion']:checked");
+
+        if (selectedTipoEducacion.length > 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    })
 })
 
 $('#cancel').click(function (e) {
@@ -209,10 +197,11 @@ $('#cancel').click(function (e) {
 function gridView() {
 
     var table = $('#gridView').DataTable({
-        "ajax": "/EducacionParvularia/Eje/GetEjes/" + $("#ambito").val() + "/" + $('#nucleo').val() + "/" + $('#ciclo').val(),
+        "ajax": "/BasesCurriculares/Eje/GetEjes/" + $("#sector").val(),
         "columns": [
             { "data": "Numero" },
             { "data": "Nombre" },
+            { "data": "TipoEducacionNombre" },
             { "data": "Accion" }
         ],
         "destroy": true,
@@ -241,8 +230,8 @@ function gridView() {
         ],
         "fnInitComplete": function (oSettings, json) {
 
-            if ($('#ciclo').val() > 0) {
-                $("div.dataTables_length").append('<br /><a class="btn btn-success btn-xs" href="#" title="Agregar núcleo" typebutton="Add"><i class="fa fa-plus"></i></a>');
+            if ($('#sector').val() !== "-1") {
+                $("div.dataTables_length").append('<br /><a class="btn btn-success btn-xs" href="#" title="Agregar eje" typebutton="Add"><i class="fa fa-plus"></i></a>');
             }
         },
         "sDom": '<"dt-panelmenu clearfix"lfr>t<"dt-panelfooter clearfix"ip>'

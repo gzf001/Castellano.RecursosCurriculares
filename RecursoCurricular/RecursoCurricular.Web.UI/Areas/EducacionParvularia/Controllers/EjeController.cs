@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace RecursoCurricular.Web.UI.Areas.EducacionParvularia.Controllers
 {
-    public class EjeController : Controller
+    public class EjeController : RecursoCurricular.Web.Controller
     {
         const string Area = "EducacionParvularia";
 

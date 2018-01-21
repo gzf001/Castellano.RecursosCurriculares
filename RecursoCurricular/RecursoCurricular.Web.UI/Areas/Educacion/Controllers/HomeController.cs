@@ -21,5 +21,19 @@ namespace RecursoCurricular.Web.UI.Areas.Educacion.Controllers
         {
             return this.Json(RecursoCurricular.Educacion.Ciclo.Ciclos, JsonRequestBehavior.AllowGet);
         }
+
+        [Authorize]
+        [HttpGet]
+        public JsonResult Sectores()
+        {
+            return this.Json(RecursoCurricular.Educacion.Sector.Sectores, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public JsonResult TiposEducacion()
+        {
+            return this.Json(RecursoCurricular.Educacion.TipoEducacion.TiposEducacion, JsonRequestBehavior.AllowGet);
+        }
     }
 }

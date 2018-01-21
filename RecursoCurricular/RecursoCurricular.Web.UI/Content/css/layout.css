@@ -158,3 +158,14 @@ div#logo {
     font-size: 0.85em;
     color: #FF0000;
 }
+
+[class^="option block mt15"] + em {
+    background: #FFFFFF;
+    margin-top: 6px;
+    padding: 0 3px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    line-height: normal;
+    font-size: 0.85em;
+    color: #FF0000;
+}
