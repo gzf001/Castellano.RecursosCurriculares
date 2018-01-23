@@ -118,9 +118,9 @@ namespace RecursoCurricular.Web.UI.Areas.Administracion.Controllers
                         Orden = model.Orden
                     }.Save(context);
 
-                context.SubmitChanges();
+                    context.SubmitChanges();
+                }
             }
-        }
 
             return this.Json("ok 200", JsonRequestBehavior.DenyGet);
         }
@@ -613,83 +613,83 @@ namespace RecursoCurricular.Web.UI.Areas.Administracion.Controllers
                 return this.View(model);
             }
 
-            try
+            //try
+            //{
+            RecursoCurricular.Membresia.Usuario usuario = RecursoCurricular.Membresia.Usuario.Get(model.Id);
+
+            string textoRun = model.Persona.Run.Replace(".", string.Empty).Replace("-", string.Empty);
+
+            int runCuerpo = int.Parse(textoRun.Substring(0, textoRun.Length - 1));
+            char runDigito = char.Parse(textoRun.Replace(runCuerpo.ToString(), string.Empty));
+
+            using (RecursoCurricular.Membresia.Context context = new RecursoCurricular.Membresia.Context())
             {
-                RecursoCurricular.Membresia.Usuario usuario = RecursoCurricular.Membresia.Usuario.Get(model.Id);
-
-                string textoRun = model.Persona.Run.Replace(".", string.Empty).Replace("-", string.Empty);
-
-                int runCuerpo = int.Parse(textoRun.Substring(0, textoRun.Length - 1));
-                char runDigito = char.Parse(textoRun.Replace(runCuerpo.ToString(), string.Empty));
-
-                using (RecursoCurricular.Membresia.Context context = new RecursoCurricular.Membresia.Context())
+                RecursoCurricular.Persona persona = new RecursoCurricular.Persona
                 {
-                    RecursoCurricular.Persona persona = new RecursoCurricular.Persona
-                    {
-                        Id = model.Id,
-                        RunCuerpo = runCuerpo,
-                        RunDigito = runDigito,
-                        Nombres = model.Persona.Nombres,
-                        ApellidoPaterno = model.Persona.ApellidoPaterno,
-                        ApellidoMaterno = model.Persona.ApellidoMaterno,
-                        Email = model.Persona.Email,
-                        SexoCodigo = model.Persona.SexoCodigo,
-                        FechaNacimiento = model.Persona.FechaNacimiento,
-                        NacionalidadCodigo = model.Persona.NacionalidadCodigo,
-                        EstadoCivilCodigo = model.Persona.EstadoCivilCodigo,
-                        NivelEducacionalCodigo = model.Persona.NivelEducacionalCodigo,
-                        RegionCodigo = model.Persona.ComunaCodigo.Value > 0 ? model.Persona.RegionCodigo.Value : default(short),
-                        CiudadCodigo = model.Persona.ComunaCodigo.Value > 0 ? model.Persona.CiudadCodigo.Value : default(short),
-                        ComunaCodigo = model.Persona.ComunaCodigo.Value > 0 ? model.Persona.ComunaCodigo.Value : default(short),
-                        VillaPoblacion = model.Persona.VillaPoblacion,
-                        Direccion = model.Persona.Direccion,
-                        Telefono = model.Persona.Telefono,
-                        Celular = model.Persona.Celular,
-                        Observaciones = default(string)
-                    };
+                    Id = model.Id,
+                    RunCuerpo = runCuerpo,
+                    RunDigito = runDigito,
+                    Nombres = model.Persona.Nombres,
+                    ApellidoPaterno = model.Persona.ApellidoPaterno,
+                    ApellidoMaterno = model.Persona.ApellidoMaterno,
+                    Email = model.Persona.Email,
+                    SexoCodigo = model.Persona.SexoCodigo,
+                    FechaNacimiento = model.Persona.FechaNacimiento,
+                    NacionalidadCodigo = model.Persona.NacionalidadCodigo,
+                    EstadoCivilCodigo = model.Persona.EstadoCivilCodigo,
+                    NivelEducacionalCodigo = model.Persona.NivelEducacionalCodigo,
+                    RegionCodigo = model.Persona.ComunaCodigo.HasValue && model.Persona.ComunaCodigo.Value > 0 ? model.Persona.RegionCodigo.Value : default(short),
+                    CiudadCodigo = model.Persona.ComunaCodigo.HasValue && model.Persona.ComunaCodigo.Value > 0 ? model.Persona.CiudadCodigo.Value : default(short),
+                    ComunaCodigo = model.Persona.ComunaCodigo.HasValue && model.Persona.ComunaCodigo.Value > 0 ? model.Persona.ComunaCodigo.Value : default(short),
+                    VillaPoblacion = model.Persona.VillaPoblacion,
+                    Direccion = model.Persona.Direccion,
+                    Telefono = model.Persona.Telefono,
+                    Celular = model.Persona.Celular,
+                    Observaciones = default(string)
+                };
 
-                    persona.Save(context);
+                persona.Save(context);
 
-                    context.SubmitChanges();
+                context.SubmitChanges();
 
-                    if (usuario == null)
-                    {
-                        RecursoCurricular.Membresia.Account.RegisterLogin(persona);
-                    }
-                    else
-                    {
-                        new RecursoCurricular.Membresia.Usuario
-                        {
-                            Id = usuario.Id,
-                            Password = usuario.Password,
-                            Aprobado = usuario.Aprobado,
-                            Bloqueado = usuario.Bloqueado,
-                            Creacion = usuario.Creacion,
-                            UltimaActividad = usuario.UltimaActividad,
-                            UltimoAcceso = usuario.UltimoAcceso,
-                            UltimoCambioPassword = usuario.UltimoCambioPassword,
-                            UltimoDesbloqueo = usuario.UltimoDesbloqueo,
-                            NumeroIntentosFallidos = usuario.NumeroIntentosFallidos,
-                            FechaIntentoFallido = usuario.FechaIntentoFallido
-                        }.Save(context);
-
-                        context.SubmitChanges();
-                    }
-                }
-
-                return this.Json("200", JsonRequestBehavior.DenyGet);
-            }
-            catch (Exception ex)
-            {
-                if (ex.Message.Contains("RunCuerpoIndex"))
+                if (usuario == null)
                 {
-                    return this.Json("El R.U.N. se encuentra registrado con otro usuario", JsonRequestBehavior.DenyGet);
+                    RecursoCurricular.Membresia.Account.RegisterLogin(persona);
                 }
                 else
                 {
-                    return this.Json(ex.Message, JsonRequestBehavior.DenyGet);
+                    new RecursoCurricular.Membresia.Usuario
+                    {
+                        Id = usuario.Id,
+                        Password = usuario.Password,
+                        Aprobado = usuario.Aprobado,
+                        Bloqueado = usuario.Bloqueado,
+                        Creacion = usuario.Creacion,
+                        UltimaActividad = usuario.UltimaActividad,
+                        UltimoAcceso = usuario.UltimoAcceso,
+                        UltimoCambioPassword = usuario.UltimoCambioPassword,
+                        UltimoDesbloqueo = usuario.UltimoDesbloqueo,
+                        NumeroIntentosFallidos = usuario.NumeroIntentosFallidos,
+                        FechaIntentoFallido = usuario.FechaIntentoFallido
+                    }.Save(context);
+
+                    context.SubmitChanges();
                 }
             }
+
+            return this.Json("200", JsonRequestBehavior.DenyGet);
+            //}
+            //catch (Exception ex)
+            //{
+            //    if (ex.Message.Contains("RunCuerpoIndex"))
+            //    {
+            //        return this.Json("El R.U.N. se encuentra registrado con otro usuario", JsonRequestBehavior.DenyGet);
+            //    }
+            //    else
+            //    {
+            //        return this.Json(ex.Message, JsonRequestBehavior.DenyGet);
+            //    }
+            //}
         }
 
         [Authorize]
@@ -838,6 +838,7 @@ namespace RecursoCurricular.Web.UI.Areas.Administracion.Controllers
 
                 usuario = new RecursoCurricular.Web.UI.Areas.Administracion.Models.Usuario
                 {
+                    Id = persona.Id,
                     FechaNacimientoString = persona.FechaNacimiento.HasValue ? persona.FechaNacimiento.Value.ToShortDateString() : string.Empty,
                     Persona = persona
                 };

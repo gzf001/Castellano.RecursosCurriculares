@@ -24,6 +24,22 @@ namespace RecursoCurricular.Web.UI.Areas.Educacion.Controllers
 
         [Authorize]
         [HttpGet]
+        public JsonResult Grados(string tipoEducacionCodigo)
+        {
+            int t;
+
+            if (int.TryParse(tipoEducacionCodigo, out t))
+            {
+                return this.Json(RecursoCurricular.Educacion.Grado.Grados(t), JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return this.Json(string.Empty, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [Authorize]
+        [HttpGet]
         public JsonResult Sectores()
         {
             return this.Json(RecursoCurricular.Educacion.Sector.Sectores, JsonRequestBehavior.AllowGet);

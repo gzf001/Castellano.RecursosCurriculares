@@ -67,6 +67,8 @@ jQuery(document).ready(function () {
 
             var sexo = $("input[name='Persona.SexoCodigo']:checked");
 
+            var a = $('#userId').val();
+
             var obj = {
                 id: $('#userId').val(),
                 userName: $('#user').val(),

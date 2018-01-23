@@ -155,7 +155,10 @@
     <Compile Include="Areas\BasesCurriculares\BasesCurricularesAreaRegistration.cs" />
     <Compile Include="Areas\BasesCurriculares\Controllers\EjeController.cs" />
     <Compile Include="Areas\BasesCurriculares\Controllers\HomeController.cs" />
+    <Compile Include="Areas\BasesCurriculares\Controllers\ObjetivoAprendizajeController.cs" />
+    <Compile Include="Areas\BasesCurriculares\Controllers\ObjetivoAprendizajeTransversalController.cs" />
     <Compile Include="Areas\BasesCurriculares\Models\Eje.cs" />
+    <Compile Include="Areas\BasesCurriculares\Models\ObjetivoAprendizaje.cs" />
     <Compile Include="Areas\EducacionParvularia\Controllers\AprendizajeEsperadoController.cs" />
     <Compile Include="Areas\EducacionParvularia\Controllers\EjeController.cs" />
     <Compile Include="Areas\EducacionParvularia\Controllers\HomeController.cs" />
@@ -217,6 +220,7 @@
     <Content Include="Content\js\admin\usuariosConectados\usuariosConectados.js" />
     <Content Include="Content\js\admin\usuarios\usuarios.js" />
     <Content Include="Content\js\basesCurriculares\ejes\ejes.js" />
+    <Content Include="Content\js\basesCurriculares\objetivosAprendizaje\objetivosAprendizaje.js" />
     <Content Include="Content\js\bootstrap.sweetalert\sweetalert.css" />
     <Content Include="Content\js\bootstrap.sweetalert\sweetalert.js" />
     <Content Include="Content\js\bootstrap.sweetalert\sweetalert.min.js" />
@@ -3652,6 +3656,7 @@
     <Content Include="Areas\BasesCurriculares\Views\web.config" />
     <Content Include="Areas\BasesCurriculares\Views\Home\Index.cshtml" />
     <Content Include="Areas\BasesCurriculares\Views\Eje\Ejes.cshtml" />
+    <Content Include="Areas\BasesCurriculares\Views\ObjetivoAprendizaje\ObjetivosAprendizaje.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -3679,6 +3684,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\BasesCurriculares\Views\ObjetivoAprendizajeTransversal\" />
     <Folder Include="Areas\Educacion\Models\" />
     <Folder Include="Content\theme\assets\js\demo\charts\" />
     <Folder Include="Content\theme\assets\js\utility\admindock\" />

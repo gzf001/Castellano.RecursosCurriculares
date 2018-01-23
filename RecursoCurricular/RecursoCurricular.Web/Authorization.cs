@@ -48,7 +48,7 @@ namespace RecursoCurricular.Web
             {
                 RecursoCurricular.Membresia.PerfilUsuario perfilUsuario = RecursoCurricular.Membresia.PerfilUsuario.Get(RecursoCurricular.Membresia.Perfil.PerfilAnio, usuario);
 
-                if (perfilUsuario == null)
+                if (perfilUsuario == null || string.IsNullOrEmpty(perfilUsuario.Valor))
                 {
                     string url = string.Format("/{0}/Home/Index", this.Area);
 

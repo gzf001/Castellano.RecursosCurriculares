@@ -41,7 +41,7 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Models
             set;
         }
 
-        public class Ejes
+        public new class Ejes
         {
             public List<Eje> data
             {

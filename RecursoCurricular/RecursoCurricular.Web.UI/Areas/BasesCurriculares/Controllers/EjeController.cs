@@ -200,7 +200,7 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Controllers
             }
             else
             {
-                return this.Json(new RecursoCurricular.Web.UI.Areas.EducacionParvularia.Models.Eje.Ejes { data = new List<RecursoCurricular.Web.UI.Areas.EducacionParvularia.Models.Eje>() }, JsonRequestBehavior.AllowGet);
+                return this.Json(new RecursoCurricular.Web.UI.Areas.BasesCurriculares.Models.Eje.Ejes { data = new List<RecursoCurricular.Web.UI.Areas.BasesCurriculares.Models.Eje>() }, JsonRequestBehavior.AllowGet);
             }
         }
     }

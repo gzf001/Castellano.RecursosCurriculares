@@ -237,8 +237,10 @@ namespace RecursoCurricular.Web.UI.App_Start
             #region BasesCurriculares
 
             ScriptBundle ejeBasesCurriculares = new ScriptBundle("~/js/ejesBasesCurriculares");
+            ScriptBundle objetivosAprendizaje = new ScriptBundle("~/js/objetivosAprendizaje");
 
             bundles.Add(ejeBasesCurriculares.Include("~/Content/js/basesCurriculares/ejes/ejes.js"));
+            bundles.Add(objetivosAprendizaje.Include("~/Content/js/basesCurriculares/objetivosAprendizaje/objetivosAprendizaje.js"));
 
             #endregion
 
