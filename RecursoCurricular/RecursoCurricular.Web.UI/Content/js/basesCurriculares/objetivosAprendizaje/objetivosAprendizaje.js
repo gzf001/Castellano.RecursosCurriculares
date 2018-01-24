@@ -134,7 +134,7 @@
 
         swal({
             title: "¿Esta seguro?",
-            text: "Se eliminará el eje",
+            text: "Se eliminará el objetivo de aprendizaje",
             type: "warning",
             showCancelButton: true,
             cancelButtonText: "Cancelar",
@@ -146,23 +146,23 @@
 
                 $.ajax({
                     type: 'GET',
-                    url: '/EducacionParvularia/Eje/DeleteEje/' + $("#ambito").val() + "/" + $('#nucleo').val() + "/" + $('#ciclo').val() + "/" + id,
+                    url: '/BasesCurriculares/ObjetivoAprendizaje/DeleteObjetivoAprendizaje/' + $("#tipoEducacion").val() + "/" + $('#grado').val() + "/" + $('#sector').val() + "/" + $('#eje').val() + "/" + id,
                     success: function (data) {
 
                         if (data === "200") {
 
                             table.ajax.reload();
 
-                            swal("Eliminado!", "El eje fue eliminado de forma correcta", "success");
+                            swal("Eliminado!", "El objetivo de aprendizaje fue eliminado de forma correcta", "success");
                         }
                         else {
 
-                            swal("Error!", "El eje no puede ser eliminado", "error");
+                            swal("Error!", "El objetivo de aprendizaje no puede ser eliminado", "error");
                         }
                     },
                     error: function (data) {
 
-                        swal("Error!", "El eje no puede ser eliminado", "error");
+                        swal("Error!", "El objetivo de aprendizaje no puede ser eliminado", "error");
                     }
                 });
             });
@@ -174,13 +174,13 @@
         validClass: 'state-success',
         errorElement: 'em',
         rules: {
-            Nombre: {
+            Descripcion: {
                 required: true
             }
         },
         messages: {
-            Nombre: {
-                required: 'Ingrese el nombre'
+            Descripcion: {
+                required: 'Ingrese la descripción'
             }
         },
         highlight: function (element, errorClass, validClass) {
@@ -195,17 +195,18 @@
         submitHandler: function (form) {
 
             var obj = {
-                ambitoExperienciaAprendizajeCodigo: $('#ambito').val(),
-                nucleoId: $('#nucleo').val(),
-                cicloCodigo: $('#ciclo').val(),
-                id: $('#ejeId').val(),
+                tipoEducacionCodigo: $('#tipoEducacion').val(),
+                gradoCodigo: $('#grado').val(),
+                sectorId: $('#sector').val(),
+                ejeId: $('#eje').val(),
+                id: $('#objetivoAprendizajeId').val(),
                 numero: $('#numero').val(),
-                nombre: $('#nombre').val()
+                descripcion: $('#descripcion').val()
             };
 
             $.ajax({
                 type: "POST",
-                url: "/EducacionParvularia/Eje/Ejes",
+                url: "/BasesCurriculares/ObjetivoAprendizaje/ObjetivosAprendizaje",
                 data: obj,
                 success: function (data) {
 

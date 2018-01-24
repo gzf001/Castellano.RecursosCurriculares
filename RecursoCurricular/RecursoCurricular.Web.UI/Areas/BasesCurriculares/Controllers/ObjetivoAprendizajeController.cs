@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Controllers
 {
-    public class ObjetivoAprendizajeController : Controller
+    public class ObjetivoAprendizajeController : RecursoCurricular.Web.Controller
     {
         const string Area = "BasesCurriculares";
 
@@ -21,7 +21,7 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Controllers
         [Authorize]
         [HttpPost]
         [RecursoCurricular.Web.Authorization(ActionType = new RecursoCurricular.Web.ActionType[] { RecursoCurricular.Web.ActionType.Accept }, Root = "ObjetivosAprendizaje", Area = Area)]
-        public ActionResult ObjetivosAprendizaje(RecursoCurricular.Web.UI.Areas.BasesCurriculares.Models.Eje model)
+        public ActionResult ObjetivosAprendizaje(RecursoCurricular.Web.UI.Areas.BasesCurriculares.Models.ObjetivoAprendizaje model)
         {
             if (!this.ModelState.IsValid)
             {
@@ -32,25 +32,17 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Controllers
             {
                 using (RecursoCurricular.BaseCurricular.Context context = new RecursoCurricular.BaseCurricular.Context())
                 {
-                    new RecursoCurricular.BaseCurricular.Eje
+                    new RecursoCurricular.BaseCurricular.ObjetivoAprendizaje
                     {
+                        TipoEducacionCodigo = model.TipoEducacionCodigo,
                         AnoNumero = this.CurrentAnio.Numero,
+                        GradoCodigo = model.GradoCodigo,
                         SectorId = model.SectorId,
+                        EjeId = model.EjeId,
                         Id = model.Id,
                         Numero = model.Numero,
-                        Nombre = model.Nombre.Trim()
+                        Descripcion = model.Descripcion.Trim()
                     }.Save(context);
-
-                    foreach (int tipoEducacionCodigo in model.SelectedTipoEducacion)
-                    {
-                        new RecursoCurricular.BaseCurricular.TipoEducacionEje
-                        {
-                            TipoEducacionCodigo = tipoEducacionCodigo,
-                            AnoNumero = this.CurrentAnio.Numero,
-                            SectorId = model.SectorId,
-                            EjeId = model.Id
-                        }.Save(context);
-                    }
 
                     context.SubmitChanges();
                 }
@@ -122,6 +114,43 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Controllers
 
         [Authorize]
         [HttpGet]
+        [RecursoCurricular.Web.Authorization(ActionType = new RecursoCurricular.Web.ActionType[] { RecursoCurricular.Web.ActionType.Delete }, Root = "ObjetivosAprendizaje", Area = Area)]
+        public JsonResult DeleteObjetivoAprendizaje(string tipoEducacionCodigo, string gradoCodigo, string sectorId, string ejeId, string id)
+        {
+            try
+            {
+                int t;
+                int g;
+                Guid s;
+                Guid e;
+                Guid i;
+
+                if (int.TryParse(tipoEducacionCodigo, out t) && int.TryParse(gradoCodigo, out g) && Guid.TryParse(sectorId, out s) && Guid.TryParse(ejeId, out e) && Guid.TryParse(id, out i) && t > 0 && g > 0)
+                {
+                    RecursoCurricular.BaseCurricular.ObjetivoAprendizaje objetivoAprendizaje = RecursoCurricular.BaseCurricular.ObjetivoAprendizaje.Get(t, this.CurrentAnio.Numero, g, s, e, i);
+
+                    using (RecursoCurricular.BaseCurricular.Context context = new RecursoCurricular.BaseCurricular.Context())
+                    {
+                        objetivoAprendizaje.Delete(context);
+
+                        context.SubmitChanges();
+                    }
+
+                    return this.Json("200", JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return this.Json("500", JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch
+            {
+                return this.Json("500", JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [Authorize]
+        [HttpGet]
         public JsonResult GetObjetivosAprendizaje(string tipoEducacionCodigo, string gradoCodigo, string sectorId, string ejeId)
         {
             int t;
@@ -144,7 +173,7 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Controllers
                     objetivosAprendizaje.data.Add(new RecursoCurricular.Web.UI.Areas.BasesCurriculares.Models.ObjetivoAprendizaje
                     {
                         Numero = objetivoAprendizaje.Numero,
-                        Descripcion = objetivoAprendizaje.Descripcion,
+                        Descripcion = objetivoAprendizaje.Descripcion.Length > 250 ? string.Format("{0}...", objetivoAprendizaje.Descripcion.Substring(0, 200)) : objetivoAprendizaje.Descripcion,
                         Accion = string.Format("{0}{1}", RecursoCurricular.Helpers.ActionLinkExtension.ActionLinkCrudEmbedded(objetivoAprendizaje.Id, null, RecursoCurricular.Helpers.TypeButton.Edit, this),
                                                          RecursoCurricular.Helpers.ActionLinkExtension.ActionLinkCrudEmbedded(objetivoAprendizaje.Id, null, RecursoCurricular.Helpers.TypeButton.Delete, this))
                     });

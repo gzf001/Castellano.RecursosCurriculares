@@ -6,7 +6,7 @@
 
     $(document).on('click', 'a[typebutton=Add]', function () {
 
-        $.getJSON('/Tic/Dimension/AddDimension', function (data) {
+        $.getJSON('/BasesCurriculares/DimensionOAT/AddDimensionOAT', function (data) {
 
             $('#dimensionId').val(data.Id);
             $('#numero').val(data.Numero);
@@ -19,7 +19,7 @@
 
     $(document).on('click', 'a[typebutton=Edit]', function () {
 
-        $.getJSON('/Tic/Dimension/EditDimension/' + $(this).attr('data-value'), function (data) {
+        $.getJSON('/BasesCurriculares/DimensionOAT/EditDimensionOAT/' + $(this).attr('data-value'), function (data) {
 
             $('#dimensionId').val(data.Id);
             $('#numero').val(data.Numero);
@@ -48,7 +48,7 @@
 
                 $.ajax({
                     type: 'GET',
-                    url: '/Tic/Dimension/DeleteDimension/' + id,
+                    url: '/BasesCurriculares/DimensionOAT/DeleteDimensionOAT/' + id,
                     success: function (data) {
 
                         if (data === "200") {
@@ -105,7 +105,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "/Tic/Dimension/Dimensiones",
+                url: "/BasesCurriculares/DimensionOAT/DimensionesOAT",
                 data: obj,
                 success: function (data) {
 
@@ -141,7 +141,7 @@ $('#cancel').click(function (e) {
 function gridView() {
 
     var table = $('#gridView').DataTable({
-        "ajax": "/Tic/Dimension/GetDimensiones",
+        "ajax": "/BasesCurriculares/DimensionOAT/GetDimensionesOAT",
         "columns": [
             { "data": "Numero" },
             { "data": "Nombre" },

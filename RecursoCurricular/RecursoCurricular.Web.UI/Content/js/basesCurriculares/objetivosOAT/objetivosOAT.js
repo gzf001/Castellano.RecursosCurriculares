@@ -1,27 +1,40 @@
 ﻿jQuery(document).ready(function () {
 
-    var table = gridView();
+    var table;
 
-    $("div.dataTables_length").append('<br /><a class="btn btn-success btn-xs" href="#" title="Agregar dimensión" typebutton="Add"><i class="fa fa-plus"></i></a>');
+    $('#dimension').change(function (e) {
+
+        e.preventDefault();
+
+        table = gridView();
+    })
 
     $(document).on('click', 'a[typebutton=Add]', function () {
 
-        $.getJSON('/Tic/Dimension/AddDimension', function (data) {
+        $.getJSON('/BasesCurriculares/ObjetivoAprendizajeOAT/AddObjetivoAprendizajeOAT/' + $("#dimension").val(), function (data) {
 
-            $('#dimensionId').val(data.Id);
-            $('#numero').val(data.Numero);
-            $('#nombre').val(data.Nombre);
-            $('#descripcion').val(data.Descripcion);
+            if (data === "500") {
 
-            popUp();
+                swal("Error!", "Seleccione la dimensión", "error");
+            }
+            else {
+                $('#objetivoOATId').val(data.Id);
+                $('#dimensionId').val(data.DimensionOAT.Nombre)
+                $('#numero').val(data.Numero);
+                $('#nombre').val(data.Nombre);
+                $('#descripcion').val(data.Descripcion);
+
+                popUp();
+            }
         })
     })
 
     $(document).on('click', 'a[typebutton=Edit]', function () {
 
-        $.getJSON('/Tic/Dimension/EditDimension/' + $(this).attr('data-value'), function (data) {
+        $.getJSON('/BasesCurriculares/ObjetivoAprendizajeOAT/EditObjetivoAprendizajeOAT/' + $("#dimension").val() + '/' + $(this).attr('data-value'), function (data) {
 
-            $('#dimensionId').val(data.Id);
+            $('#objetivoOATId').val(data.Id);
+            $('#dimensionId').val(data.DimensionOAT.Nombre)
             $('#numero').val(data.Numero);
             $('#nombre').val(data.Nombre);
             $('#descripcion').val(data.Descripcion);
@@ -36,35 +49,35 @@
 
         swal({
             title: "¿Esta seguro?",
-            text: "Se eliminará la dimensión",
+            text: "Se eliminará el objetivo de aprendizaje transversal",
             type: "warning",
             showCancelButton: true,
             cancelButtonText: "Cancelar",
             confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Si, eliminalo",
+            confirmButtonText: "Si, eliminala",
             closeOnConfirm: false
         },
             function () {
 
                 $.ajax({
                     type: 'GET',
-                    url: '/Tic/Dimension/DeleteDimension/' + id,
+                    url: '/BasesCurriculares/ObjetivoAprendizajeOAT/DeleteObjetivoAprendizajeOAT/' + $("#dimension").val() + '/' + id,
                     success: function (data) {
 
                         if (data === "200") {
 
                             table.ajax.reload();
 
-                            swal("Eliminado!", "La dimensión fue eliminada de forma correcta", "success");
+                            swal("Eliminado!", "El objetivo de aprendizaje transversal fue eliminado de forma correcta", "success");
                         }
                         else {
 
-                            swal("Error!", "La dimensión no puede ser eliminada", "error");
+                            swal("Error!", "El objetivo de aprendizaje transversal no puede ser eliminado", "error");
                         }
                     },
                     error: function (data) {
 
-                        swal("Error!", "La dimensión no puede ser eliminada", "error");
+                        swal("Error!", "El objetivo de aprendizaje transversal no puede ser eliminado", "error");
                     }
                 });
             });
@@ -97,7 +110,8 @@
         submitHandler: function (form) {
 
             var obj = {
-                id: $('#dimensionId').val(),
+                dimensionOATId: $("#dimension").val(),
+                id: $('#objetivoOATId').val(),
                 numero: $('#numero').val(),
                 nombre: $('#nombre').val(),
                 descripcion: $('#descripcion').val()
@@ -105,7 +119,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "/Tic/Dimension/Dimensiones",
+                url: "/BasesCurriculares/ObjetivoAprendizajeOAT/ObjetivosAprendizajeOAT",
                 data: obj,
                 success: function (data) {
 
@@ -141,7 +155,7 @@ $('#cancel').click(function (e) {
 function gridView() {
 
     var table = $('#gridView').DataTable({
-        "ajax": "/Tic/Dimension/GetDimensiones",
+        "ajax": "/BasesCurriculares/ObjetivoAprendizajeOAT/GetObjetivosAprendizajeOAT/" + $("#dimension").val(),
         "columns": [
             { "data": "Numero" },
             { "data": "Nombre" },
@@ -162,6 +176,13 @@ function gridView() {
                 "sortable": false
             }
         ],
+        "fnInitComplete": function (oSettings, json) {
+
+            if ($('#dimension').val() !== '-1') {
+
+                $("div.dataTables_length").append('<br /><a class="btn btn-success btn-xs" href="#" title="Agregar objetivo de aprendizaje transversal" typebutton="Add"><i class="fa fa-plus"></i></a>');
+            }
+        },
         "iDisplayLength": 15,
         "aLengthMenu": [
             [15, 20, 25, 30, -1],
