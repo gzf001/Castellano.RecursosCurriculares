@@ -155,12 +155,14 @@
     <Compile Include="Areas\BasesCurriculares\BasesCurricularesAreaRegistration.cs" />
     <Compile Include="Areas\BasesCurriculares\Controllers\DimensionOATController.cs" />
     <Compile Include="Areas\BasesCurriculares\Controllers\EjeController.cs" />
+    <Compile Include="Areas\BasesCurriculares\Controllers\HabilidadController.cs" />
     <Compile Include="Areas\BasesCurriculares\Controllers\HomeController.cs" />
     <Compile Include="Areas\BasesCurriculares\Controllers\IndicadorController.cs" />
     <Compile Include="Areas\BasesCurriculares\Controllers\ObjetivoAprendizajeController.cs" />
     <Compile Include="Areas\BasesCurriculares\Controllers\ObjetivoAprendizajeOATController.cs" />
     <Compile Include="Areas\BasesCurriculares\Models\DimensionOAT.cs" />
     <Compile Include="Areas\BasesCurriculares\Models\Eje.cs" />
+    <Compile Include="Areas\BasesCurriculares\Models\Habilidad.cs" />
     <Compile Include="Areas\BasesCurriculares\Models\Indicador.cs" />
     <Compile Include="Areas\BasesCurriculares\Models\ObjetivoAprendizaje.cs" />
     <Compile Include="Areas\BasesCurriculares\Models\ObjetivoAprendizajeOAT.cs" />
@@ -226,6 +228,7 @@
     <Content Include="Content\js\admin\usuarios\usuarios.js" />
     <Content Include="Content\js\basesCurriculares\dimensionesOAT\dimensionesOAT.js" />
     <Content Include="Content\js\basesCurriculares\ejes\ejes.js" />
+    <Content Include="Content\js\basesCurriculares\habilidades\habilidades.js" />
     <Content Include="Content\js\basesCurriculares\indicadores\indicadores.js" />
     <Content Include="Content\js\basesCurriculares\objetivosAprendizaje\objetivosAprendizaje.js" />
     <Content Include="Content\js\basesCurriculares\objetivosOAT\objetivosOAT.js" />
@@ -3668,6 +3671,7 @@
     <Content Include="Areas\BasesCurriculares\Views\DimensionOAT\DimensionesOAT.cshtml" />
     <Content Include="Areas\BasesCurriculares\Views\ObjetivoAprendizajeOAT\ObjetivosAprendizajeOAT.cshtml" />
     <Content Include="Areas\BasesCurriculares\Views\Indicador\Indicadores.cshtml" />
+    <Content Include="Areas\BasesCurriculares\Views\Habilidad\Habilidades.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

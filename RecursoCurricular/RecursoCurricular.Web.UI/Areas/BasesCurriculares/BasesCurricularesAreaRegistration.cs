@@ -172,6 +172,34 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares
 
             #endregion
 
+            #region Habilidad
+
+            context.MapRoute(
+                   name: "GetHabilidadesBaseCurricular",
+                   url: "BasesCurriculares/Habilidad/GetHabilidades/{tipoEducacionCodigo}/{sectorId}",
+                   defaults: new { area = "BasesCurriculares", controller = "Habilidad", action = "GetHabilidades" }
+               );
+
+            context.MapRoute(
+                   name: "AddHabilidadBaseCurricular",
+                   url: "BasesCurriculares/Habilidad/AddHabilidad/{tipoEducacionCodigo}/{sectorId}",
+                   defaults: new { area = "BasesCurriculares", controller = "Habilidad", action = "AddHabilidad" }
+               );
+
+            context.MapRoute(
+                   name: "EditHabilidadBaseCurricular",
+                   url: "BasesCurriculares/Habilidad/EditHabilidad/{tipoEducacionCodigo}/{sectorId}/{id}",
+                   defaults: new { area = "BasesCurriculares", controller = "Habilidad", action = "EditHabilidad" }
+               );
+
+            context.MapRoute(
+                   name: "DeleteHabilidadBaseCurricular",
+                   url: "BasesCurriculares/Habilidad/DeleteHabilidad/{tipoEducacionCodigo}/{sectorId}/{id}",
+                   defaults: new { area = "BasesCurriculares", controller = "Habilidad", action = "DeleteHabilidad" }
+               );
+
+            #endregion
+
             context.MapRoute(
                 "BasesCurriculares_default",
                 "BasesCurriculares/{controller}/{action}/{id}",
