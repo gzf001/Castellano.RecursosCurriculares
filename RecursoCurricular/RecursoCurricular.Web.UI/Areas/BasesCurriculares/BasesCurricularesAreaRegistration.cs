@@ -132,6 +132,46 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares
 
             #endregion
 
+            #region Indicador
+
+            context.MapRoute(
+                   name: "GetObjetivoIndicadorBaseCurricular",
+                   url: "BasesCurriculares/Indicador/GetIndicadores/{tipoEducacionCodigo}/{gradoCodigo}/{sectorId}/{ejeId}",
+                   defaults: new { area = "BasesCurriculares", controller = "Indicador", action = "GetObjetivos" }
+               );
+
+            context.MapRoute(
+                   name: "GetIndicadoresBaseCurricular",
+                   url: "BasesCurriculares/Indicador/GetIndicadores/{tipoEducacionCodigo}/{gradoCodigo}/{sectorId}/{ejeId}/{objetivoAprendizajeId}",
+                   defaults: new { area = "BasesCurriculares", controller = "Indicador", action = "GetIndicadores" }
+               );
+
+            context.MapRoute(
+                   name: "SelectObjetivoAprendizaje",
+                   url: "BasesCurriculares/Indicador/SelectObjetivo/{tipoEducacionCodigo}/{gradoCodigo}/{sectorId}/{ejeId}/{objetivoAprendizajeId}",
+                   defaults: new { area = "BasesCurriculares", controller = "Indicador", action = "SelectObjetivo" }
+               );
+
+            context.MapRoute(
+                   name: "AddIndicadorBaseCurricular",
+                   url: "BasesCurriculares/Indicador/AddIndicador/{tipoEducacionCodigo}/{gradoCodigo}/{sectorId}/{ejeId}/{objetivoAprendizajeId}",
+                   defaults: new { area = "BasesCurriculares", controller = "Indicador", action = "AddIndicador" }
+               );
+
+            context.MapRoute(
+                   name: "EditIndicadorBaseCurricular",
+                   url: "BasesCurriculares/Indicador/EditIndicador/{tipoEducacionCodigo}/{gradoCodigo}/{sectorId}/{ejeId}/{objetivoAprendizajeId}/{Id}",
+                   defaults: new { area = "BasesCurriculares", controller = "Indicador", action = "EditIndicador" }
+               );
+
+            context.MapRoute(
+                   name: "DeleteIndicadorBaseCurricular",
+                   url: "BasesCurriculares/Indicador/DeleteIndicador/{tipoEducacionCodigo}/{gradoCodigo}/{sectorId}/{ejeId}/{objetivoAprendizajeId}/{Id}",
+                   defaults: new { area = "BasesCurriculares", controller = "Indicador", action = "DeleteIndicador" }
+               );
+
+            #endregion
+
             context.MapRoute(
                 "BasesCurriculares_default",
                 "BasesCurriculares/{controller}/{action}/{id}",

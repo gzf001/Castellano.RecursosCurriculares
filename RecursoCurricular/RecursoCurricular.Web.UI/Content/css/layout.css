@@ -137,6 +137,20 @@ div#logo {
     width: 100%;
 }
 
+.textAreaDisabled {
+    position: relative;
+    vertical-align: top;
+    border: 1px solid #DDD;
+    display: -moz-inline-stack;
+    display: inline-block;
+    padding: 10px;
+    color: #626262;
+    background-color: #ffffff;
+    outline: 0;
+    height: 100%;
+    width: 100%;
+}
+
 .form-group + em {
     background: #FFFFFF;
     margin-top: 6px;
