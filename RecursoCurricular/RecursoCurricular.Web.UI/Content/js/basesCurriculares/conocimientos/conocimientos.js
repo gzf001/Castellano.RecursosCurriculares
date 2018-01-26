@@ -33,7 +33,7 @@
 
     $(document).on('click', 'a[typebutton=Add]', function () {
 
-        $.getJSON("/BasesCurriculares/Actitud/AddActitud/" + $("#tipoEducacion").val() + "/" + $("#sector").val(), function (data) {
+        $.getJSON("/BasesCurriculares/Conocimiento/AddConocimiento/" + $("#tipoEducacion").val() + "/" + $("#sector").val(), function (data) {
 
             if (data === "500") {
 
@@ -43,7 +43,7 @@
 
                 $('#tipoEducacionCodigo').val(data.TipoEducacionNombre);
                 $('#sectorId').val(data.SectorNombre);
-                $('#actitudId').val(data.Id);
+                $('#conocimientoId').val(data.Id);
                 $('#numero').val(data.Numero);
                 $('#nombre').val(data.Nombre);
                 $('#descripcion').val(data.Descripcion);
@@ -55,7 +55,7 @@
 
     $(document).on('click', 'a[typebutton=Edit]', function () {
 
-        $.getJSON("/BasesCurriculares/Actitud/EditActitud/" + $("#tipoEducacion").val() + "/" + $("#sector").val() + "/" + $(this).attr('data-value'), function (data) {
+        $.getJSON("/BasesCurriculares/Conocimiento/EditConocimiento/" + $("#tipoEducacion").val() + "/" + $("#sector").val() + "/" + $(this).attr('data-value'), function (data) {
 
             if (data === "500") {
 
@@ -65,7 +65,7 @@
 
                 $('#tipoEducacionCodigo').val(data.TipoEducacionNombre);
                 $('#sectorId').val(data.SectorNombre);
-                $('#actitudId').val(data.Id);
+                $('#conocimientoId').val(data.Id);
                 $('#numero').val(data.Numero)
                 $('#nombre').val(data.Nombre)
                 $('#descripcion').val(data.Descripcion);
@@ -81,7 +81,7 @@
 
         swal({
             title: "¿Esta seguro?",
-            text: "Se eliminará la habilidad",
+            text: "Se eliminará el conocimiento",
             type: "warning",
             showCancelButton: true,
             cancelButtonText: "Cancelar",
@@ -93,23 +93,23 @@
 
                 $.ajax({
                     type: 'GET',
-                    url: '/BasesCurriculares/Actitud/DeleteActitud/' + $("#tipoEducacion").val() + "/" + $("#sector").val() + "/" + id,
+                    url: '/BasesCurriculares/Conocimiento/DeleteConocimiento/' + $("#tipoEducacion").val() + "/" + $("#sector").val() + "/" + id,
                     success: function (data) {
 
                         if (data === "200") {
 
                             table.ajax.reload();
 
-                            swal("Eliminado!", "La actitud fue eliminada de forma correcta", "success");
+                            swal("Eliminado!", "El conocimiento fue eliminado de forma correcta", "success");
                         }
                         else {
 
-                            swal("Error!", "La actitud no puede ser eliminada", "error");
+                            swal("Error!", "El conocimiento no puede ser eliminado", "error");
                         }
                     },
                     error: function (data) {
 
-                        swal("Error!", "La actitud no puede ser eliminada", "error");
+                        swal("Error!", "El conocimiento no puede ser eliminado", "error");
                     }
                 });
             });
@@ -150,7 +150,7 @@
             var obj = {
                 tipoEducacionCodigo: $("#tipoEducacion").val(),
                 sectorId: $('#sector').val(),
-                id: $('#actitudId').val(),
+                id: $('#conocimientoId').val(),
                 numero: $('#numero').val(),
                 nombre: $('#nombre').val(),
                 descripcion: $('#descripcion').val()
@@ -158,7 +158,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "/BasesCurriculares/Actitud/Actitudes",
+                url: "/BasesCurriculares/Conocimiento/Conocimientos",
                 data: obj,
                 success: function (data) {
 
@@ -194,7 +194,7 @@ $('#cancel').click(function (e) {
 function gridView() {
 
     var table = $('#gridView').DataTable({
-        "ajax": "/BasesCurriculares/Actitud/GetActitudes/" + $('#tipoEducacion').val() + "/" + $("#sector").val(),
+        "ajax": "/BasesCurriculares/Conocimiento/GetConocimientos/" + $('#tipoEducacion').val() + "/" + $("#sector").val(),
         "columns": [
             { "data": "Numero" },
             { "data": "Nombre" },

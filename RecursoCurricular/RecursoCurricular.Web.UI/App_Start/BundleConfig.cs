@@ -244,6 +244,7 @@ namespace RecursoCurricular.Web.UI.App_Start
             ScriptBundle habilidades = new ScriptBundle("~/js/habilidades");
             ScriptBundle subHabilidades = new ScriptBundle("~/js/subHabilidades");
             ScriptBundle actitudes = new ScriptBundle("~/js/actitudes");
+            ScriptBundle conocimientos = new ScriptBundle("~/js/conocimientos");
 
             bundles.Add(ejeBasesCurriculares.Include("~/Content/js/basesCurriculares/ejes/ejes.js"));
             bundles.Add(objetivosAprendizaje.Include("~/Content/js/basesCurriculares/objetivosAprendizaje/objetivosAprendizaje.js"));
@@ -253,6 +254,7 @@ namespace RecursoCurricular.Web.UI.App_Start
             bundles.Add(habilidades.Include("~/Content/js/basesCurriculares/habilidades/habilidades.js"));
             bundles.Add(subHabilidades.Include("~/Content/js/basesCurriculares/subHabilidades/subHabilidades.js"));
             bundles.Add(actitudes.Include("~/Content/js/basesCurriculares/actitudes/actitudes.js"));
+            bundles.Add(conocimientos.Include("~/Content/js/basesCurriculares/conocimientos/conocimientos.js"));
 
             #endregion
 

@@ -262,6 +262,34 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares
 
             #endregion
 
+            #region Conocimiento
+
+            context.MapRoute(
+                   name: "GetConocimientosBaseCurricular",
+                   url: "BasesCurriculares/Conocimiento/GetConocimientos/{tipoEducacionCodigo}/{sectorId}",
+                   defaults: new { area = "BasesCurriculares", controller = "Conocimiento", action = "GetConocimientos" }
+               );
+
+            context.MapRoute(
+                   name: "AddConocimientoBaseCurricular",
+                   url: "BasesCurriculares/Conocimiento/AddConocimiento/{tipoEducacionCodigo}/{sectorId}",
+                   defaults: new { area = "BasesCurriculares", controller = "Conocimiento", action = "AddConocimiento" }
+               );
+
+            context.MapRoute(
+                   name: "EditConocimientoBaseCurricular",
+                   url: "BasesCurriculares/Conocimiento/EditConocimiento/{tipoEducacionCodigo}/{sectorId}/{id}",
+                   defaults: new { area = "BasesCurriculares", controller = "Conocimiento", action = "EditConocimiento" }
+               );
+
+            context.MapRoute(
+                   name: "DeleteConocimientoBaseCurricular",
+                   url: "BasesCurriculares/Conocimiento/DeleteConocimiento/{tipoEducacionCodigo}/{sectorId}/{id}",
+                   defaults: new { area = "BasesCurriculares", controller = "Conocimiento", action = "DeleteConocimiento" }
+               );
+
+            #endregion
+
             context.MapRoute(
                 "BasesCurriculares_default",
                 "BasesCurriculares/{controller}/{action}/{id}",

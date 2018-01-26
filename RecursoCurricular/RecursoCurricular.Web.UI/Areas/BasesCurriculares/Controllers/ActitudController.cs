@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Controllers
 {
-    public class ActitudController : Controller
+    public class ActitudController : RecursoCurricular.Web.Controller
     {
         const string Area = "BasesCurriculares";
 
@@ -40,7 +40,7 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Controllers
                         Id = model.Id,
                         Numero = model.Numero,
                         Nombre = model.Nombre.Trim(),
-                        Descripcion = model.Descripcion.Trim()
+                        Descripcion = string.IsNullOrEmpty(model.Descripcion) ? default(string) : model.Descripcion.Trim()
                     }.Save(context);
 
                     context.SubmitChanges();
@@ -74,6 +74,7 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Controllers
                 {
                     TipoEducacionNombre = tipoEducacion.Nombre,
                     SectorNombre = sector.Nombre,
+                    Id = Guid.NewGuid(),
                     Numero = numero,
                     Nombre = string.Empty,
                     Descripcion = string.Empty
