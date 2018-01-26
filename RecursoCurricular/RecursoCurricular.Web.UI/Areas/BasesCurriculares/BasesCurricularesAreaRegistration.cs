@@ -234,6 +234,34 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares
 
             #endregion
 
+            #region Actitud
+
+            context.MapRoute(
+                   name: "GetActitudesBaseCurricular",
+                   url: "BasesCurriculares/Actitud/GetActitudes/{tipoEducacionCodigo}/{sectorId}",
+                   defaults: new { area = "BasesCurriculares", controller = "Actitud", action = "GetActitudes" }
+               );
+
+            context.MapRoute(
+                   name: "AddActitudBaseCurricular",
+                   url: "BasesCurriculares/Actitud/AddActitud/{tipoEducacionCodigo}/{sectorId}",
+                   defaults: new { area = "BasesCurriculares", controller = "Actitud", action = "AddActitud" }
+               );
+
+            context.MapRoute(
+                   name: "EditActitudBaseCurricular",
+                   url: "BasesCurriculares/Actitud/EditActitud/{tipoEducacionCodigo}/{sectorId}/{id}",
+                   defaults: new { area = "BasesCurriculares", controller = "Actitud", action = "EditActitud" }
+               );
+
+            context.MapRoute(
+                   name: "DeleteActitudBaseCurricular",
+                   url: "BasesCurriculares/Actitud/DeleteActitud/{tipoEducacionCodigo}/{sectorId}/{id}",
+                   defaults: new { area = "BasesCurriculares", controller = "Actitud", action = "DeleteActitud" }
+               );
+
+            #endregion
+
             context.MapRoute(
                 "BasesCurriculares_default",
                 "BasesCurriculares/{controller}/{action}/{id}",

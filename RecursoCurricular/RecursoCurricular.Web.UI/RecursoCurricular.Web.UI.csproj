@@ -153,6 +153,7 @@
     <Compile Include="Areas\Administracion\Models\Usuario.cs" />
     <Compile Include="Areas\Administracion\Models\UsuariosConectados.cs" />
     <Compile Include="Areas\BasesCurriculares\BasesCurricularesAreaRegistration.cs" />
+    <Compile Include="Areas\BasesCurriculares\Controllers\ActitudController.cs" />
     <Compile Include="Areas\BasesCurriculares\Controllers\DimensionOATController.cs" />
     <Compile Include="Areas\BasesCurriculares\Controllers\EjeController.cs" />
     <Compile Include="Areas\BasesCurriculares\Controllers\HabilidadController.cs" />
@@ -161,6 +162,7 @@
     <Compile Include="Areas\BasesCurriculares\Controllers\ObjetivoAprendizajeController.cs" />
     <Compile Include="Areas\BasesCurriculares\Controllers\ObjetivoAprendizajeOATController.cs" />
     <Compile Include="Areas\BasesCurriculares\Controllers\SubHabilidadController.cs" />
+    <Compile Include="Areas\BasesCurriculares\Models\Actitud.cs" />
     <Compile Include="Areas\BasesCurriculares\Models\DimensionOAT.cs" />
     <Compile Include="Areas\BasesCurriculares\Models\Eje.cs" />
     <Compile Include="Areas\BasesCurriculares\Models\Habilidad.cs" />
@@ -228,6 +230,7 @@
     <Content Include="Content\js\admin\rolPermiso\roles.js" />
     <Content Include="Content\js\admin\usuariosConectados\usuariosConectados.js" />
     <Content Include="Content\js\admin\usuarios\usuarios.js" />
+    <Content Include="Content\js\basesCurriculares\actitudes\actitudes.js" />
     <Content Include="Content\js\basesCurriculares\dimensionesOAT\dimensionesOAT.js" />
     <Content Include="Content\js\basesCurriculares\ejes\ejes.js" />
     <Content Include="Content\js\basesCurriculares\habilidades\habilidades.js" />
@@ -3676,6 +3679,7 @@
     <Content Include="Areas\BasesCurriculares\Views\Indicador\Indicadores.cshtml" />
     <Content Include="Areas\BasesCurriculares\Views\Habilidad\Habilidades.cshtml" />
     <Content Include="Areas\BasesCurriculares\Views\SubHabilidad\SubHabilidades.cshtml" />
+    <Content Include="Areas\BasesCurriculares\Views\Actitud\Actitudes.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

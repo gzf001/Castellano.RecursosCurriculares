@@ -5,7 +5,7 @@ using System.Web;
 
 namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Models
 {
-    public class Habilidad : RecursoCurricular.BaseCurricular.Habilidad
+    public class Actitud : RecursoCurricular.BaseCurricular.Actitud
     {
         public string Accion
         {
@@ -25,9 +25,9 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Models
             set;
         }
 
-        public new class Habilidades
+        public class Actitudes
         {
-            public List<Habilidad> data
+            public List<Actitud> data
             {
                 get;
                 set;
