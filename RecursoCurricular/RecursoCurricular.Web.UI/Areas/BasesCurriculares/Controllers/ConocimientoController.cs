@@ -28,30 +28,30 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Controllers
                 return this.Json(this.GetError());
             }
 
-            //try
-            //{
-            using (RecursoCurricular.BaseCurricular.Context context = new RecursoCurricular.BaseCurricular.Context())
+            try
             {
-                new RecursoCurricular.BaseCurricular.Conocimiento
+                using (RecursoCurricular.BaseCurricular.Context context = new RecursoCurricular.BaseCurricular.Context())
                 {
-                    TipoEducacionCodigo = model.TipoEducacionCodigo,
-                    AnoNumero = this.CurrentAnio.Numero,
-                    SectorId = model.SectorId,
-                    Id = model.Id,
-                    Numero = model.Numero,
-                    Nombre = model.Nombre.Trim(),
-                    Descripcion = string.IsNullOrEmpty(model.Descripcion) ? default(string) : model.Descripcion.Trim()
-                }.Save(context);
+                    new RecursoCurricular.BaseCurricular.Conocimiento
+                    {
+                        TipoEducacionCodigo = model.TipoEducacionCodigo,
+                        AnoNumero = this.CurrentAnio.Numero,
+                        SectorId = model.SectorId,
+                        Id = model.Id,
+                        Numero = model.Numero,
+                        Nombre = model.Nombre.Trim(),
+                        Descripcion = string.IsNullOrEmpty(model.Descripcion) ? default(string) : model.Descripcion.Trim()
+                    }.Save(context);
 
-                context.SubmitChanges();
+                    context.SubmitChanges();
+                }
+
+                return this.Json("200", JsonRequestBehavior.DenyGet);
             }
-
-            return this.Json("200", JsonRequestBehavior.DenyGet);
-            //}
-            //catch
-            //{
-            //    return this.Json("500", JsonRequestBehavior.DenyGet);
-            //}
+            catch
+            {
+                return this.Json("500", JsonRequestBehavior.DenyGet);
+            }
         }
 
         [Authorize]
