@@ -2,17 +2,17 @@
 
 namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares
 {
-    public class BasesCurricularesAreaRegistration : AreaRegistration 
+    public class BasesCurricularesAreaRegistration : AreaRegistration
     {
-        public override string AreaName 
+        public override string AreaName
         {
-            get 
+            get
             {
                 return "BasesCurriculares";
             }
         }
 
-        public override void RegisterArea(AreaRegistrationContext context) 
+        public override void RegisterArea(AreaRegistrationContext context)
         {
             #region Eje
 
@@ -49,7 +49,7 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares
             #endregion
 
             #region ObjetivoAprendizaje
-            
+
             context.MapRoute(
                    name: "GetObjetivosAprendizaje",
                    url: "BasesCurriculares/ObjetivoAprendizaje/GetObjetivosAprendizaje/{tipoEducacionCodigo}/{gradoCodigo}/{sectorId}/{ejeId}",
@@ -181,6 +181,12 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares
                );
 
             context.MapRoute(
+                   name: "GetHabilidadesComboBasesCurriculares",
+                   url: "BasesCurriculares/Home/Habilidades/{tipoEducacionCodigo}/{sectorId}",
+                   defaults: new { area = "BasesCurriculares", controller = "Home", action = "Habilidades" }
+               );
+
+            context.MapRoute(
                    name: "AddHabilidadBaseCurricular",
                    url: "BasesCurriculares/Habilidad/AddHabilidad/{tipoEducacionCodigo}/{sectorId}",
                    defaults: new { area = "BasesCurriculares", controller = "Habilidad", action = "AddHabilidad" }
@@ -196,6 +202,34 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares
                    name: "DeleteHabilidadBaseCurricular",
                    url: "BasesCurriculares/Habilidad/DeleteHabilidad/{tipoEducacionCodigo}/{sectorId}/{id}",
                    defaults: new { area = "BasesCurriculares", controller = "Habilidad", action = "DeleteHabilidad" }
+               );
+
+            #endregion
+
+            #region SubHabilidad
+
+            context.MapRoute(
+                   name: "GetSubHabilidad",
+                   url: "BasesCurriculares/SubHabilidad/GetSubHabilidades/{tipoEducacionCodigo}/{gradoCodigo}/{habilidadId}/{sectorId}",
+                   defaults: new { area = "BasesCurriculares", controller = "SubHabilidad", action = "GetSubHabilidades" }
+               );
+
+            context.MapRoute(
+                   name: "AddSubHabilidad",
+                   url: "BasesCurriculares/SubHabilidad/AddSubHabilidad/{tipoEducacionCodigo}/{gradoCodigo}/{habilidadId}/{sectorId}",
+                   defaults: new { area = "BasesCurriculares", controller = "SubHabilidad", action = "AddSubHabilidad" }
+               );
+
+            context.MapRoute(
+                   name: "EditSubHabilidad",
+                   url: "BasesCurriculares/SubHabilidad/EditSubHabilidad/{tipoEducacionCodigo}/{gradoCodigo}/{habilidadId}/{sectorId}/{Id}",
+                   defaults: new { area = "BasesCurriculares", controller = "SubHabilidad", action = "EditSubHabilidad" }
+               );
+
+            context.MapRoute(
+                   name: "DeleteSubHabilidad",
+                   url: "BasesCurriculares/SubHabilidad/DeleteSubHabilidad/{tipoEducacionCodigo}/{gradoCodigo}/{habilidadId}/{sectorId}/{Id}",
+                   defaults: new { area = "BasesCurriculares", controller = "SubHabilidad", action = "DeleteSubHabilidad" }
                );
 
             #endregion

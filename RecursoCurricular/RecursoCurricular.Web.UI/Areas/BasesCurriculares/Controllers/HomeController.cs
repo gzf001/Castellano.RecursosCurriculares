@@ -30,5 +30,22 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Controllers
                 return this.Json(string.Empty, JsonRequestBehavior.AllowGet);
             }
         }
+
+        [Authorize]
+        [HttpGet]
+        public JsonResult Habilidades(string tipoEducacionCodigo, string sectorId)
+        {
+            int t;
+            Guid s;
+
+            if (int.TryParse(tipoEducacionCodigo, out t) && Guid.TryParse(sectorId, out s) && t > 0)
+            {
+                return this.Json(RecursoCurricular.BaseCurricular.Habilidad.Habilidades(t, this.CurrentAnio.Numero, s), JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return this.Json(string.Empty, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }
