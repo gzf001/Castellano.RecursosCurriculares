@@ -290,6 +290,22 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares
 
             #endregion
 
+            #region Unidad
+
+            context.MapRoute(
+                   name: "GetUnidadesBaseCurricular",
+                   url: "BasesCurriculares/Unidad/GetUnidades/{tipoEducacionCodigo}/{gradoCodigo}/{sectorId}",
+                   defaults: new { area = "BasesCurriculares", controller = "Unidad", action = "GetUnidades" }
+               );
+
+            context.MapRoute(
+                   name: "GetAddUnidadBaseCurricular",
+                   url: "BasesCurriculares/Unidad/AddUnidad/{tipoEducacionCodigo}/{gradoCodigo}/{sectorId}",
+                   defaults: new { area = "BasesCurriculares", controller = "Unidad", action = "AddUnidad" }
+               );
+
+            #endregion
+
             context.MapRoute(
                 "BasesCurriculares_default",
                 "BasesCurriculares/{controller}/{action}/{id}",

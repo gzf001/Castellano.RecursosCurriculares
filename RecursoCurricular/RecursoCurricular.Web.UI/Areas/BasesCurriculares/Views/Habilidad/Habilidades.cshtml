@@ -88,8 +88,8 @@
                     <div class="section row">
                         <div class="col-md-12">
                             @Html.LabelFor(x => x.Descripcion, new { @for = "descripcion", @class = "field-label" })
-                            <label class="field select">
-                                @Html.TextBoxFor(x => x.Descripcion, new { @class = "gui-input", @id = "descripcion", @placeholder = "Descripción", @maxLength = "70" })
+                            <label class="field textarea-grow">
+                                @Html.TextAreaFor(x => x.Descripcion, new { @class = "gui-textarea", @id = "descripcion" })
                             </label>
                         </div>
                     </div>

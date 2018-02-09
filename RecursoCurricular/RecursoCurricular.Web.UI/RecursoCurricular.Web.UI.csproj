@@ -163,6 +163,7 @@
     <Compile Include="Areas\BasesCurriculares\Controllers\ObjetivoAprendizajeController.cs" />
     <Compile Include="Areas\BasesCurriculares\Controllers\ObjetivoAprendizajeOATController.cs" />
     <Compile Include="Areas\BasesCurriculares\Controllers\SubHabilidadController.cs" />
+    <Compile Include="Areas\BasesCurriculares\Controllers\UnidadController.cs" />
     <Compile Include="Areas\BasesCurriculares\Models\Actitud.cs" />
     <Compile Include="Areas\BasesCurriculares\Models\Conocimiento.cs" />
     <Compile Include="Areas\BasesCurriculares\Models\DimensionOAT.cs" />
@@ -172,6 +173,7 @@
     <Compile Include="Areas\BasesCurriculares\Models\ObjetivoAprendizaje.cs" />
     <Compile Include="Areas\BasesCurriculares\Models\ObjetivoAprendizajeOAT.cs" />
     <Compile Include="Areas\BasesCurriculares\Models\SubHabilidad.cs" />
+    <Compile Include="Areas\BasesCurriculares\Models\Unidad.cs" />
     <Compile Include="Areas\EducacionParvularia\Controllers\AprendizajeEsperadoController.cs" />
     <Compile Include="Areas\EducacionParvularia\Controllers\EjeController.cs" />
     <Compile Include="Areas\EducacionParvularia\Controllers\HomeController.cs" />
@@ -241,6 +243,7 @@
     <Content Include="Content\js\basesCurriculares\objetivosAprendizaje\objetivosAprendizaje.js" />
     <Content Include="Content\js\basesCurriculares\objetivosOAT\objetivosOAT.js" />
     <Content Include="Content\js\basesCurriculares\subHabilidades\subHabilidades.js" />
+    <Content Include="Content\js\basesCurriculares\unidades\unidades.js" />
     <Content Include="Content\js\bootstrap.sweetalert\sweetalert.css" />
     <Content Include="Content\js\bootstrap.sweetalert\sweetalert.js" />
     <Content Include="Content\js\bootstrap.sweetalert\sweetalert.min.js" />
@@ -3684,6 +3687,7 @@
     <Content Include="Areas\BasesCurriculares\Views\SubHabilidad\SubHabilidades.cshtml" />
     <Content Include="Areas\BasesCurriculares\Views\Actitud\Actitudes.cshtml" />
     <Content Include="Areas\BasesCurriculares\Views\Conocimiento\Conocimientos.cshtml" />
+    <Content Include="Areas\BasesCurriculares\Views\Unidad\Unidades.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -3695,7 +3699,9 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

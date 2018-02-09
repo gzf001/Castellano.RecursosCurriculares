@@ -45,7 +45,7 @@
                 $('#tipoEducacionCodigo').val(data.TipoEducacionNombre);
                 $('#sectorId').val(data.SectorNombre);
                 $('#numero').val(data.Numero)
-                $('#descripion').val(data.Descripion);
+                $('#descripcion').val(data.Descripion);
 
                 popUp();
             }

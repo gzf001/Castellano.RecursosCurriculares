@@ -172,7 +172,7 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Controllers
                     conocimiento.data.Add(new RecursoCurricular.Web.UI.Areas.BasesCurriculares.Models.Conocimiento
                     {
                         Numero = c.Numero,
-                        Nombre = c.Nombre.Length > 70 ? string.Format("{0}...", c.Nombre.Substring(0, 70)) : c.Nombre,
+                        Nombre = string.IsNullOrEmpty(c.Nombre) ? string.Empty : c.Nombre.Length > 70 ? string.Format("{0}...", c.Nombre.Substring(0, 70)) : c.Nombre,
                         Descripcion = c.Descripcion.Length > 70 ? string.Format("{0}...", c.Descripcion.Substring(0, 70)) : c.Descripcion,
                         Accion = string.Format("{0}{1}", RecursoCurricular.Helpers.ActionLinkExtension.ActionLinkCrudEmbedded(c.Id, null, RecursoCurricular.Helpers.TypeButton.Edit, this),
                                                          RecursoCurricular.Helpers.ActionLinkExtension.ActionLinkCrudEmbedded(c.Id, null, RecursoCurricular.Helpers.TypeButton.Delete, this))

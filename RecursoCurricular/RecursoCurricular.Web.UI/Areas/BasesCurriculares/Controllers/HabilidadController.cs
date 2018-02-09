@@ -46,12 +46,12 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Controllers
                 }
 
                 return this.Json("200", JsonRequestBehavior.DenyGet);
-        }
+            }
             catch
             {
                 return this.Json("500", JsonRequestBehavior.DenyGet);
-    }
-}
+            }
+        }
 
         [Authorize]
         [HttpGet]
@@ -168,7 +168,7 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Controllers
                     habilidades.data.Add(new RecursoCurricular.Web.UI.Areas.BasesCurriculares.Models.Habilidad
                     {
                         Numero = habilidad.Numero,
-                        Descripcion = habilidad.Descripcion,
+                        Descripcion = habilidad.Descripcion.Length > 70 ? string.Format("{0}...", habilidad.Descripcion.Substring(0, 70)) : habilidad.Descripcion,
                         Accion = string.Format("{0}{1}", RecursoCurricular.Helpers.ActionLinkExtension.ActionLinkCrudEmbedded(habilidad.Id, null, RecursoCurricular.Helpers.TypeButton.Edit, this),
                                                          RecursoCurricular.Helpers.ActionLinkExtension.ActionLinkCrudEmbedded(habilidad.Id, null, RecursoCurricular.Helpers.TypeButton.Delete, this))
                     });
