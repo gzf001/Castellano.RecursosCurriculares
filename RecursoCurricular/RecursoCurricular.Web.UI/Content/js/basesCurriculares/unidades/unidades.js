@@ -314,10 +314,29 @@ function treeHabilidades(subHabilidadesId) {
 
     $("#habilidades").fancytree({
         extensions: ["childcounter"],
-        source: {
-            url: "/BasesCurriculares/Unidad/GetHabilidades/" + $('#unidadId').val() + '/' + $('#tipoEducacion').val() + '/' + $('#grado').val() + '/' + $('#sector').val(),
-            cache: false
-        },
+        source: $.ajax({
+                        type: "GET",
+                        url: "/BasesCurriculares/Unidad/GetHabilidades/" + $('#unidadId').val() + '/' + $('#tipoEducacion').val() + '/' + $('#grado').val() + '/' + $('#sector').val(),
+                        success: function (data) {
+
+                            subHabilidadesId.length = 0;
+
+                            $(data).each(function (i, habilidad) {
+
+                                $(habilidad.children).each(function (j, subHabilidad) {
+
+                                    if (subHabilidad.selected) {
+
+                                        subHabilidadesId.push(subHabilidad.key);
+                                    }
+                                });
+                            });
+                        },
+                        error: function (data) {
+
+                            swal("Error!", "Se ha producido un error al cargar las habilidades", "error");
+                        }
+                    }),
         selectMode: 3,
         checkbox: true, // Show checkboxes.
         clickFolderMode: 2, // 1:activate, 2:expand, 3:activate and expand, 4:activate (dblclick expands)
@@ -387,9 +406,32 @@ function treeObjetivosAprendizaje(indicadoresId) {
 
     $("#objetivosAprendizajes").fancytree({
         extensions: ["childcounter"],
-        source: {
-            url: "/BasesCurriculares/Unidad/GetIndicadores/" + $('#unidadId').val() + '/' + $('#tipoEducacion').val() + '/' + $('#grado').val() + '/' + $('#sector').val()
-        },
+        source: $.ajax({
+            type: "GET",
+            url: "/BasesCurriculares/Unidad/GetIndicadores/" + $('#unidadId').val() + '/' + $('#tipoEducacion').val() + '/' + $('#grado').val() + '/' + $('#sector').val(),
+            success: function (data) {
+
+                indicadoresId.length = 0;
+
+                $(data).each(function (i, eje) {
+
+                    $(eje.children).each(function (j, objetivoAprendizaje) {
+
+                        $(objetivoAprendizaje.children).each(function (k, indicador) {
+
+                            if (indicador.selected) {
+
+                                indicadoresId.push(indicador.key);
+                            }
+                        });
+                    });
+                });
+            },
+            error: function (data) {
+
+                swal("Error!", "Se ha producido un error al cargar los objtivos de aprendizaje", "error");
+            }
+        }),
         selectMode: 3,
         checkbox: true, // Show checkboxes.
         clickFolderMode: 2, // 1:activate, 2:expand, 3:activate and expand, 4:activate (dblclick expands)
@@ -501,9 +543,26 @@ function treeActitudes(actitudesId) {
 
     $("#actitudes").fancytree({
         extensions: ["childcounter"],
-        source: {
-            url: "/BasesCurriculares/Unidad/GetActitudes/" + $('#unidadId').val() + '/' + $('#tipoEducacion').val() + '/' + $('#grado').val() + '/' + $('#sector').val()
-        },
+        source: $.ajax({
+                        type: "GET",
+                        url: "/BasesCurriculares/Unidad/GetActitudes/" + $('#unidadId').val() + '/' + $('#tipoEducacion').val() + '/' + $('#grado').val() + '/' + $('#sector').val(),
+                        success: function (data) {
+
+                            actitudesId.length = 0;
+
+                            $(data).each(function (i, actitud) {
+
+                                if (actitud.selected) {
+
+                                    actitudesId.push(actitud.key);
+                                }
+                            });
+                        },
+                        error: function (data) {
+
+                            swal("Error!", "Se ha producido un error al cargar las actitudes", "error");
+                        }
+                    }),
         selectMode: 3,
         checkbox: true, // Show checkboxes.
         clickFolderMode: 2, // 1:activate, 2:expand, 3:activate and expand, 4:activate (dblclick expands)
@@ -536,9 +595,26 @@ function treeConocimientos(conocimientosId) {
 
     $("#conocimientos").fancytree({
         extensions: ["childcounter"],
-        source: {
-            url: "/BasesCurriculares/Unidad/GetConocimientos/" + $('#unidadId').val() + '/' + $('#tipoEducacion').val() + '/' + $('#grado').val() + '/' + $('#sector').val()
-        },
+        source: $.ajax({
+                        type: "GET",
+                        url: "/BasesCurriculares/Unidad/GetConocimientos/" + $('#unidadId').val() + '/' + $('#tipoEducacion').val() + '/' + $('#grado').val() + '/' + $('#sector').val(),
+                        success: function (data) {
+
+                            conocimientosId.length = 0;
+
+                            $(data).each(function (i, conocimiento) {
+
+                                if (conocimiento.selected) {
+
+                                    conocimientosId.push(conocimiento.key);
+                                }
+                            });
+                        },
+                        error: function (data) {
+
+                            swal("Error!", "Se ha producido un error al cargar los conocimientos", "error");
+                        }
+                    }),
         selectMode: 3,
         checkbox: true, // Show checkboxes.
         clickFolderMode: 2, // 1:activate, 2:expand, 3:activate and expand, 4:activate (dblclick expands)
