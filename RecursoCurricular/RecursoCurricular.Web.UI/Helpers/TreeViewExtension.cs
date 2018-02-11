@@ -86,13 +86,13 @@ namespace RecursoCurricular.Web.UI.Helpers
             {
                 if (RecursoCurricular.BaseCurricular.SubHabilidad.Exists(habilidad, grado))
                 {
-                    t.InnerHtml += string.Format("<li class='folder' id='padre'>", string.Format("{0}.- {1}", habilidad.Numero, habilidad.Descripcion.Length > 70 ? string.Format("{0}...", habilidad.Descripcion.Substring(0, 70)) : habilidad.Descripcion));
+                    t.InnerHtml += string.Format("<li class='folder' id='padre'>{0}", string.Format("{0}.- {1}", habilidad.Numero, habilidad.Descripcion.Length > 70 ? string.Format("{0}...", habilidad.Descripcion.Substring(0, 70)) : habilidad.Descripcion));
 
                     t.InnerHtml += "<ul>";
 
                     foreach (RecursoCurricular.BaseCurricular.SubHabilidad subHabilidad in RecursoCurricular.BaseCurricular.SubHabilidad.GetAll(habilidad, grado))
                     {
-                        t.InnerHtml += string.Format("<li class='fancytree-title' id='{0}'>{1}", subHabilidad.Id, string.Format("{0}.- {1}", subHabilidad.Numero, subHabilidad.Descripcion));
+                        t.InnerHtml += string.Format("<li class='fancytree-title' id='{0}{1}'>{2}</li>", subHabilidad.HabilidadId, subHabilidad.Id, string.Format("{0}.- {1}", subHabilidad.Numero, subHabilidad.Descripcion));
                     }
 
                     t.InnerHtml += "</ul></li>";
@@ -120,21 +120,27 @@ namespace RecursoCurricular.Web.UI.Helpers
 
             RecursoCurricular.Educacion.Sector sector = RecursoCurricular.Educacion.Sector.Get(sectorId);
 
-            foreach (RecursoCurricular.BaseCurricular.Eje eje in RecursoCurricular.BaseCurricular.Eje.GetAll(anio, sector, grado.TipoEducacion))
+            foreach (RecursoCurricular.BaseCurricular.Eje eje in RecursoCurricular.BaseCurricular.Eje.GetEjesObjetivoAprendizajeIndicador(anio, sector, grado.TipoEducacion))
             {
-                if (RecursoCurricular.BaseCurricular.ObjetivoAprendizaje.Exists(grado, sector, eje))
+                t.InnerHtml += string.Format("<li class='folder' id='eje'>{0}", string.Format("{0}.- {1}", eje.Numero, eje.Nombre));
+
+                t.InnerHtml += "<ul>";
+
+                foreach (RecursoCurricular.BaseCurricular.ObjetivoAprendizaje objetivoAprendizaje in RecursoCurricular.BaseCurricular.ObjetivoAprendizaje.GetObjetivosAprendizajeIndicador(anio, grado, sector, eje))
                 {
-                    t.InnerHtml += string.Format("<li class='folder' id='padre'>{0}", string.Format("{0}.- {1}", eje.Numero, eje.Nombre));
+                    t.InnerHtml += string.Format("<li class='fancytree-title folder' id='objetivoAprendizaje'>{0}", string.Format("{0}.- {1}", objetivoAprendizaje.Numero, objetivoAprendizaje.Descripcion));
 
                     t.InnerHtml += "<ul>";
 
-                    foreach (RecursoCurricular.BaseCurricular.ObjetivoAprendizaje objetivoAprendizaje in RecursoCurricular.BaseCurricular.ObjetivoAprendizaje.GetAll(grado, sector, eje))
+                    foreach (RecursoCurricular.BaseCurricular.Indicador indicador in RecursoCurricular.BaseCurricular.Indicador.GetAll(objetivoAprendizaje))
                     {
-                        t.InnerHtml += string.Format("<li class='fancytree-title' id='{0}'>{1}", objetivoAprendizaje.Id, string.Format("{0}.- {1}", objetivoAprendizaje.Numero, objetivoAprendizaje.Descripcion));
+                        t.InnerHtml += string.Format("<li class='fancytree-title' id='{0}{1}{2}'>{3}</li>", indicador.EjeId, indicador.ObjetivoAprendizajeId, indicador.Id, string.Format("{0}.- {1}", indicador.Numero, indicador.Descripcion));
                     }
 
                     t.InnerHtml += "</ul></li>";
                 }
+
+                t.InnerHtml += "</ul></li>";
             }
 
             return new MvcHtmlString(t.ToString(TagRenderMode.Normal));

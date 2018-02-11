@@ -203,6 +203,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\JsonClass\Actitud.cs" />
+    <Compile Include="Helpers\JsonClass\Base.cs" />
+    <Compile Include="Helpers\JsonClass\Conocimiento.cs" />
+    <Compile Include="Helpers\JsonClass\Habilidad.cs" />
+    <Compile Include="Helpers\JsonClass\ObjetivoAprendizaje.cs" />
     <Compile Include="Helpers\TreeViewExtension.cs" />
     <Compile Include="Models\PartialHeader.cs" />
     <Compile Include="Models\PartialSwal.cs" />

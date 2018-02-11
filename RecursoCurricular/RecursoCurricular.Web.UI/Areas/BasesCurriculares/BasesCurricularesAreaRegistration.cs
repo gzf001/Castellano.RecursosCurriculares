@@ -304,6 +304,42 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares
                    defaults: new { area = "BasesCurriculares", controller = "Unidad", action = "AddUnidad" }
                );
 
+            context.MapRoute(
+                   name: "GetEditUnidadBaseCurricular",
+                   url: "BasesCurriculares/Unidad/EditUnidad/{tipoEducacionCodigo}/{gradoCodigo}/{sectorId}/{unidadId}",
+                   defaults: new { area = "BasesCurriculares", controller = "Unidad", action = "EditUnidad" }
+               );
+
+            context.MapRoute(
+                   name: "GetDeleteUnidadBaseCurricular",
+                   url: "BasesCurriculares/Unidad/DeleteUnidad/{tipoEducacionCodigo}/{gradoCodigo}/{sectorId}/{unidadId}",
+                   defaults: new { area = "BasesCurriculares", controller = "Unidad", action = "DeleteUnidad" }
+               );
+
+            context.MapRoute(
+                   name: "GetUnidadHabilidadesBaseCurricular",
+                   url: "BasesCurriculares/Unidad/GetHabilidades/{unidadId}/{tipoEducacionCodigo}/{gradoCodigo}/{sectorId}",
+                   defaults: new { area = "BasesCurriculares", controller = "Unidad", action = "GetHabilidades" }
+               );
+
+            context.MapRoute(
+                   name: "GetUnidadIndicadoresBaseCurricular",
+                   url: "BasesCurriculares/Unidad/GetIndicadores/{unidadId}/{tipoEducacionCodigo}/{gradoCodigo}/{sectorId}",
+                   defaults: new { area = "BasesCurriculares", controller = "Unidad", action = "GetIndicadores" }
+               );
+
+            context.MapRoute(
+                  name: "GetUnidadActitudesBaseCurricular",
+                  url: "BasesCurriculares/Unidad/GetActitudes/{unidadId}/{tipoEducacionCodigo}/{gradoCodigo}/{sectorId}",
+                  defaults: new { area = "BasesCurriculares", controller = "Unidad", action = "GetActitudes" }
+              );
+
+            context.MapRoute(
+                  name: "GetUnidadConocimientosBaseCurricular",
+                  url: "BasesCurriculares/Unidad/GetConocimientos/{unidadId}/{tipoEducacionCodigo}/{gradoCodigo}/{sectorId}",
+                  defaults: new { area = "BasesCurriculares", controller = "Unidad", action = "GetConocimientos" }
+              );
+
             #endregion
 
             context.MapRoute(

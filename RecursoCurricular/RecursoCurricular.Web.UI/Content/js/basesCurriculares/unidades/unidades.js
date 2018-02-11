@@ -1,7 +1,7 @@
 ﻿jQuery(document).ready(function () {
 
-    var habilidadesId = [];
-    var objetivosAprendizajeId = [];
+    var subHabilidadesId = [];
+    var indicadoresId = [];
     var actitudesId = [];
     var conocimientosId = [];
 
@@ -68,196 +68,6 @@
         heightStyle: "content"
     });
 
-    $("#treeHabilidades").fancytree({
-        extensions: ["childcounter"],
-        selectMode: 3,
-        checkbox: true, // Show checkboxes.
-        clickFolderMode: 2, // 1:activate, 2:expand, 3:activate and expand, 4:activate (dblclick expands)
-        select: function (event, data) {
-
-            var habilidadId;
-            var index;
-
-            if (data.node.key === 'padre') {
-
-                if (data.node.selected) {
-
-                    $(data.node.children).each(function (i) {
-
-                        habilidadId = data.node.children[i].key;
-
-                        index = jQuery.inArray(habilidadId, habilidadesId);
-
-                        if (index === -1) {
-
-                            habilidadesId.push(habilidadId);
-                        }
-                    });
-                }
-                else {
-
-                    $(data.node.children).each(function (i) {
-
-                        habilidadId = data.node.children[i].key;
-
-                        index = jQuery.inArray(habilidadId, habilidadesId);
-
-                        if (index !== -1) {
-
-                            habilidadesId.splice(index, 1);
-                        }
-                    });
-                }
-            }
-            else {
-
-                habilidadId = data.node.key;
-
-                index = jQuery.inArray(habilidadId, habilidadesId);
-
-                if (data.node.selected) {
-
-                    if (index === -1) {
-
-                        habilidadesId.push(habilidadId);
-                    }
-                } else {
-
-                    habilidadesId.splice(index, 1);
-                }
-            }
-        },
-        childcounter: {
-            deep: true,
-            hideZeros: true,
-            hideExpanded: true
-        }
-    })
-
-    $("#treeObjetivosAprendizajes").fancytree({
-        extensions: ["childcounter"],
-        selectMode: 3,
-        checkbox: true, // Show checkboxes.
-        clickFolderMode: 2, // 1:activate, 2:expand, 3:activate and expand, 4:activate (dblclick expands)
-        select: function (event, data) {
-
-            var objetivoAprendizajeId;
-            var index;
-
-            if (data.node.key === 'padre') {
-
-                if (data.node.selected) {
-
-                    $(data.node.children).each(function (i) {
-
-                        objetivoAprendizajeId = data.node.children[i].key;
-
-                        index = jQuery.inArray(objetivoAprendizajeId, objetivosAprendizajeId);
-
-                        if (index === -1) {
-
-                            objetivosAprendizajeId.push(objetivoAprendizajeId);
-                        }
-                    });
-                }
-                else {
-
-                    $(data.node.children).each(function (i) {
-
-                        objetivoAprendizajeId = data.node.children[i].key;
-
-                        index = jQuery.inArray(objetivoAprendizajeId, objetivosAprendizajeId);
-
-                        if (index !== -1) {
-
-                            objetivosAprendizajeId.splice(index, 1);
-                        }
-                    });
-                }
-            }
-            else {
-
-                objetivoAprendizajeId = data.node.key;
-
-                index = jQuery.inArray(objetivoAprendizajeId, objetivosAprendizajeId);
-
-                if (data.node.selected) {
-
-                    if (index === -1) {
-
-                        objetivosAprendizajeId.push(objetivoAprendizajeId);
-                    }
-                } else {
-
-                    objetivosAprendizajeId.splice(index, 1);
-                }
-            }
-        },
-        childcounter: {
-            deep: true,
-            hideZeros: true,
-            hideExpanded: true
-        }
-    })
-
-    $("#treeActitudes").fancytree({
-        extensions: ["childcounter"],
-        selectMode: 3,
-        checkbox: true, // Show checkboxes.
-        clickFolderMode: 2, // 1:activate, 2:expand, 3:activate and expand, 4:activate (dblclick expands)
-        select: function (event, data) {
-
-            var actitudId = data.node.key;
-
-            var index = jQuery.inArray(actitudId, actitudesId);
-
-            if (data.node.selected) {
-
-                if (index === -1) {
-
-                    actitudesId.push(actitudId);
-                }
-            } else {
-
-                actitudesId.splice(index, 1);
-            }
-        },
-        childcounter: {
-            deep: true,
-            hideZeros: true,
-            hideExpanded: true
-        }
-    })
-
-    $("#treeConocimientos").fancytree({
-        extensions: ["childcounter"],
-        selectMode: 3,
-        checkbox: true, // Show checkboxes.
-        clickFolderMode: 2, // 1:activate, 2:expand, 3:activate and expand, 4:activate (dblclick expands)
-        select: function (event, data) {
-
-            var conocimientoId = data.node.key;
-
-            var index = jQuery.inArray(conocimientoId, conocimientosId);
-
-            if (data.node.selected) {
-
-                if (index === -1) {
-
-                    conocimientosId.push(conocimientoId);
-                }
-            } else {
-
-                conocimientosId.splice(index, 1);
-            }
-        },
-        childcounter: {
-            deep: true,
-            hideZeros: true,
-            hideExpanded: true
-        }
-    })
-
     $(document).on('click', 'a[typebutton=Add]', function (e) {
 
         e.preventDefault();
@@ -270,6 +80,8 @@
             }
             else {
 
+                $(":ui-fancytree").fancytree("destroy");
+
                 $('#tipoEducacionCodigo').val(data.TipoEducacionNombre);
                 $('#gradoCodigo').val(data.GradoNombre)
                 $('#sectorId').val(data.SectorNombre);
@@ -280,34 +92,58 @@
                 $('#numero').val(data.Numero);
                 $('#nombre').val(data.Nescripcion);
 
+                treeHabilidades(subHabilidadesId);
+
+                treeObjetivosAprendizaje(indicadoresId);
+
+                treeActitudes(actitudesId);
+
+                treeConocimientos(conocimientosId);
+
                 $('#form').hide(500);
 
                 $('#divForm').show(500);
             }
-        })
+        });
     })
 
-    $(document).on('click', 'a[typebutton=Edit]', function () {
+    $(document).on('click', 'a[typebutton=Edit]', function (e) {
 
-        $.getJSON("/BasesCurriculares/ObjetivoAprendizaje/EditObjetivoAprendizaje/" + $("#tipoEducacion").val() + "/" + $('#grado').val() + "/" + $('#sector').val() + "/" + $('#eje').val() + "/" + $(this).attr('data-value'), function (data) {
+        e.preventDefault();
+
+        $.getJSON("/BasesCurriculares/Unidad/EditUnidad/" + $("#tipoEducacion").val() + "/" + $('#grado').val() + "/" + $('#sector').val() + '/' + $(this).attr('data-value'), function (data) {
 
             if (data === "500") {
 
-                swal("Error!", "Se ha producido un error al cargar la información", "error");
+                swal("Error!", "Seleccione el sector", "error");
             }
             else {
 
-                $('#tipoEducacionCodigo').val(data.TipoEducacion.Nombre);
-                $('#gradoCodigo').val(data.Grado.Nombre)
-                $('#sectorId').val(data.Sector.Nombre);
-                $('#ejeId').val(data.Eje.Nombre);
-                $('#objetivoAprendizajeId').val(data.Id);
-                $('#numero').val(data.Numero);
-                $('#descripcion').val(data.Descripcion);
+                $(":ui-fancytree").fancytree("destroy");
 
-                popUp();
+                $('#tipoEducacionCodigo').val(data.TipoEducacionNombre);
+                $('#gradoCodigo').val(data.GradoNombre)
+                $('#sectorId').val(data.SectorNombre);
+                $('#unidadId').val(data.Id);
+                $('#proposito').val(data.Proposito);
+                $('#conocimientoPrevio').val(data.ConocimientoPrevio);
+                $('#palabraClave').val(data.PalabraClave);
+                $('#numero').val(data.Numero);
+                $('#nombre').val(data.Nombre);
+
+                treeHabilidades(subHabilidadesId);
+
+                treeObjetivosAprendizaje(indicadoresId);
+
+                treeActitudes(actitudesId);
+
+                treeConocimientos(conocimientosId);
+
+                $('#form').hide(500);
+
+                $('#divForm').show(500);
             }
-        })
+        });
     })
 
     $(document).on('click', 'a[typebutton=Delete]', function () {
@@ -316,35 +152,35 @@
 
         swal({
             title: "¿Esta seguro?",
-            text: "Se eliminará el objetivo de aprendizaje",
+            text: "Se eliminará la unidad",
             type: "warning",
             showCancelButton: true,
             cancelButtonText: "Cancelar",
             confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Si, eliminalo",
+            confirmButtonText: "Si, eliminala",
             closeOnConfirm: false
         },
             function () {
 
                 $.ajax({
                     type: 'GET',
-                    url: '/BasesCurriculares/ObjetivoAprendizaje/DeleteObjetivoAprendizaje/' + $("#tipoEducacion").val() + "/" + $('#grado').val() + "/" + $('#sector').val() + "/" + $('#eje').val() + "/" + id,
+                    url: '/BasesCurriculares/Unidad/DeleteUnidad/' + $("#tipoEducacion").val() + "/" + $('#grado').val() + "/" + $('#sector').val() + "/" + id,
                     success: function (data) {
 
                         if (data === "200") {
 
                             table.ajax.reload();
 
-                            swal("Eliminado!", "El objetivo de aprendizaje fue eliminado de forma correcta", "success");
+                            swal("Eliminado!", "La unidad fue eliminada de forma correcta", "success");
                         }
                         else {
 
-                            swal("Error!", "El objetivo de aprendizaje no puede ser eliminado", "error");
+                            swal("Error!", "La unidad no puede ser eliminada", "error");
                         }
                     },
                     error: function (data) {
 
-                        swal("Error!", "El objetivo de aprendizaje no puede ser eliminado", "error");
+                        swal("Error!", "La unidad no puede ser eliminada", "error");
                     }
                 });
             });
@@ -376,42 +212,46 @@
         },
         submitHandler: function (form) {
 
-            alert('aqui');
+            var obj = {
+                tipoEducacionCodigo: $('#tipoEducacion').val(),
+                gradoCodigo: $('#grado').val(),
+                sectorId: $('#sector').val(),
+                id: $('#unidadId').val(),
+                proposito: $('#proposito').val(),
+                conocimientoPrevio: $('#conocimientoPrevio').val(),
+                palabraClave: $('#palabraClave').val(),
+                numero: $('#numero').val(),
+                nombre: $('#nombre').val(),
+                subHabilidadesId: subHabilidadesId,
+                indicadoresId: indicadoresId,
+                actitudesId: actitudesId,
+                conocimientosId: conocimientosId
+            };
 
-            //var obj = {
-            //    tipoEducacionCodigo: $('#tipoEducacion').val(),
-            //    gradoCodigo: $('#grado').val(),
-            //    sectorId: $('#sector').val(),
-            //    ejeId: $('#eje').val(),
-            //    id: $('#objetivoAprendizajeId').val(),
-            //    numero: $('#numero').val(),
-            //    descripcion: $('#descripcion').val()
-            //};
+            $.ajax({
+                type: "POST",
+                url: "/BasesCurriculares/Unidad/Unidades",
+                data: obj,
+                success: function (data) {
 
-            //$.ajax({
-            //    type: "POST",
-            //    url: "/BasesCurriculares/ObjetivoAprendizaje/ObjetivosAprendizaje",
-            //    data: obj,
-            //    success: function (data) {
+                    if (data === "200") {
 
-            //        if (data === "200") {
+                        table.ajax.reload();
 
-            //            table.ajax.reload();
+                        $.magnificPopup.close();
 
-            //            $.magnificPopup.close();
+                        swal("Listo!", "Su información fue guardada correctamente", "success");
+                    }
+                    else {
 
-            //            swal("Listo!", "Su información fue guardada correctamente", "success");
-            //        }
-            //        else {
+                        swal("Error!", "Se ha producido un error al registrar la información", "error");
+                    }
+                },
+                error: function (data) {
 
-            //            swal("Error!", "Se ha producido un error al registrar la información", "error");
-            //        }
-            //    },
-            //    error: function (data) {
-
-            //        swal("Error!", "Se ha producido un error al registrar la información", "error");
-            //    }
-            //});
+                    swal("Error!", "Se ha producido un error al registrar la información", "error");
+                }
+            });
         }
     })
 })
@@ -468,4 +308,261 @@ function gridView() {
     });
 
     return table;
+}
+
+function treeHabilidades(subHabilidadesId) {
+
+    $("#habilidades").fancytree({
+        extensions: ["childcounter"],
+        source: {
+            url: "/BasesCurriculares/Unidad/GetHabilidades/" + $('#unidadId').val() + '/' + $('#tipoEducacion').val() + '/' + $('#grado').val() + '/' + $('#sector').val(),
+            cache: false
+        },
+        selectMode: 3,
+        checkbox: true, // Show checkboxes.
+        clickFolderMode: 2, // 1:activate, 2:expand, 3:activate and expand, 4:activate (dblclick expands)
+        select: function (event, data) {
+
+            var subHabilidadId;
+            var index;
+
+            if (data.node.key === 'padre') {
+
+                if (data.node.selected) {
+
+                    $(data.node.children).each(function (i) {
+
+                        subHabilidadId = data.node.children[i].key;
+
+                        index = jQuery.inArray(subHabilidadId, subHabilidadesId);
+
+                        if (index === -1) {
+
+                            subHabilidadesId.push(subHabilidadId);
+                        }
+                    });
+                }
+                else {
+
+                    $(data.node.children).each(function (i) {
+
+                        subHabilidadId = data.node.children[i].key;
+
+                        index = jQuery.inArray(subHabilidadId, subHabilidadesId);
+
+                        if (index !== -1) {
+
+                            subHabilidadesId.splice(index, 1);
+                        }
+                    });
+                }
+            }
+            else {
+
+                subHabilidadId = data.node.key;
+
+                index = jQuery.inArray(subHabilidadId, subHabilidadesId);
+
+                if (data.node.selected) {
+
+                    if (index === -1) {
+
+                        subHabilidadesId.push(subHabilidadId);
+                    }
+                } else {
+
+                    subHabilidadesId.splice(index, 1);
+                }
+            }
+        },
+        childcounter: {
+            deep: true,
+            hideZeros: true,
+            hideExpanded: true
+        }
+    })
+}
+
+function treeObjetivosAprendizaje(indicadoresId) {
+
+    $("#objetivosAprendizajes").fancytree({
+        extensions: ["childcounter"],
+        source: {
+            url: "/BasesCurriculares/Unidad/GetIndicadores/" + $('#unidadId').val() + '/' + $('#tipoEducacion').val() + '/' + $('#grado').val() + '/' + $('#sector').val()
+        },
+        selectMode: 3,
+        checkbox: true, // Show checkboxes.
+        clickFolderMode: 2, // 1:activate, 2:expand, 3:activate and expand, 4:activate (dblclick expands)
+        select: function (event, data) {
+
+            if (data.node.key === 'eje') {
+
+                if (data.node.selected) {
+
+                    $(data.node.children).each(function (i) {
+
+                        $(data.node.children[i].children).each(function (j) {
+
+                            indicadorId = data.node.children[i].children[j].key;
+
+                            index = jQuery.inArray(indicadorId, indicadoresId);
+
+                            if (index === -1) {
+
+                                indicadoresId.push(indicadorId);
+                            }
+                        });
+                    });
+                }
+                else {
+
+                    $(data.node.children).each(function (i) {
+
+                        $(data.node.children[i].children).each(function (j) {
+
+                            indicadorId = data.node.children[i].children[j].key;
+
+                            index = jQuery.inArray(indicadorId, indicadoresId);
+
+                            if (index !== -1) {
+
+                                indicadoresId.splice(index, 1);
+                            }
+                        });
+                    });
+                }
+            }
+            else if (data.node.key === 'objetivoAprendizaje') {
+
+                if (data.node.selected) {
+
+                    $(data.node.children).each(function (i) {
+
+                        indicadorId = data.node.children[i].key;
+
+                        index = jQuery.inArray(indicadorId, indicadoresId);
+
+                        if (index === -1) {
+
+                            indicadoresId.push(indicadorId);
+                        }
+                    });
+                }
+                else {
+
+                    $(data.node.children).each(function (i) {
+
+                        indicadorId = data.node.children[i].key;
+
+                        index = jQuery.inArray(indicadorId, indicadoresId);
+
+                        if (index !== -1) {
+
+                            indicadoresId.splice(index, 1);
+                        }
+                    });
+                }
+            }
+            else {
+
+                if (data.node.selected) {
+
+                    indicadorId = data.node.key;
+
+                    index = jQuery.inArray(indicadorId, indicadoresId);
+
+                    if (index === -1) {
+
+                        indicadoresId.push(indicadorId);
+                    }
+                }
+                else {
+
+                    indicadorId = data.node.key;
+
+                    index = jQuery.inArray(indicadorId, indicadoresId);
+
+                    if (index !== -1) {
+
+                        indicadoresId.splice(index, 1);
+                    }
+                }
+            }
+        },
+        childcounter: {
+            deep: true,
+            hideZeros: true,
+            hideExpanded: true
+        }
+    });
+}
+
+function treeActitudes(actitudesId) {
+
+    $("#actitudes").fancytree({
+        extensions: ["childcounter"],
+        source: {
+            url: "/BasesCurriculares/Unidad/GetActitudes/" + $('#unidadId').val() + '/' + $('#tipoEducacion').val() + '/' + $('#grado').val() + '/' + $('#sector').val()
+        },
+        selectMode: 3,
+        checkbox: true, // Show checkboxes.
+        clickFolderMode: 2, // 1:activate, 2:expand, 3:activate and expand, 4:activate (dblclick expands)
+        select: function (event, data) {
+
+            var actitudId = data.node.key;
+
+            var index = jQuery.inArray(actitudId, actitudesId);
+
+            if (data.node.selected) {
+
+                if (index === -1) {
+
+                    actitudesId.push(actitudId);
+                }
+            } else {
+
+                actitudesId.splice(index, 1);
+            }
+        },
+        childcounter: {
+            deep: true,
+            hideZeros: true,
+            hideExpanded: true
+        }
+    })
+}
+
+function treeConocimientos(conocimientosId) {
+
+    $("#conocimientos").fancytree({
+        extensions: ["childcounter"],
+        source: {
+            url: "/BasesCurriculares/Unidad/GetConocimientos/" + $('#unidadId').val() + '/' + $('#tipoEducacion').val() + '/' + $('#grado').val() + '/' + $('#sector').val()
+        },
+        selectMode: 3,
+        checkbox: true, // Show checkboxes.
+        clickFolderMode: 2, // 1:activate, 2:expand, 3:activate and expand, 4:activate (dblclick expands)
+        select: function (event, data) {
+
+            var conocimientoId = data.node.key;
+
+            var index = jQuery.inArray(conocimientoId, conocimientosId);
+
+            if (data.node.selected) {
+
+                if (index === -1) {
+
+                    conocimientosId.push(conocimientoId);
+                }
+            } else {
+
+                conocimientosId.splice(index, 1);
+            }
+        },
+        childcounter: {
+            deep: true,
+            hideZeros: true,
+            hideExpanded: true
+        }
+    })
 }

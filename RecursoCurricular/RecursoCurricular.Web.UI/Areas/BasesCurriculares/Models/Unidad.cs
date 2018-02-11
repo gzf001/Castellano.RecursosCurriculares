@@ -7,13 +7,13 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Models
 {
     public class Unidad : RecursoCurricular.BaseCurricular.Unidad
     {
-        public List<Guid> HabilidadesId
+        public List<string> SubHabilidadesId
         {
             get;
             set;
         }
 
-        public List<Guid> ObjetivosAprendizajeId
+        public List<string> IndicadoresId
         {
             get;
             set;

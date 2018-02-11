@@ -137,25 +137,25 @@
                                 <h3>Habilidades</h3>
                                 <div>
                                     <div id="treeHabilidades" class="col-md-12">
-                                        @Html.TreeViewHabilidades("habilidades", 2018, 110, 1, new Guid("2271E0EE-6B23-4123-9763-E5B872196ACE"))
+                                        <div id="habilidades" class="col-md-12"></div>
                                     </div>
                                 </div>
                                 <h3>Objetivos de Aprendizaje</h3>
                                 <div>
                                     <div id="treeObjetivosAprendizajes" class="col-md-12">
-                                        @Html.TreeViewObjetivosAprendizaje("objetivosAprendizajes", 2018, 110, 1, new Guid("2271E0EE-6B23-4123-9763-E5B872196ACE"))
+                                        <div id="objetivosAprendizajes" class="col-md-12"></div>
                                     </div>
                                 </div>
                                 <h3>Actitudes</h3>
                                 <div>
                                     <div id="treeActitudes" class="col-md-12">
-                                        @Html.TreeViewActitudes("actitudes", 2018, 110, new Guid("2271E0EE-6B23-4123-9763-E5B872196ACE"))
+                                        <div id="actitudes" class="col-md-12"></div>
                                     </div>
                                 </div>
                                 <h3>Conocimientos</h3>
                                 <div>
                                     <div id="treeConocimientos" class="col-md-12">
-                                        @Html.TreeViewConocimientos("treeConocimientos", 2018, 110, new Guid("2271E0EE-6B23-4123-9763-E5B872196ACE"))
+                                        <div id="conocimientos" class="col-md-12"></div>
                                     </div>
                                 </div>
                             </div>
@@ -173,5 +173,5 @@
 
 @Styles.Render("~/Content/fancytree")
 @Scripts.Render("~/Content/jqueryFancyTree")
-<script src="~/Content/theme/vendor/plugins/fancytree/extensions/jquery.fancytree.childcounter.js"></script>
+@Scripts.Render("~/Content/fancyTreeChildcounter")
 @Scripts.Render("~/js/unidades")

@@ -135,6 +135,8 @@ namespace RecursoCurricular.Web.UI.App_Start
 
             ScriptBundle jqueryFancyTree = new ScriptBundle("~/Content/jqueryFancyTree");
 
+            ScriptBundle jqueryFancyTreeChildcounter = new ScriptBundle("~/Content/fancyTreeChildcounter");
+
             ScriptBundle summernoteJs = new ScriptBundle("~/Content/summernoteJs");
 
             bundles.Add(jquery.Include("~/Content/js/jquery-3.2.0.min.js"));
@@ -165,6 +167,8 @@ namespace RecursoCurricular.Web.UI.App_Start
             bundles.Add(jqueryNestable.Include("~/Content/theme/vendor/plugins/nestable/jquery.nestable.js"));
 
             bundles.Add(jqueryFancyTree.Include("~/Content/theme/vendor/plugins/fancytree/jquery.fancytree-all.js"));
+
+            bundles.Add(jqueryFancyTreeChildcounter.Include("~/Content/theme/vendor/plugins/fancytree/extensions/jquery.fancytree.childcounter.js"));
 
             //ADMIN FORMS JS
             bundles.Add(monthpicker.Include("~/Content/theme/assets/admin-tools/admin-forms/js/source/jquery-ui-monthpicker.js"));
