@@ -179,7 +179,7 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Controllers
             }
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpGet]
         public JsonResult GetHabilidades(string unidadId, string tipoEducacionCodigo, string gradoCodigo, string sectorId)
         {

@@ -162,6 +162,7 @@
     <Compile Include="Areas\BasesCurriculares\Controllers\IndicadorController.cs" />
     <Compile Include="Areas\BasesCurriculares\Controllers\ObjetivoAprendizajeController.cs" />
     <Compile Include="Areas\BasesCurriculares\Controllers\ObjetivoAprendizajeOATController.cs" />
+    <Compile Include="Areas\BasesCurriculares\Controllers\OrdenObjetivoAprendizajeController.cs" />
     <Compile Include="Areas\BasesCurriculares\Controllers\SubHabilidadController.cs" />
     <Compile Include="Areas\BasesCurriculares\Controllers\UnidadController.cs" />
     <Compile Include="Areas\BasesCurriculares\Models\Actitud.cs" />
@@ -172,6 +173,7 @@
     <Compile Include="Areas\BasesCurriculares\Models\Indicador.cs" />
     <Compile Include="Areas\BasesCurriculares\Models\ObjetivoAprendizaje.cs" />
     <Compile Include="Areas\BasesCurriculares\Models\ObjetivoAprendizajeOAT.cs" />
+    <Compile Include="Areas\BasesCurriculares\Models\OrdenObjetivoAprendizaje.cs" />
     <Compile Include="Areas\BasesCurriculares\Models\SubHabilidad.cs" />
     <Compile Include="Areas\BasesCurriculares\Models\Unidad.cs" />
     <Compile Include="Areas\EducacionParvularia\Controllers\AprendizajeEsperadoController.cs" />
@@ -247,6 +249,7 @@
     <Content Include="Content\js\basesCurriculares\indicadores\indicadores.js" />
     <Content Include="Content\js\basesCurriculares\objetivosAprendizaje\objetivosAprendizaje.js" />
     <Content Include="Content\js\basesCurriculares\objetivosOAT\objetivosOAT.js" />
+    <Content Include="Content\js\basesCurriculares\ordenObjetivosAprendizaje\ordenObjetivosAprendizaje.js" />
     <Content Include="Content\js\basesCurriculares\subHabilidades\subHabilidades.js" />
     <Content Include="Content\js\basesCurriculares\unidades\unidades.js" />
     <Content Include="Content\js\bootstrap.sweetalert\sweetalert.css" />
@@ -3693,6 +3696,8 @@
     <Content Include="Areas\BasesCurriculares\Views\Actitud\Actitudes.cshtml" />
     <Content Include="Areas\BasesCurriculares\Views\Conocimiento\Conocimientos.cshtml" />
     <Content Include="Areas\BasesCurriculares\Views\Unidad\Unidades.cshtml" />
+    <Content Include="Areas\BasesCurriculares\Views\OrdenObjetivoAprendizaje\OrdenObjetivoAprendizaje.cshtml" />
+    <Content Include="Areas\BasesCurriculares\Views\OrdenObjetivoAprendizaje\_ObjetivoAprendizaje.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

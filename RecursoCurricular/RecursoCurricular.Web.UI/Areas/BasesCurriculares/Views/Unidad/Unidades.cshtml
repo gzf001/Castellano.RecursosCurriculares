@@ -95,13 +95,13 @@
                             </div>
                         </div>
                         <div class="section row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 @Html.LabelFor(x => x.Numero, new { @for = "numero", @class = "field-label" })
                                 <label class="field select">
                                     @Html.TextBoxFor(x => x.Numero, new { @class = "textBoxDisabled", @id = "numero", @disabled = true })
                                 </label>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 @Html.LabelFor(x => x.Nombre, new { @for = "nombre", @class = "field-label" })
                                 <label class="field select">
                                     @Html.TextBoxFor(x => x.Nombre, new { @class = "gui-input", @id = "nombre", @placeholder = "Nombre", @maxLength = "100" })

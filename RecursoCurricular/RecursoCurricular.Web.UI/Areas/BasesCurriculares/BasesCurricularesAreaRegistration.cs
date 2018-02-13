@@ -340,6 +340,12 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares
                   defaults: new { area = "BasesCurriculares", controller = "Unidad", action = "GetConocimientos" }
               );
 
+            context.MapRoute(
+                  name: "GetUnidadOrdenObjetivoAprendizajeBaseCurricular",
+                  url: "BasesCurriculares/Unidad/GetConocimientos/{tipoEducacionCodigo}/{gradoCodigo}/{sectorId}",
+                  defaults: new { area = "BasesCurriculares", controller = "OrdenObjetivoAprendizaje", action = "OrdenObjetivoAprendizaje" }
+              );
+
             #endregion
 
             context.MapRoute(

@@ -301,7 +301,7 @@ function gridView() {
         "fnInitComplete": function (oSettings, json) {
 
             if ($('#sector').val() !== "-1") {
-                $("div.dataTables_length").append('<br /><a class="btn btn-success btn-xs" href="#" title="Agregar objetivo de aprendizaje" typebutton="Add"><i class="fa fa-plus"></i></a>');
+                $("div.dataTables_length").append('<br /><a class="btn btn-success btn-xs" href="#" title="Agregar unidad" typebutton="Add"><i class="fa fa-plus"></i></a>');
             }
         },
         "sDom": '<"dt-panelmenu clearfix"lfr>t<"dt-panelfooter clearfix"ip>'
