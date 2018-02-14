@@ -1,36 +1,46 @@
-﻿@model RecursoCurricular.Web.UI.Areas.BasesCurriculares.Models.Indicador
+﻿@model RecursoCurricular.Web.UI.Areas.BasesCurriculares.Models.OrdenObjetivoAprendizaje
 
+@using RecursoCurricular.Web.UI.Helpers
 
-<div class="dd">
-    <ul id="objetivo" class='dd-list'>
-        <li class='dd-item'>
-            <div class='dd-handle'><b>Eje</b><br /><br />Objetivo de aprendizaje 1</div>
-            <div class="dd">
-                <ul id="indicador" class='dd-list'>
-                    <li class='dd-item'><div class='dd-handle'>Indicador 1</div></li>
-                    <li class='dd-item'><div class='dd-handle'>Indicador 2</div></li>
-                    <li class='dd-item'><div class='dd-handle'>Indicador 3</div></li>
-                    <li class='dd-item'><div class='dd-handle'>Indicador 4</div></li>
-                    <li class='dd-item'><div class='dd-handle'>Indicador 5</div></li>
-                    <li class='dd-item'><div class='dd-handle'>Indicador 6</div></li>
-                    <li class='dd-item'><div class='dd-handle'>Indicador 7</div></li>
-                    <li class='dd-item'><div class='dd-handle'>Indicador 8</div></li>
-                    <li class='dd-item'><div class='dd-handle'>Indicador 9</div></li>
-                    <li class='dd-item'><div class='dd-handle'>Indicador 10</div></li>
-                </ul>
-            </div>
-        </li>
-    </ul>
-</div>
+@Html.SortObjetivoAprendizaje("objetivo", Model.TipoEducacionCodigo, Model.AnioNumero, Model.GradoCodigo, Model.SectorId, Model.UnidadId)
+
+@*<div class="dd">
+        <ul id="objetivo" class='dd-list'>
+            <li class='dd-item'>
+                <div class='dd-handle'><b>Eje</b><br /><br />Objetivo de aprendizaje 1</div>
+                <div class="dd">
+                    <ul id="indicador" class='dd-list'>
+                        <li class='dd-item'><div class='dd-handle'>Indicador 1</div></li>
+                        <li class='dd-item'><div class='dd-handle'>Indicador 2</div></li>
+                        <li class='dd-item'><div class='dd-handle'>Indicador 3</div></li>
+                        <li class='dd-item'><div class='dd-handle'>Indicador 4</div></li>
+                        <li class='dd-item'><div class='dd-handle'>Indicador 5</div></li>
+                        <li class='dd-item'><div class='dd-handle'>Indicador 6</div></li>
+                        <li class='dd-item'><div class='dd-handle'>Indicador 7</div></li>
+                        <li class='dd-item'><div class='dd-handle'>Indicador 8</div></li>
+                        <li class='dd-item'><div class='dd-handle'>Indicador 9</div></li>
+                        <li class='dd-item'><div class='dd-handle'>Indicador 10</div></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>*@
 
 
 <script type="text/javascript">
 
     jQuery(document).ready(function () {
 
-        $('#objetivo').sortable()
+        $('#objetivo').sortable();
 
-        $('ul#indicador').sortable()
+        $('ul#indicador').sortable({
+            stop: function (event, ui) {
+
+                var z = ui.item.index();
+
+                var a = 0;
+            }
+        });
     });
 
 </script>

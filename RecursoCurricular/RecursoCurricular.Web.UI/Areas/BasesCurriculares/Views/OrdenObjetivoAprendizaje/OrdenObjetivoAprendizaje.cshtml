@@ -1,4 +1,4 @@
-﻿@model RecursoCurricular.Web.UI.Areas.BasesCurriculares.Models.OrdenObjetivoAprendizaje
+﻿@model RecursoCurricular.Web.UI.Areas.BasesCurriculares.Models.Unidad
 
 @{
     ViewBag.Title = "OrdenObjetivoAprendizaje";
@@ -109,7 +109,7 @@
             </div>
             <div class="row mt1">
                 <div class="col-md-11">
-                    @Html.Partial("_ObjetivoAprendizaje", new RecursoCurricular.Web.UI.Areas.BasesCurriculares.Models.Indicador())
+                    <div id="unidadObjetivoAprendizaje" />
                 </div>
             </div>
             <div class="panel-footer text-right">

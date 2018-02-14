@@ -66,6 +66,19 @@
 
         $('#divForm').show(500);
 
+        $.ajax({
+            url: "/BasesCurriculares/OrdenObjetivoAprendizaje/ObjetivosAprendizaje/" + $("#tipoEducacion").val() + "/" + $('#grado').val() + "/" + $('#sector').val() + '/' + $(this).attr('data-value'),
+            method: "GET",
+            processData: false,
+            contentType: false,
+        }).done(function (data) {
+
+            alert('aqui');
+
+            $('#unidadObjetivoAprendizaje').html(data);
+
+        });
+
         //$.getJSON("/BasesCurriculares/Unidad/EditUnidad/" + $("#tipoEducacion").val() + "/" + $('#grado').val() + "/" + $('#sector').val() + '/' + $(this).attr('data-value'), function (data) {
 
         //    if (data === "500") {
@@ -100,6 +113,14 @@
         //    }
         //});
     })
+
+    $('#save').click(function (e) {
+
+        e.preventDefault();
+
+
+
+    });
 
     var validator = $('#unidadForm').validate({
 

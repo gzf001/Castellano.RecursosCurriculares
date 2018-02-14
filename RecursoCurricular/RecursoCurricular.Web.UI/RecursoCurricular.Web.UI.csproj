@@ -210,6 +210,7 @@
     <Compile Include="Helpers\JsonClass\Conocimiento.cs" />
     <Compile Include="Helpers\JsonClass\Habilidad.cs" />
     <Compile Include="Helpers\JsonClass\ObjetivoAprendizaje.cs" />
+    <Compile Include="Helpers\ObjetivoAprendizajeOrdenable.cs" />
     <Compile Include="Helpers\TreeViewExtension.cs" />
     <Compile Include="Models\PartialHeader.cs" />
     <Compile Include="Models\PartialSwal.cs" />

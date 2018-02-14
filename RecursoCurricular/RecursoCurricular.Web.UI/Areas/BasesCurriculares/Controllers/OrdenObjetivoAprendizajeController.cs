@@ -20,15 +20,26 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Controllers
 
         [Authorize]
         [HttpGet]
-        public PartialViewResult ObjetivosAprendizaje(string unidadId)
+        public PartialViewResult ObjetivosAprendizaje(string tipoEducacionCodigo, string gradoCodigo, string sectorId, string unidadId)
         {
-            Guid id;
+            int t;
+            int g;
+            Guid s;
+            Guid u;
 
-            if (Guid.TryParse(unidadId, out id))
+            if (int.TryParse(tipoEducacionCodigo, out t) && int.TryParse(gradoCodigo, out g) && Guid.TryParse(sectorId, out s) && Guid.TryParse(unidadId, out u))
             {
+                return this.PartialView("_ObjetivoAprendizaje", new RecursoCurricular.Web.UI.Areas.BasesCurriculares.Models.OrdenObjetivoAprendizaje
+                {
+                    TipoEducacionCodigo = t,
+                    AnioNumero = this.CurrentAnio.Numero,
+                    GradoCodigo = g,
+                    SectorId = s,
+                    UnidadId = u
+                });
             }
 
-            return this.PartialView("_ObjetivoAprendizaje.cshtml", new RecursoCurricular.Web.UI.Areas.BasesCurriculares.Models.Indicador())
+            return this.PartialView("_ObjetivoAprendizaje.cshtml", new RecursoCurricular.Web.UI.Areas.BasesCurriculares.Models.OrdenObjetivoAprendizaje());
         }
     }
 }

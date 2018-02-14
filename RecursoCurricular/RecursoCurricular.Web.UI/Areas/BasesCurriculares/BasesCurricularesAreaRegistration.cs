@@ -342,8 +342,14 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares
 
             context.MapRoute(
                   name: "GetUnidadOrdenObjetivoAprendizajeBaseCurricular",
-                  url: "BasesCurriculares/Unidad/GetConocimientos/{tipoEducacionCodigo}/{gradoCodigo}/{sectorId}",
+                  url: "BasesCurriculares/OrdenObjetivoAprendizaje/OrdenObjetivoAprendizaje",
                   defaults: new { area = "BasesCurriculares", controller = "OrdenObjetivoAprendizaje", action = "OrdenObjetivoAprendizaje" }
+              );
+
+            context.MapRoute(
+                  name: "GetPartialViewUnidadOrdenObjetivoAprendizajeBaseCurricular",
+                  url: "BasesCurriculares/OrdenObjetivoAprendizaje/ObjetivosAprendizaje/{tipoEducacionCodigo}/{gradoCodigo}/{sectorId}/{unidadId}",
+                  defaults: new { area = "BasesCurriculares", controller = "OrdenObjetivoAprendizaje", action = "ObjetivosAprendizaje" }
               );
 
             #endregion
