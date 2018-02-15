@@ -62,6 +62,8 @@
 
         e.preventDefault();
 
+        $('#unidadId').val($(this).attr('data-value'));
+
         $('#form').hide(500);
 
         $('#divForm').show(500);
@@ -73,123 +75,64 @@
             contentType: false,
         }).done(function (data) {
 
-            alert('aqui');
-
             $('#unidadObjetivoAprendizaje').html(data);
 
         });
-
-        //$.getJSON("/BasesCurriculares/Unidad/EditUnidad/" + $("#tipoEducacion").val() + "/" + $('#grado').val() + "/" + $('#sector').val() + '/' + $(this).attr('data-value'), function (data) {
-
-        //    if (data === "500") {
-
-        //        swal("Error!", "Seleccione el sector", "error");
-        //    }
-        //    else {
-
-        //        $(":ui-fancytree").fancytree("destroy");
-
-        //        $('#tipoEducacionCodigo').val(data.TipoEducacionNombre);
-        //        $('#gradoCodigo').val(data.GradoNombre)
-        //        $('#sectorId').val(data.SectorNombre);
-        //        $('#unidadId').val(data.Id);
-        //        $('#proposito').val(data.Proposito);
-        //        $('#conocimientoPrevio').val(data.ConocimientoPrevio);
-        //        $('#palabraClave').val(data.PalabraClave);
-        //        $('#numero').val(data.Numero);
-        //        $('#nombre').val(data.Nombre);
-
-        //        treeHabilidades(subHabilidadesId);
-
-        //        treeObjetivosAprendizaje(indicadoresId);
-
-        //        treeActitudes(actitudesId);
-
-        //        treeConocimientos(conocimientosId);
-
-        //        
-
-        //        
-        //    }
-        //});
     })
 
     $('#save').click(function (e) {
 
         e.preventDefault();
 
+        var ordenes = [];
 
+        $('.itemPadre').each(function (i, objetivo) {
 
-    });
+            var orden = {
 
-    var validator = $('#unidadForm').validate({
-
-        errorClass: 'state-error',
-        validClass: 'state-success',
-        errorElement: 'em',
-        rules: {
-            Nombre: {
-                required: true
+                objetivoAprendizajeId: $(objetivo.childNodes[1]).val(),
+                indicadores:[]
             }
-        },
-        messages: {
-            Nombre: {
-                required: 'Ingrese el nombre de la unidad'
-            }
-        },
-        highlight: function (element, errorClass, validClass) {
-            $(element).closest('.field').addClass(errorClass).removeClass(validClass);
-        },
-        unhighlight: function (element, errorClass, validClass) {
-            $(element).closest('.field').removeClass(errorClass).addClass(validClass);
-        },
-        errorPlacement: function (error, element) {
-            error.insertAfter(element.parent());
-        },
-        submitHandler: function (form) {
 
-            var obj = {
-                tipoEducacionCodigo: $('#tipoEducacion').val(),
-                gradoCodigo: $('#grado').val(),
-                sectorId: $('#sector').val(),
-                id: $('#unidadId').val(),
-                proposito: $('#proposito').val(),
-                conocimientoPrevio: $('#conocimientoPrevio').val(),
-                palabraClave: $('#palabraClave').val(),
-                numero: $('#numero').val(),
-                nombre: $('#nombre').val(),
-                subHabilidadesId: subHabilidadesId,
-                indicadoresId: indicadoresId,
-                actitudesId: actitudesId,
-                conocimientosId: conocimientosId
-            };
+            $(objetivo.childNodes[2].childNodes[0].childNodes).each(function (j, indicador) {
 
-            $.ajax({
-                type: "POST",
-                url: "/BasesCurriculares/Unidad/Unidades",
-                data: obj,
-                success: function (data) {
+                orden.indicadores.push($(indicador.childNodes[1]).val());
 
-                    if (data === "200") {
+            });
 
-                        table.ajax.reload();
+            ordenes.push(orden);
+        });
 
-                        $.magnificPopup.close();
+        var obj = {
+            tipoEducacionCodigo: $('#tipoEducacion').val(),
+            gradoCodigo: $('#grado').val(),
+            sectorId: $('#sector').val(),
+            unidadId: $('#unidadId').val(),
+            ordenes: ordenes
+        };
 
-                        swal("Listo!", "Su información fue guardada correctamente", "success");
-                    }
-                    else {
+        $.ajax({
+            type: "POST",
+            url: "/BasesCurriculares/OrdenObjetivoAprendizaje/OrdenObjetivoAprendizaje",
+            data: obj,
+            success: function (data) {
 
-                        swal("Error!", "Se ha producido un error al registrar la información", "error");
-                    }
-                },
-                error: function (data) {
+                if (data === "200") {
+
+
+                    swal("Listo!", "Su información fue guardada correctamente", "success");
+                }
+                else {
 
                     swal("Error!", "Se ha producido un error al registrar la información", "error");
                 }
-            });
-        }
-    })
+            },
+            error: function (data) {
+
+                swal("Error!", "Se ha producido un error al registrar la información", "error");
+            }
+        });
+    });
 })
 
 $('#cancel').click(function (e) {

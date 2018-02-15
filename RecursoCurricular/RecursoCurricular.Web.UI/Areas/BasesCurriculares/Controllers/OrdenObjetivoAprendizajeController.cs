@@ -19,6 +19,24 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Controllers
         }
 
         [Authorize]
+        [HttpPost]
+        [RecursoCurricular.Web.Authorization(ActionType = new RecursoCurricular.Web.ActionType[] { RecursoCurricular.Web.ActionType.Accept }, Root = "OrdenObjetivoAprendizaje", Area = Area)]
+        public JsonResult OrdenObjetivoAprendizaje(RecursoCurricular.Web.UI.Areas.BasesCurriculares.Models.OrdenObjetivoAprendizaje model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.Json("500", JsonRequestBehavior.AllowGet);
+            }
+
+            foreach (RecursoCurricular.Web.UI.Areas.BasesCurriculares.Models.OrdenObjetivoAprendizaje.Orden orden in model.Ordenes)
+            {
+                //RecursoCurricular.BaseCurricular.UnidadObjetivoAprendizaje unidadObjetivoAprendizaje = RecursoCurricular.BaseCurricular.UnidadObjetivoAprendizaje.Get(model.TipoEducacionCodigo, this.CurrentAnio.Numero, model.GradoCodigo, model.SectorId, model.UnidadId, )
+            }
+
+            return this.Json("200", JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]
         [HttpGet]
         public PartialViewResult ObjetivosAprendizaje(string tipoEducacionCodigo, string gradoCodigo, string sectorId, string unidadId)
         {

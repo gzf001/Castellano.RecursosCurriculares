@@ -36,5 +36,26 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Models
             get;
             set;
         }
+
+        public List<Orden> Ordenes
+        {
+            get;
+            set;
+        }
+
+        public class Orden
+        {
+            public Guid ObjetivoAprendizajeId
+            {
+                get;
+                set;
+            }
+
+            public List<Guid> Indicadores
+            {
+                get;
+                set;
+            }
+        }
     }
 }
