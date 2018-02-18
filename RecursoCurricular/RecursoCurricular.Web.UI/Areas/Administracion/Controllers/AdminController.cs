@@ -522,9 +522,9 @@ namespace RecursoCurricular.Web.UI.Areas.Administracion.Controllers
                         MenuItemId = rolAccion.MenuItemId,
                         AccionCodigo = rolAccion.AccionCodigo
                     }.Save(context);
-                    context.SubmitChanges();
-
                 }
+
+                context.SubmitChanges();
             }
 
             return this.Json("200 ok", JsonRequestBehavior.DenyGet);

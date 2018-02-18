@@ -21,7 +21,7 @@ namespace RecursoCurricular.Web.UI.Helpers
             foreach (RecursoCurricular.BaseCurricular.UnidadObjetivoAprendizaje unidadObjetivoAprendizaje in RecursoCurricular.BaseCurricular.UnidadObjetivoAprendizaje.GetAll(unidad))
             {
                 t.InnerHtml += "<li class='dd-item itemPadre'>";
-                t.InnerHtml += string.Format("<div class='dd-handle'>{0}<br /><br />{1}.-{2}</div><input id='keyObjetivoAprendizaje' type='hidden' value='{3}' />", unidadObjetivoAprendizaje.ObjetivoAprendizaje.Eje.Nombre, unidadObjetivoAprendizaje.ObjetivoAprendizaje.Numero, unidadObjetivoAprendizaje.ObjetivoAprendizaje.Descripcion, unidadObjetivoAprendizaje.ObjetivoAprendizaje.Id);
+                t.InnerHtml += string.Format("<div class='dd-handle'>{0}<br /><br />{1}.-{2}</div><input id='keyEje' type='hidden' value='{3}' /><input id='keyObjetivoAprendizaje' type='hidden' value='{4}' />", unidadObjetivoAprendizaje.ObjetivoAprendizaje.Eje.Nombre, unidadObjetivoAprendizaje.ObjetivoAprendizaje.Numero, unidadObjetivoAprendizaje.ObjetivoAprendizaje.Descripcion, unidadObjetivoAprendizaje.EjeId, unidadObjetivoAprendizaje.ObjetivoAprendizajeId);
                 t.InnerHtml += "<div class='dd'>";
                 t.InnerHtml += "<ul id='indicador' class='dd-list'>";
 

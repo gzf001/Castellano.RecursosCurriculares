@@ -30,10 +30,32 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.4\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +73,7 @@
     <Compile Include="Business\ObjetivoTransversal.cs" />
     <Compile Include="Business\ObjetivoTransversalIndicador.cs" />
     <Compile Include="Business\ObjetivoVertical.cs" />
+    <Compile Include="Business\TipoEducacionEje.cs" />
     <Compile Include="Business\Unidad.cs" />
     <Compile Include="Business\UnidadAprendizaje.cs" />
     <Compile Include="Context.cs" />
@@ -63,6 +86,7 @@
     <Compile Include="Entity\ObjetivoTransversal.cs" />
     <Compile Include="Entity\ObjetivoTransversalIndicador.cs" />
     <Compile Include="Entity\ObjetivoVertical.cs" />
+    <Compile Include="Entity\TipoEducacionEje.cs" />
     <Compile Include="Entity\Unidad.cs" />
     <Compile Include="Entity\UnidadAprendizaje.cs" />
     <Compile Include="Persistent\Aprendizaje.cs" />
@@ -74,6 +98,7 @@
     <Compile Include="Persistent\ObjetivoTransversal.cs" />
     <Compile Include="Persistent\ObjetivoTransversalIndicador.cs" />
     <Compile Include="Persistent\ObjetivoVertical.cs" />
+    <Compile Include="Persistent\TipoEducacionEje.cs" />
     <Compile Include="Persistent\Unidad.cs" />
     <Compile Include="Persistent\UnidadAprendizaje.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -92,6 +117,9 @@
       <Project>{31fe3606-5aba-44fb-9284-3ddbb8f68ffe}</Project>
       <Name>RecursoCurricular</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

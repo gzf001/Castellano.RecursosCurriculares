@@ -108,6 +108,7 @@
     <Compile Include="Entity\UnidadIndicador.cs" />
     <Compile Include="Entity\UnidadObjetivoAprendizaje.cs" />
     <Compile Include="Entity\UnidadSubHabilidad.cs" />
+    <Compile Include="OrdenObjetivoAprendizaje.cs" />
     <Compile Include="Persistent\Actitud.cs" />
     <Compile Include="Persistent\AprendizajeEsperadoParvulo.cs" />
     <Compile Include="Persistent\Conocimiento.cs" />

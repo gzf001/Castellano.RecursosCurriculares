@@ -28,12 +28,18 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Controllers
                 return this.Json("500", JsonRequestBehavior.AllowGet);
             }
 
-            foreach (RecursoCurricular.Web.UI.Areas.BasesCurriculares.Models.OrdenObjetivoAprendizaje.Orden orden in model.Ordenes)
-            {
-                //RecursoCurricular.BaseCurricular.UnidadObjetivoAprendizaje unidadObjetivoAprendizaje = RecursoCurricular.BaseCurricular.UnidadObjetivoAprendizaje.Get(model.TipoEducacionCodigo, this.CurrentAnio.Numero, model.GradoCodigo, model.SectorId, model.UnidadId, )
-            }
+            model.AnioNumero = this.CurrentAnio.Numero;
 
-            return this.Json("200", JsonRequestBehavior.AllowGet);
+            try
+            {
+                RecursoCurricular.BaseCurricular.OrdenObjetivoAprendizaje.Ordenar(model);
+
+                return this.Json("200", JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                return this.Json("500", JsonRequestBehavior.AllowGet);
+            }
         }
 
         [Authorize]
@@ -57,7 +63,7 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Controllers
                 });
             }
 
-            return this.PartialView("_ObjetivoAprendizaje.cshtml", new RecursoCurricular.Web.UI.Areas.BasesCurriculares.Models.OrdenObjetivoAprendizaje());
+            return this.PartialView("_ObjetivoAprendizaje", new RecursoCurricular.Web.UI.Areas.BasesCurriculares.Models.OrdenObjetivoAprendizaje());
         }
     }
 }

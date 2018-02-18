@@ -84,7 +84,7 @@ namespace RecursoCurricular.Web.UI.App_Start
             bundles.Add(address.Include("~/Content/theme/vendor/plugins/xeditable/inputs/address/address.css"));
 
             bundles.Add(typeahead_bootstrap.Include("~/Content/theme/vendor/plugins/xeditable/inputs/typeaheadjs/lib/typeahead.js-bootstrap.css"));
-            
+
             #endregion
 
             #region JS
@@ -263,6 +263,16 @@ namespace RecursoCurricular.Web.UI.App_Start
             bundles.Add(conocimientos.Include("~/Content/js/basesCurriculares/conocimientos/conocimientos.js"));
             bundles.Add(unidades.Include("~/Content/js/basesCurriculares/unidades/unidades.js"));
             bundles.Add(ordenObjetivosAprendizaje.Include("~/Content/js/basesCurriculares/ordenObjetivosAprendizaje/ordenObjetivosAprendizaje.js"));
+
+            #endregion
+
+            #region BasesCurriculares
+
+            ScriptBundle ejeRecursosCurriculares = new ScriptBundle("~/js/ejesRecursosCurriculares");
+            ScriptBundle contenidos = new ScriptBundle("~/js/contenidos");
+            ScriptBundle objetivosVerticales = new ScriptBundle("~/js/objetivosVerticales");
+
+            bundles.Add(objetivosVerticales.Include("~/Content/js/recursosCurriculares/objetivosVerticales/objetivosVerticales.js"));
 
             #endregion
 
