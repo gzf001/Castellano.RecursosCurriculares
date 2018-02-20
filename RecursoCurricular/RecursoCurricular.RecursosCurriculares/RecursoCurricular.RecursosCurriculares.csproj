@@ -68,6 +68,7 @@
     <Compile Include="Business\AprendizajeContenido.cs" />
     <Compile Include="Business\AprendizajeIndicador.cs" />
     <Compile Include="Business\AprendizajeObjetivoVertical.cs" />
+    <Compile Include="Business\Categoria.cs" />
     <Compile Include="Business\Contenido.cs" />
     <Compile Include="Business\Eje.cs" />
     <Compile Include="Business\ObjetivoTransversal.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Entity\AprendizajeContenido.cs" />
     <Compile Include="Entity\AprendizajeIndicador.cs" />
     <Compile Include="Entity\AprendizajeObjetivoVertical.cs" />
+    <Compile Include="Entity\Categoria.cs" />
     <Compile Include="Entity\Contenido.cs" />
     <Compile Include="Entity\Eje.cs" />
     <Compile Include="Entity\ObjetivoTransversal.cs" />

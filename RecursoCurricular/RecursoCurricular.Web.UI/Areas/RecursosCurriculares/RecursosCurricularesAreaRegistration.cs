@@ -109,6 +109,40 @@ namespace RecursoCurricular.Web.UI.Areas.RecursosCurriculares
                );
 
             #endregion
+
+            #region AprendizajeEsperado
+
+            context.MapRoute(
+                   name: "GetAprendizajeEsperado",
+                   url: "RecursosCurriculares/AprendizajeEsperado/GetAprendizajesEsperados/{tipoEducacionCodigo}/{GradoCodigo}/{sectorId}",
+                   defaults: new { area = "RecursosCurriculares", controller = "AprendizajeEsperado", action = "GetAprendizajesEsperados" }
+               );
+
+            context.MapRoute(
+                   name: "GetAprendizajeIndicador",
+                   url: "RecursosCurriculares/AprendizajeEsperado/GetAprendizajesIndicadores/{tipoEducacionCodigo}/{GradoCodigo}/{sectorId}/{aprendizajeId}",
+                   defaults: new { area = "RecursosCurriculares", controller = "AprendizajeEsperado", action = "GetAprendizajesIndicadores" }
+               );
+
+            context.MapRoute(
+                   name: "AddAprendizaje",
+                   url: "RecursosCurriculares/AprendizajeEsperado/AddAprendizaje/{tipoEducacionCodigo}/{GradoCodigo}/{sectorId}",
+                   defaults: new { area = "RecursosCurriculares", controller = "AprendizajeEsperado", action = "AddAprendizaje" }
+               );
+
+            context.MapRoute(
+                   name: "GetAprendizajeContenidos",
+                   url: "RecursosCurriculares/AprendizajeEsperado/GetAprendizajeContenidos/{tipoEducacionCodigo}/{GradoCodigo}/{sectorId}/{aprendizajeId}",
+                   defaults: new { area = "RecursosCurriculares", controller = "AprendizajeEsperado", action = "GetAprendizajeContenidos" }
+               );
+
+            context.MapRoute(
+                   name: "GetAprendizajeObjetivosVerticales",
+                   url: "RecursosCurriculares/AprendizajeEsperado/GetAprendizajeObjetivosVerticales/{tipoEducacionCodigo}/{GradoCodigo}/{sectorId}/{aprendizajeId}",
+                   defaults: new { area = "RecursosCurriculares", controller = "AprendizajeEsperado", action = "GetAprendizajeObjetivosVerticales" }
+               );
+
+            #endregion
         }
     }
 }

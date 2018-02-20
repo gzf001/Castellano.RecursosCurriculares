@@ -1,0 +1,232 @@
+﻿@model RecursoCurricular.Web.UI.Areas.RecursosCurriculares.Models.AprendizajeEsperado
+
+@{
+    ViewBag.Title = "AprendizajesEsperados";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/jqueryUIcss1121")
+
+<div id="form" class="admin-form">
+    <div class="panel">
+        <div class="panel-heading">
+            <span class="panel-title">Aprendizajes Esperados</span>
+        </div>
+        <div class="form-horizontal">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Grado.TipoEducacion.Nombre, new { @for = "tipoEducacion", @class = "col-sm-4 control-label" })
+                        <div class="col-sm-4">
+                            @Html.DropDownListFor(x => x.Grado.TipoEducacion.Nombre, RecursoCurricular.Educacion.TipoEducacion.TiposEducacion, new { @id = "tipoEducacion", @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Grado.Nombre, new { @for = "grado", @class = "col-sm-4 control-label" })
+                        <div class="col-sm-4">
+                            @Html.DropDownListFor(x => x.Grado.Nombre, RecursoCurricular.Educacion.Grado.DefaultItem, new { @id = "grado", @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Sector.Nombre, new { @for = "sector", @class = "col-sm-4 control-label" })
+                        <div class="col-sm-4">
+                            @Html.DropDownListFor(x => x.Sector.Nombre, RecursoCurricular.Educacion.Sector.DefaultItem, new { @id = "sector", @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="center-block col-md-12">
+        <div class="panel panel-visible">
+            <div class="panel-body pn">
+                <table class="table table-striped table-hover" id="gridViewAprendizaje" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Número</th>
+                            <th>Aprendizaje Esperado</th>
+                            <th>Indicadores</th>
+                            <th>C.M.O.</th>
+                            <th>O.F.V.</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="indicadorForm" class="admin-form">
+    <div class="panel">
+        <div class="panel-heading">
+            <span class="panel-title">Indicadores de Aprendizaje</span>
+        </div>
+        @Html.AntiForgeryToken()
+
+        @Html.Hidden("aprendizajeId")
+        @Html.Hidden("indicadorId")
+
+        <div class="panel-body">
+            <div class="section row">
+                <div class="col-md-12">
+                    <div class="section row">
+                        <div class="col-md-4">
+                            @Html.LabelFor(x => x.Grado.TipoEducacion.Nombre, new { @for = "aprendizajeTipoEducacion", @class = "field-label" })
+                            <label class="field select">
+                                @Html.TextBoxFor(x => x.Grado.TipoEducacion.Nombre, new { @class = "textBoxDisabled", @id = "aprendizajeTipoEducacion", @disabled = true })
+                            </label>
+                        </div>
+                        <div class="col-md-4">
+                            @Html.LabelFor(x => x.Grado.Nombre, new { @for = "aprendizajeGrado", @class = "field-label" })
+                            <label class="field select">
+                                @Html.TextBoxFor(x => x.Grado.Nombre, new { @class = "textBoxDisabled", @id = "aprendizajeGrado", @disabled = true })
+                            </label>
+                        </div>
+                        <div class="col-md-4">
+                            @Html.LabelFor(x => x.Sector.Nombre, new { @for = "aprendizajeSector", @class = "field-label" })
+                            <label class="field select">
+                                @Html.TextBoxFor(x => x.Sector.Nombre, new { @class = "textBoxDisabled", @id = "aprendizajeSector", @disabled = true })
+                            </label>
+                        </div>
+                    </div>
+                    <div class="section row">
+                        <div class="col-md-12">
+                            @Html.LabelFor(x => x.Numero, new { @for = "aprendizajeNumero", @class = "field-label" })
+                            <label class="field select">
+                                @Html.TextBoxFor(x => x.Numero, new { @class = "textBoxDisabled", @id = "aprendizajeNumero", @disabled = true })
+                            </label>
+                        </div>
+                    </div>
+                    <div class="section row">
+                        <div class="col-md-12">
+                            @Html.LabelFor(x => x.Descripcion, new { @for = "aprendizajeDescripcion", @class = "field-label" })
+                            <label class="field textarea-grow">
+                                @Html.TextAreaFor(x => x.Descripcion, new { @class = "gui-textarea", @id = "aprendizajeDescripcion", @placeholder = "" })
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="center-block col-md-12">
+                <div class="panel panel-visible">
+                    <div class="panel-body pn">
+                        <table class="table table-striped table-hover" id="gridViewIndicador" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Número</th>
+                                    <th>Descripción</th>
+                                    <th>Habilidad Taxonómica</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="section row">
+                <div id="accordion">
+                    <h3>Contenidos</h3>
+                    <div>
+                        <div id="treeContenidos" class="col-md-12">
+                            <div id="contenidos" class="col-md-12"></div>
+                        </div>
+                    </div>
+                    <h3>Objetivos Verticales</h3>
+                    <div>
+                        <div id="treeObjetivosVerticales" class="col-md-12">
+                            <div id="objetivosVerticales" class="col-md-12"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer text-right">
+            <button type="button" id="cancel" class="button btn-dark">Cancelar</button>
+            <button type="submit" id="save" class="button btn-primary">Guardar</button>
+        </div>
+    </div>
+</div>
+
+<div id="modal-form" class="popup-basic admin-form mfp-with-anim mfp-hide mw800">
+    <div class="panel">
+        <div class="panel-heading">
+            <span class="panel-title">Indicadores de Objetivos de Aprendizaje</span>
+        </div>
+        <form id="formModal" method="post">
+
+            @Html.AntiForgeryToken()
+
+            <div class="panel-body">
+                <div class="section row">
+                    <div class="col-md-12">
+                        <div class="section row">
+                            <div class="col-md-4">
+                                @Html.LabelFor(x => x.Grado.TipoEducacion.Nombre, new { @for = "tipoEducacionIndicadorCodigo", @class = "field-label" })
+                                <label class="field select">
+                                    @Html.TextBoxFor(x => x.Grado.TipoEducacion.Nombre, new { @class = "textBoxDisabled", @id = "tipoEducacionIndicadorCodigo", @disabled = true })
+                                </label>
+                            </div>
+                            <div class="col-md-4">
+                                @Html.LabelFor(x => x.Grado.Nombre, new { @for = "gradoIndicadorCodigo", @class = "field-label" })
+                                <label class="field select">
+                                    @Html.TextBoxFor(x => x.Grado.Nombre, new { @class = "textBoxDisabled", @id = "gradoIndicadorCodigo", @disabled = true })
+                                </label>
+                            </div>
+                            <div class="col-md-4">
+                                @Html.LabelFor(x => x.Sector.Nombre, new { @for = "sectorIndicadorId", @class = "field-label" })
+                                <label class="field select">
+                                    @Html.TextBoxFor(x => x.Sector.Nombre, new { @class = "textBoxDisabled", @id = "sectorIndicadorId", @disabled = true })
+                                </label>
+                            </div>
+                        </div>
+                        <div class="section row">
+                            <div class="col-md-12">
+                                @Html.LabelFor(x => x.Descripcion, new { @for = "aprendizajeIndicadorDescripcion", @class = "field-label" })
+                                <label class="field select">
+                                    @Html.TextAreaFor(x => x.Descripcion, new { @class = "textAreaDisabled", @id = "aprendizajeIndicadorDescripcion", @disabled = true })
+                                </label>
+                            </div>
+                        </div>
+                        <div class="section row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(x => x.IndicadorItem.Categoria, new { @for = "aprendizajeIndicadorCategoria", @class = "field-label" })
+                                <label class="field select">
+                                    @Html.DropDownListFor(x => x.IndicadorItem.Categoria, RecursoCurricular.RecursosCurriculares.Categoria.Categorias, new { @id = "aprendizajeIndicadorCategorias" })
+                                    <i class="arrow"></i>
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(x => x.IndicadorItem.Numero, new { @for = "aprendizajeIndicadorNumero", @class = "field-label" })
+                                <label class="field select">
+                                    @Html.TextBoxFor(x => x.IndicadorItem.Numero, new { @class = "textBoxDisabled", @id = "aprendizajeIndicadorNumero", @disabled = true })
+                                </label>
+                            </div>
+                        </div>
+                        <div class="section row">
+                            <div class="col-md-12">
+                                @Html.LabelFor(x => x.IndicadorItem.Descripcion, new { @for = "indicadorDescripcion", @class = "field-label" })
+                                <label class="field textarea-grow">
+                                    @Html.TextAreaFor(x => x.IndicadorItem.Descripcion, new { @class = "gui-textarea", @id = "indicadorDescripcion", @placeholder = "" })
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer text-right">
+                <button type="button" id="cancelPopUp" class="button btn-dark">Cancelar</button>
+                <button type="submit" id="save" class="button btn-primary">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@Styles.Render("~/Content/fancytree")
+@Scripts.Render("~/Content/jqueryFancyTree")
+@Scripts.Render("~/Content/fancyTreeChildcounter")
+@Scripts.Render("~/js/aprendizajesEsperados")

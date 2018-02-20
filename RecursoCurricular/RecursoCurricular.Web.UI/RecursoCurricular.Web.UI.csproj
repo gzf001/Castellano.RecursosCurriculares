@@ -186,10 +186,12 @@
     <Compile Include="Areas\Home\HomeAreaRegistration.cs" />
     <Compile Include="Areas\Home\Models\Login.cs" />
     <Compile Include="Areas\Home\Models\RecoveryPass.cs" />
+    <Compile Include="Areas\RecursosCurriculares\Controllers\AprendizajeEsperadoController.cs" />
     <Compile Include="Areas\RecursosCurriculares\Controllers\ContenidoController.cs" />
     <Compile Include="Areas\RecursosCurriculares\Controllers\EjeController.cs" />
     <Compile Include="Areas\RecursosCurriculares\Controllers\HomeController.cs" />
     <Compile Include="Areas\RecursosCurriculares\Controllers\ObjetivoVerticalController.cs" />
+    <Compile Include="Areas\RecursosCurriculares\Models\AprendizajeEsperado.cs" />
     <Compile Include="Areas\RecursosCurriculares\Models\Contenido.cs" />
     <Compile Include="Areas\RecursosCurriculares\Models\Eje.cs" />
     <Compile Include="Areas\RecursosCurriculares\Models\ObjetivoVertical.cs" />
@@ -210,8 +212,10 @@
     <Compile Include="Helpers\JsonClass\Actitud.cs" />
     <Compile Include="Helpers\JsonClass\Base.cs" />
     <Compile Include="Helpers\JsonClass\Conocimiento.cs" />
+    <Compile Include="Helpers\JsonClass\Contenido.cs" />
     <Compile Include="Helpers\JsonClass\Habilidad.cs" />
     <Compile Include="Helpers\JsonClass\ObjetivoAprendizaje.cs" />
+    <Compile Include="Helpers\JsonClass\ObjetivoVertical.cs" />
     <Compile Include="Helpers\ObjetivoAprendizajeOrdenable.cs" />
     <Compile Include="Helpers\TreeViewExtension.cs" />
     <Compile Include="Models\PartialHeader.cs" />
@@ -682,6 +686,7 @@
     <Content Include="Content\js\jquery_ui\jquery-ui.structure.min.css" />
     <Content Include="Content\js\jquery_ui\jquery-ui.theme.min.css" />
     <Content Include="Content\js\layout.js" />
+    <Content Include="Content\js\recursosCurriculares\aprendizajesEsperados\aprendizajesEsperados.js" />
     <Content Include="Content\js\recursosCurriculares\contenidos\contenidos.js" />
     <Content Include="Content\js\recursosCurriculares\ejes\ejes.js" />
     <Content Include="Content\js\recursosCurriculares\objetivosVerticales\objetivosVerticales.js" />
@@ -3709,6 +3714,7 @@
     <Content Include="Areas\RecursosCurriculares\Views\Contenido\Contenidos.cshtml" />
     <Content Include="Areas\RecursosCurriculares\Views\Home\Index.cshtml" />
     <Content Include="Areas\RecursosCurriculares\Views\ObjetivoVertical\ObjetivosVerticales.cshtml" />
+    <Content Include="Areas\RecursosCurriculares\Views\AprendizajeEsperado\AprendizajesEsperados.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
