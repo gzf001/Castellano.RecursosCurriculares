@@ -42,7 +42,7 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Controllers
                 Nombre = model.Nombre.Trim()
             };
 
-            RecursoCurricular.BaseCurricular.Unidad.Result resultado = RecursoCurricular.BaseCurricular.Unidad.Save(unidad, model.SubHabilidadesId, model.IndicadoresId, model.ConocimientosId, model.ActitudesId);
+            RecursoCurricular.Result resultado = RecursoCurricular.BaseCurricular.Unidad.Save(unidad, model.SubHabilidadesId, model.IndicadoresId, model.ConocimientosId, model.ActitudesId);
 
             return this.Json(resultado.Status, JsonRequestBehavior.AllowGet);
         }

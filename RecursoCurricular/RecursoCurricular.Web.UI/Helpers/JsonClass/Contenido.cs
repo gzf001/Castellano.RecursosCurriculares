@@ -39,7 +39,7 @@ namespace RecursoCurricular.Web.UI.Helpers.JsonClass
 
                     Contenido o = new Contenido
                     {
-                        key = "contenido",
+                        key = string.Format("{0}{1}", contenido.EjeId, contenido.Id),
                         title = contenido.Descripcion,
                         folder = false,
                         selected = aprendizajeContenido != null,

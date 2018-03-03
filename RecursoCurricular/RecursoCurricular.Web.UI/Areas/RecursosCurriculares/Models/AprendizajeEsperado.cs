@@ -56,13 +56,13 @@ namespace RecursoCurricular.Web.UI.Areas.RecursosCurriculares.Models
             set;
         }
 
-        public List<RecursoCurricular.RecursosCurriculares.Contenido> Contenidos
+        public List<RecursoCurricular.RecursosCurriculares.AprendizajeContenido> Contenidos
         {
             get;
             set;
         }
 
-        public List<RecursoCurricular.RecursosCurriculares.ObjetivoVertical> ObjetivosVerticales
+        public List<RecursoCurricular.RecursosCurriculares.AprendizajeObjetivoVertical> ObjetivosVerticales
         {
             get;
             set;
@@ -77,7 +77,7 @@ namespace RecursoCurricular.Web.UI.Areas.RecursosCurriculares.Models
             }
 
             [Display(Name = "Habilidad Taxonómica:")]
-            public new string Categoria
+            public string Habilidad
             {
                 get;
                 set;

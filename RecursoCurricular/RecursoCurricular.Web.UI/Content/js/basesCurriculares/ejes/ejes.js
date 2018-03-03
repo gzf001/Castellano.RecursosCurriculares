@@ -9,7 +9,9 @@
         table = gridView();
     })
 
-    $(document).on('click', 'a[typebutton=Add]', function () {
+    $(document).on('click', 'a[typebutton=Add]', function (e) {
+
+        e.preventDefault();
 
         $.getJSON("/BasesCurriculares/Eje/AddEje/" + $("#sector").val(), function (data) {
 
@@ -35,7 +37,9 @@
         })
     })
 
-    $(document).on('click', 'a[typebutton=Edit]', function () {
+    $(document).on('click', 'a[typebutton=Edit]', function (e) {
+
+        e.preventDefault();
 
         $.getJSON("/BasesCurriculares/Eje/EditEje/" + $("#sector").val() + "/" + $(this).attr('data-value'), function (data) {
 
@@ -61,7 +65,9 @@
         })
     })
 
-    $(document).on('click', 'a[typebutton=Delete]', function () {
+    $(document).on('click', 'a[typebutton=Delete]', function (e) {
+
+        e.preventDefault();
 
         var id = $(this).attr('data-value');
 

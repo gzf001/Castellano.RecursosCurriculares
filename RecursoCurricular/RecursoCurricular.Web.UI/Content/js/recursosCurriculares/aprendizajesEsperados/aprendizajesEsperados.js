@@ -2,9 +2,11 @@
 
     var contenidosId = [];
     var objetivosVerticalesId = [];
-    var indicadores = [];
 
-    var table;
+    var tableAprendizaje;
+    var tableIndicador;
+
+    $('#aprendizajeForm').hide();
 
     $('#indicadorForm').hide();
 
@@ -58,7 +60,7 @@
 
         e.preventDefault();
 
-        table = gridViewAprendizaje();
+        tableAprendizaje = gridViewAprendizaje();
     })
 
     $('#accordion').accordion({
@@ -74,7 +76,7 @@
 
             if (data === "500") {
 
-                swal("Error!", "Seleccione el objetivo de aprendizaje", "error");
+                swal("Error!", "Seleccione el sector", "error");
             }
             else {
 
@@ -87,15 +89,17 @@
                 $('#aprendizajeNumero').val(data.Numero);
                 $('#aprendizajeDescripcion').val(data.Descripcion);
 
-                gridViewIndicador();
+                tableIndicador = gridViewIndicador();
 
                 treeContenidos(contenidosId);
 
                 treeObjetivosVerticales(objetivosVerticalesId);
 
+                $('#indicadorForm').hide();
+
                 $('#form').hide(500);
 
-                $('#indicadorForm').show(500);
+                $('#aprendizajeForm').show(500);
             }
         })
     })
@@ -104,27 +108,188 @@
 
         e.preventDefault();
 
-        $('#tipoEducacionIndicadorCodigo').val($('#aprendizajeTipoEducacion').val());
-        $('#gradoIndicadorCodigo').val($('#aprendizajeGrado').val());
-        $('#sectorIndicadorId').val($('#aprendizajeSector').val());
-        $('#aprendizajeIndicadorDescripcion').val($('#aprendizajeDescripcion').val());
+        $.getJSON("/RecursosCurriculares/AprendizajeEsperado/AddIndicador/" + $("#tipoEducacion").val() + "/" + $('#grado').val() + "/" + $('#sector').val() + "/" + $('#aprendizajeId').val(), function (data) {
 
-        popUp();
+            if (data === "500") {
+
+                swal("Error!", "Existen problemas al agregar un nuevo indicador, por favor refresque el navegador y reintente", "error");
+            }
+            else {
+                $('#indicadorId').val(data.IndicadorItem.Id)
+                $('#tipoEducacionIndicadorCodigo').val(data.TipoEducacionNombre);
+                $('#gradoIndicadorCodigo').val(data.GradoNombre);
+                $('#sectorIndicadorId').val(data.SectorNombre);
+                $('#aprendizajeIndicadorNumero').val(data.IndicadorItem.Numero);
+                $('#aprendizajeIndicadorDescripcion').val(data.Descripcion);
+                $('#aprendizajeIndicadorCategoria').val('-1');
+                $('#indicadorDescripcion').val(data.IndicadorItem.Descripcion);
+
+                popUp();
+            }
+        });
     })
 
-    var validator = $('#formModal').validate({
+    $(document).on('click', 'a[id=editAprendizaje]', function (e) {
+
+        e.preventDefault();
+
+        $.getJSON("/RecursosCurriculares/AprendizajeEsperado/EditAprendizaje/" + $("#tipoEducacion").val() + "/" + $('#grado').val() + "/" + $('#sector').val() + "/" + $(this).attr('data-value'), function (data) {
+
+            if (data === "500") {
+
+                swal("Error!", "Existen problemas al editar el aprendizaje, por favor refresque el navegador y reintente", "error");
+            }
+            else {
+
+                $(":ui-fancytree").fancytree("destroy");
+
+                $('#aprendizajeId').val(data.Id);
+                $('#aprendizajeTipoEducacion').val(data.TipoEducacionNombre);
+                $('#aprendizajeGrado').val(data.GradoNombre);
+                $('#aprendizajeSector').val(data.SectorNombre);
+                $('#aprendizajeNumero').val(data.Numero);
+                $('#aprendizajeDescripcion').val(data.Descripcion);
+
+                tableIndicador = gridViewIndicador();
+
+                treeContenidos(contenidosId);
+
+                treeObjetivosVerticales(objetivosVerticalesId);
+
+                $('#indicadorForm').show(500);
+
+                $('#form').hide(500);
+
+                $('#aprendizajeForm').show(500);
+            }
+        });
+    })
+
+    $(document).on('click', 'a[id=deleteAprendizaje]', function (e) {
+
+        e.preventDefault();
+
+        e.preventDefault();
+
+        var id = $(this).attr('data-value');
+
+        swal({
+            title: "¿Esta seguro?",
+            text: "Se eliminará el aprendizaje",
+            type: "warning",
+            showCancelButton: true,
+            cancelButtonText: "Cancelar",
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Si, eliminalo",
+            closeOnConfirm: false
+        },
+            function () {
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/RecursosCurriculares/AprendizajeEsperado/DeleteAprendizaje/' + $("#tipoEducacion").val() + "/" + $('#grado').val() + "/" + $('#sector').val() + "/" + id,
+                    success: function (data) {
+
+                        if (data === "200") {
+
+                            tableAprendizaje.ajax.reload();
+
+                            swal("Eliminado!", "El aprendizaje fue eliminado de forma correcta", "success");
+                        }
+                        else {
+
+                            swal("Error!", "El aprendizaje no puede ser eliminado", "error");
+                        }
+                    },
+                    error: function (data) {
+
+                        swal("Error!", "El aprendizaje no puede ser eliminado", "error");
+                    }
+                });
+            });
+    })
+
+    $(document).on('click', 'a[id=editIndicador]', function (e) {
+
+        e.preventDefault();
+
+        $.getJSON("/RecursosCurriculares/AprendizajeEsperado/EditIndicador/" + $("#tipoEducacion").val() + "/" + $('#grado').val() + "/" + $('#sector').val() + "/" + $('#aprendizajeId').val() + "/" + $(this).attr('data-value'), function (data) {
+
+            if (data === "500") {
+
+                swal("Error!", "Se ha producido un error al cargar la información", "error");
+            }
+            else {
+
+                $('#indicadorId').val(data.IndicadorItem.Id)
+                $('#tipoEducacionIndicadorCodigo').val(data.TipoEducacionNombre);
+                $('#gradoIndicadorCodigo').val(data.GradoNombre);
+                $('#sectorIndicadorId').val(data.SectorNombre);
+                $('#aprendizajeIndicadorNumero').val(data.IndicadorItem.Numero);
+                $('#aprendizajeIndicadorDescripcion').val(data.Descripcion);
+                $('#aprendizajeIndicadorCategoria').val(data.IndicadorItem.CategoriaCodigo);
+                $('#indicadorDescripcion').val(data.IndicadorItem.Descripcion);
+
+                popUp();
+            }
+        });
+    })
+
+    $(document).on('click', 'a[id=deleteIndicador]', function (e) {
+
+        e.preventDefault();
+
+        var id = $(this).attr('data-value');
+
+        swal({
+            title: "¿Esta seguro?",
+            text: "Se eliminará el indicador",
+            type: "warning",
+            showCancelButton: true,
+            cancelButtonText: "Cancelar",
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Si, eliminalo",
+            closeOnConfirm: false
+        },
+            function () {
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/RecursosCurriculares/AprendizajeEsperado/DeleteIndicador/' + $("#tipoEducacion").val() + "/" + $('#grado').val() + "/" + $('#sector').val() + "/" + $('#aprendizajeId').val() + "/" + id,
+                    success: function (data) {
+
+                        if (data === "200") {
+
+                            tableIndicador.ajax.reload();
+
+                            swal("Eliminado!", "El indicador fue eliminado de forma correcta", "success");
+                        }
+                        else {
+
+                            swal("Error!", "El indicador no puede ser eliminado", "error");
+                        }
+                    },
+                    error: function (data) {
+
+                        swal("Error!", "El indicador no puede ser eliminado", "error");
+                    }
+                });
+            });
+    })
+
+    var validAprendizaje = $('#formAprendizaje').validate({
 
         errorClass: 'state-error',
         validClass: 'state-success',
         errorElement: 'em',
         rules: {
-            "IndicadorItem.Descripcion": {
+            "Descripcion": {
                 required: true
             }
         },
         messages: {
-            "IndicadorItem.Descripcion": {
-                required: 'Ingrese la descripción'
+            "Descripcion": {
+                required: 'Ingrese la descripción del aprendizaje'
             }
         },
         highlight: function (element, errorClass, validClass) {
@@ -138,77 +303,137 @@
         },
         submitHandler: function (form) {
 
-            var indicador = {
+            var contenidos = [];
+            var objetivosVerticales = [];
+
+            var aprendizaje = {
+                tipoEducacionCodigo: $('#tipoEducacion').val(),
+                gradoCodigo: $('#grado').val(),
+                sectorId: $('#sector').val(),
+                id: $('#aprendizajeId').val(),
+                numero: $('#aprendizajeNumero').val(),
+                descripcion: $('#aprendizajeDescripcion').val()
+            };
+
+            $(contenidosId).each(function (i) {
+
+                var ejeId = contenidosId[i].substring(0, 36);
+                var contenidoId = contenidosId[i].substring(36, 72);
+
+                var aprendizajeContenido = {
+                    tipoEducacionCodigo: aprendizaje.tipoEducacionCodigo,
+                    gradoCodigo: aprendizaje.gradoCodigo,
+                    sectorId: aprendizaje.sectorId,
+                    aprendizajeId: aprendizaje.id,
+                    ejeId: ejeId,
+                    contenidoId: contenidoId
+                };
+
+                contenidos.push(aprendizajeContenido);
+            });
+
+            $(objetivosVerticalesId).each(function (i) {
+
+                var aprendizajeObjetivoVertical = {
+                    tipoEducacionCodigo: aprendizaje.tipoEducacionCodigo,
+                    gradoCodigo: aprendizaje.gradoCodigo,
+                    sectorId: aprendizaje.sectorId,
+                    aprendizajeId: aprendizaje.id,
+                    objetivoVerticalId: objetivosVerticalesId[i]
+                };
+
+                objetivosVerticales.push(aprendizajeObjetivoVertical);
+            });
+
+            aprendizaje.contenidos = contenidos;
+            aprendizaje.objetivosVerticales = objetivosVerticales;
+
+            $.ajax({
+                type: "POST",
+                url: "/RecursosCurriculares/AprendizajeEsperado/AprendizajesEsperados",
+                data: aprendizaje,
+                success: function (data) {
+
+                    if (data === "200") {
+
+                        $('#indicadorForm').show();
+
+                        swal("Listo!", "Su información fue guardada correctamente", "success");
+                    }
+                    else {
+
+                        swal("Error!", "Se ha producido un error al registrar la información", "error");
+                    }
+                },
+                error: function (data) {
+
+                    swal("Error!", "Se ha producido un error al registrar la información", "error");
+                }
+            });
+        }
+    })
+
+    var validIndicador = $('#formModal').validate({
+
+        errorClass: 'state-error',
+        validClass: 'state-success',
+        errorElement: 'em',
+        rules: {
+            "IndicadorItem.Descripcion": {
+                required: true
+            }
+        },
+        messages: {
+            "IndicadorItem.Descripcion": {
+                required: 'Ingrese la descripción del indicador'
+            }
+        },
+        highlight: function (element, errorClass, validClass) {
+            $(element).closest('.field').addClass(errorClass).removeClass(validClass);
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).closest('.field').removeClass(errorClass).addClass(validClass);
+        },
+        errorPlacement: function (error, element) {
+            error.insertAfter(element.parent());
+        },
+        submitHandler: function (form) {
+
+            var obj = {
                 tipoEducacionCodigo: $('#tipoEducacion').val(),
                 gradoCodigo: $('#grado').val(),
                 sectorId: $('#sector').val(),
                 aprendizajeId: $('#aprendizajeId').val(),
                 id: $('#indicadorId').val(),
-                categoriaCodigo: $('#aprendizajeIndicadorCategorias').val(),
+                categoriaCodigo: $('#aprendizajeIndicadorCategoria').val(),
                 numero: $('#aprendizajeIndicadorNumero').val(),
                 descripcion: $('#indicadorDescripcion').val()
             };
 
-            index = jQuery.inArray(indicador, indicadores);
+            $.ajax({
+                type: "POST",
+                url: "/RecursosCurriculares/AprendizajeEsperado/Indicadores",
+                data: obj,
+                success: function (data) {
 
-            if (index === -1) {
+                    $.magnificPopup.close();
 
-                indicadores.push(indicador);
-            }
-            else {
+                    if (data === "200") {
 
-                indicadores[index] = indicador;
-            }
+                        tableIndicador.ajax.reload();
 
-            var z = $("#gridViewIndicador tbody tr").length;
+                        swal("Listo!", "Su información fue guardada correctamente", "success");
+                    }
+                    else {
 
-            if ($("#gridViewIndicador tbody tr").length === 1) {
+                        swal("Error!", "Se ha producido un error al registrar la información", "error");
+                    }
+                },
+                error: function (data) {
 
-                var dataSet = [[indicador.numero, indicador.descripcion, $("#aprendizajeIndicadorCategorias option:selected").text(), "<a class='btn btn-primary btn-xs btn-flat actionLinkCrudEmbedded tooltipstered' title='Ediatr' index='0' typebutton='Edit'><i class='fa fa-times'></i></a><a class='btn btn-danger btn-xs actionLinkCrudEmbedded' title='Eliminar' index='0' typebutton='Delete'><i class='fa fa-times'></i></a>"]];
-
-                table = $('#gridViewIndicador').DataTable({
-                    "data": dataSet,
-                    "destroy": true,
-                    "order": [[0, "asc"]],
-                    "columnDefs": [
-                        {
-                            "targets": [0],
-                            "searchable": false,
-                            "sortable": true
-                        },
-                        {
-                            "targets": [1],
-                            "searchable": true,
-                            "sortable": true
-                        },
-                        {
-                            "targets": [2],
-                            "searchable": true,
-                            "sortable": true
-                        },
-                        {
-                            "targets": [3],
-                            "searchable": false,
-                            "sortable": false
-                        }
-                    ],
-                    "iDisplayLength": 5,
-                    "aLengthMenu": [
-                        [10, 15, 20, 25, 30, -1],
-                        [10, 15, 20, 25, 30, "All"]
-                    ],
-                    "fnInitComplete": function (oSettings, json) {
-
-                        $("#gridViewIndicador_length").append('<br /><a class="btn btn-success btn-xs" id="addIndicador" href="#" title="Agregar indicador" typebutton="Add"><i class="fa fa-plus"></i></a>');
-                    },
-                    "sDom": '<"dt-panelmenu clearfix"lfr>t<"dt-panelfooter clearfix"ip>'
-                });
-            }
-            
-            $.magnificPopup.close();
-            //var dataset = [];
-
-            swal("Listo!", "El indicador fue guardado correctamente", "success");
+                    swal("Error!", "Se ha producido un error al registrar la información", "error");
+                }
+            });
         }
     })
 
@@ -217,6 +442,8 @@
         e.preventDefault();
 
         $('#form').show(500);
+
+        $('#aprendizajeForm').hide(500);
 
         $('#indicadorForm').hide(500);
     })
@@ -236,9 +463,9 @@ function gridViewAprendizaje() {
         "columns": [
             { "data": "Numero" },
             { "data": "Descripcion" },
+            { "data": "DetalleIndicadores" },
             { "data": "CMO" },
             { "data": "OFV" },
-            { "data": "DetalleIndicadores" },
             { "data": "Accion" }
         ],
         "destroy": true,
@@ -275,15 +502,20 @@ function gridViewAprendizaje() {
                 "sortable": false
             }
         ],
-        "iDisplayLength": 15,
+        "iDisplayLength": 5,
         "aLengthMenu": [
-            [15, 20, 25, 30, -1],
-            [15, 20, 25, 30, "All"]
+            [5, 10, 15, 20, 25, 30, -1],
+            [5, 10, 15, 20, 25, 30, "All"]
         ],
         "fnInitComplete": function (oSettings, json) {
 
             if ($('#sector').val() !== "-1") {
-                $("div.dataTables_length").append('<br /><a class="btn btn-success btn-xs" id="addAprendizaje" href="#" title="Agregar objetivo vertical" typebutton="Add"><i class="fa fa-plus"></i></a>');
+
+                if (!$('#addAprendizaje').length) {
+
+                    $("#gridViewAprendizaje_length").append('<br /><a class="btn btn-success btn-xs" id="addAprendizaje" href="#" title="Agregar objetivo vertical" typebutton="Add"><i class="fa fa-plus"></i></a>');
+                }
+
             }
         },
         "sDom": '<"dt-panelmenu clearfix"lfr>t<"dt-panelfooter clearfix"ip>'
@@ -299,7 +531,7 @@ function gridViewIndicador() {
         "columns": [
             { "data": "Numero" },
             { "data": "Descripcion" },
-            { "data": "Categoria" },
+            { "data": "Habilidad" },
             { "data": "Accion" }
         ],
         "destroy": true,
@@ -333,7 +565,9 @@ function gridViewIndicador() {
         ],
         "fnInitComplete": function (oSettings, json) {
 
-            $("#gridViewIndicador_length").append('<br /><a class="btn btn-success btn-xs" id="addIndicador" href="#" title="Agregar indicador" typebutton="Add"><i class="fa fa-plus"></i></a>');
+            if (!$('#addIndicador').length) {
+                $("#gridViewIndicador_length").append('<br /><a class="btn btn-success btn-xs" id="addIndicador" href="#" title="Agregar indicador" typebutton="Add"><i class="fa fa-plus"></i></a>');
+            }
         },
         "sDom": '<"dt-panelmenu clearfix"lfr>t<"dt-panelfooter clearfix"ip>'
     });
@@ -376,7 +610,7 @@ function treeContenidos(contenidosId) {
             var contenidoId;
             var index;
 
-            if (data.node.key === 'padre') {
+            if (data.node.key === 'eje') {
 
                 if (data.node.selected) {
 

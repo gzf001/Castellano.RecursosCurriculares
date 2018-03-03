@@ -131,6 +131,18 @@ namespace RecursoCurricular.Web.UI.Areas.RecursosCurriculares
                );
 
             context.MapRoute(
+                   name: "EditAprendizaje",
+                   url: "RecursosCurriculares/AprendizajeEsperado/EditAprendizaje/{tipoEducacionCodigo}/{GradoCodigo}/{sectorId}/{aprendizajeId}",
+                   defaults: new { area = "RecursosCurriculares", controller = "AprendizajeEsperado", action = "EditAprendizaje" }
+               );
+
+            context.MapRoute(
+                   name: "DeleteAprendizaje",
+                   url: "RecursosCurriculares/AprendizajeEsperado/DeleteAprendizaje/{tipoEducacionCodigo}/{GradoCodigo}/{sectorId}/{aprendizajeId}",
+                   defaults: new { area = "RecursosCurriculares", controller = "AprendizajeEsperado", action = "DeleteAprendizaje" }
+               );
+
+            context.MapRoute(
                    name: "GetAprendizajeContenidos",
                    url: "RecursosCurriculares/AprendizajeEsperado/GetAprendizajeContenidos/{tipoEducacionCodigo}/{GradoCodigo}/{sectorId}/{aprendizajeId}",
                    defaults: new { area = "RecursosCurriculares", controller = "AprendizajeEsperado", action = "GetAprendizajeContenidos" }
@@ -140,6 +152,24 @@ namespace RecursoCurricular.Web.UI.Areas.RecursosCurriculares
                    name: "GetAprendizajeObjetivosVerticales",
                    url: "RecursosCurriculares/AprendizajeEsperado/GetAprendizajeObjetivosVerticales/{tipoEducacionCodigo}/{GradoCodigo}/{sectorId}/{aprendizajeId}",
                    defaults: new { area = "RecursosCurriculares", controller = "AprendizajeEsperado", action = "GetAprendizajeObjetivosVerticales" }
+               );
+
+            context.MapRoute(
+                   name: "AddAprendizajeIndicador",
+                   url: "RecursosCurriculares/AprendizajeEsperado/AddIndicador/{tipoEducacionCodigo}/{GradoCodigo}/{sectorId}/{aprendizajeId}",
+                   defaults: new { area = "RecursosCurriculares", controller = "AprendizajeEsperado", action = "AddIndicador" }
+               );
+
+            context.MapRoute(
+                   name: "EditIndicador",
+                   url: "RecursosCurriculares/AprendizajeEsperado/EditIndicador/{tipoEducacionCodigo}/{GradoCodigo}/{sectorId}/{aprendizajeId}/{indicadorId}",
+                   defaults: new { area = "RecursosCurriculares", controller = "AprendizajeEsperado", action = "EditIndicador" }
+               );
+
+            context.MapRoute(
+                   name: "DeleteIndicador",
+                   url: "RecursosCurriculares/AprendizajeEsperado/DeleteIndicador/{tipoEducacionCodigo}/{GradoCodigo}/{sectorId}/{aprendizajeId}/{indicadorId}",
+                   defaults: new { area = "RecursosCurriculares", controller = "AprendizajeEsperado", action = "DeleteIndicador" }
                );
 
             #endregion
