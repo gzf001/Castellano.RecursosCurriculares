@@ -171,7 +171,7 @@ namespace RecursoCurricular.Web.UI.Areas.RecursosCurriculares.Controllers
 
                     foreach (RecursoCurricular.RecursosCurriculares.AprendizajeIndicador i in RecursoCurricular.RecursosCurriculares.AprendizajeIndicador.GetAll(a))
                     {
-                        aprendizaje.DetalleIndicadores += i.Descripcion.Length > 70 ? string.Format("<div>-{0}...</div>", i.Descripcion.Substring(0, 70)) : string.Format("<div>{0}</div>", i.Descripcion);
+                        aprendizaje.DetalleIndicadores += i.Descripcion.Length > 70 ? string.Format("<div>-{0}...</div>", i.Descripcion.Substring(0, 70)) : string.Format("<div>-{0}</div>", i.Descripcion);
                     }
 
                     aprendizajesEsperados.data.Add(aprendizaje);

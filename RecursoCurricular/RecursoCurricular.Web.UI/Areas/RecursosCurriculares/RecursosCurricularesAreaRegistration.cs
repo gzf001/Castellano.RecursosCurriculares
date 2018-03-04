@@ -12,7 +12,7 @@ namespace RecursoCurricular.Web.UI.Areas.RecursosCurriculares
             }
         }
 
-        public override void RegisterArea(AreaRegistrationContext context) 
+        public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
                 "RecursosCurriculares_default",
@@ -229,9 +229,33 @@ namespace RecursoCurricular.Web.UI.Areas.RecursosCurriculares
                );
 
             context.MapRoute(
+                   name: "EditObjetivoTransversal",
+                   url: "RecursosCurriculares/ObjetivoTransversal/EditObjetivoTransversal/{tipoEducacionCodigo}/{GradoCodigo}/{sectorId}/{unidadId}/{objetivoTransversalId}",
+                   defaults: new { area = "RecursosCurriculares", controller = "ObjetivoTransversal", action = "EditObjetivoTransversal" }
+               );
+
+            context.MapRoute(
+                   name: "DeleteObjetivoTransversal",
+                   url: "RecursosCurriculares/ObjetivoTransversal/DeleteObjetivoTransversal/{tipoEducacionCodigo}/{GradoCodigo}/{sectorId}/{unidadId}/{objetivoTransversalId}",
+                   defaults: new { area = "RecursosCurriculares", controller = "ObjetivoTransversal", action = "DeleteObjetivoTransversal" }
+               );
+
+            context.MapRoute(
                    name: "AddObjetivoTransversalIndicador",
                    url: "RecursosCurriculares/ObjetivoTransversal/AddObjetivoTransversalIndicador/{tipoEducacionCodigo}/{GradoCodigo}/{sectorId}/{unidadId}/{objetivoTransversalId}",
                    defaults: new { area = "RecursosCurriculares", controller = "ObjetivoTransversal", action = "AddObjetivoTransversalIndicador" }
+               );
+
+            context.MapRoute(
+                   name: "EditObjetivoTransversalIndicador",
+                   url: "RecursosCurriculares/ObjetivoTransversal/EditObjetivoTransversalIndicador/{tipoEducacionCodigo}/{GradoCodigo}/{sectorId}/{unidadId}/{objetivoTransversalId}/{indicadorId}",
+                   defaults: new { area = "RecursosCurriculares", controller = "ObjetivoTransversal", action = "EditObjetivoTransversalIndicador" }
+               );
+
+            context.MapRoute(
+                   name: "DeleteObjetivoTransversalIndicador",
+                   url: "RecursosCurriculares/ObjetivoTransversal/DeleteObjetivoTransversalIndicador/{tipoEducacionCodigo}/{GradoCodigo}/{sectorId}/{unidadId}/{objetivoTransversalId}/{indicadorId}",
+                   defaults: new { area = "RecursosCurriculares", controller = "ObjetivoTransversal", action = "DeleteObjetivoTransversalIndicador" }
                );
 
             context.MapRoute(

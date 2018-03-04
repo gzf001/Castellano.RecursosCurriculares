@@ -169,8 +169,6 @@
 
         e.preventDefault();
 
-        e.preventDefault();
-
         var id = $(this).attr('data-value');
 
         swal({
@@ -259,6 +257,8 @@
                     success: function (data) {
 
                         if (data === "200") {
+
+                            tableAprendizaje.ajax.reload();
 
                             tableIndicador.ajax.reload();
 
@@ -357,6 +357,8 @@
                     if (data === "200") {
 
                         $('#indicadorForm').show();
+
+                        tableAprendizaje.ajax.reload();
 
                         swal("Listo!", "Su información fue guardada correctamente", "success");
                     }

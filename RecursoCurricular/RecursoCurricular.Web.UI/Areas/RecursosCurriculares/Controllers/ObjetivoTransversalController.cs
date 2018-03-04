@@ -43,7 +43,7 @@ namespace RecursoCurricular.Web.UI.Areas.RecursosCurriculares.Controllers
                         UnidadId = model.UnidadId,
                         Id = model.Id,
                         Numero = model.Numero,
-                        Descripcion = model.Descripcion
+                        Descripcion = model.Descripcion.Trim()
                     }.Save(context);
 
                     context.SubmitChanges();
@@ -92,6 +92,74 @@ namespace RecursoCurricular.Web.UI.Areas.RecursosCurriculares.Controllers
 
         [Authorize]
         [HttpGet]
+        [RecursoCurricular.Web.Authorization(ActionType = new RecursoCurricular.Web.ActionType[] { RecursoCurricular.Web.ActionType.Edit }, Root = "ObjetivoTransversales", Area = Area)]
+        public JsonResult EditObjetivoTransversal(string tipoEducacionCodigo, string gradoCodigo, string sectorId, string unidadId, string objetivoTransversalId)
+        {
+            int t;
+            int g;
+            Guid s;
+            Guid u;
+            Guid o;
+
+            if (int.TryParse(tipoEducacionCodigo, out t) && int.TryParse(gradoCodigo, out g) && Guid.TryParse(sectorId, out s) && Guid.TryParse(unidadId, out u) && Guid.TryParse(objetivoTransversalId, out o) && t > 0 && g > 0)
+            {
+                RecursoCurricular.Educacion.Grado grado = RecursoCurricular.Educacion.Grado.Get(t, g);
+                RecursoCurricular.Educacion.Sector sector = RecursoCurricular.Educacion.Sector.Get(s);
+                RecursoCurricular.RecursosCurriculares.ObjetivoTransversal objetivoTransversal = RecursoCurricular.RecursosCurriculares.ObjetivoTransversal.Get(this.CurrentAnio.Numero, t, g, s, u, o);
+
+                return this.Json(new RecursoCurricular.Web.UI.Areas.RecursosCurriculares.Models.ObjetivoTransversal
+                {
+                    IndicadorItem = new RecursoCurricular.Web.UI.Areas.RecursosCurriculares.Models.ObjetivoTransversal.Indicador(),
+                    TipoEducacionNombre = grado.TipoEducacion.Nombre,
+                    GradoNombre = grado.Nombre,
+                    SectorNombre = sector.Nombre,
+                    UnidadNombre = string.Format("{0}.- {1}", objetivoTransversal.Unidad.Numero, objetivoTransversal.Unidad.Nombre),
+                    Id = objetivoTransversal.Id,
+                    Numero = objetivoTransversal.Numero,
+                    Descripcion = objetivoTransversal.Descripcion
+                }, JsonRequestBehavior.AllowGet);
+            }
+
+            return this.Json("500", JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]
+        [HttpGet]
+        [RecursoCurricular.Web.Authorization(ActionType = new RecursoCurricular.Web.ActionType[] { RecursoCurricular.Web.ActionType.Delete }, Root = "ObjetivoTransversales", Area = Area)]
+        public JsonResult DeleteObjetivoTransversal(string tipoEducacionCodigo, string gradoCodigo, string sectorId, string unidadId, string objetivoTransversalId)
+        {
+            int t;
+            int g;
+            Guid s;
+            Guid u;
+            Guid o;
+
+            if (int.TryParse(tipoEducacionCodigo, out t) && int.TryParse(gradoCodigo, out g) && Guid.TryParse(sectorId, out s) && Guid.TryParse(unidadId, out u) && Guid.TryParse(objetivoTransversalId, out o) && t > 0 && g > 0)
+            {
+                RecursoCurricular.RecursosCurriculares.ObjetivoTransversal objetivoTransversal = RecursoCurricular.RecursosCurriculares.ObjetivoTransversal.Get(this.CurrentAnio.Numero, t, g, s, u, o);
+
+                try
+                {
+                    using (RecursoCurricular.RecursosCurriculares.Context context = new RecursoCurricular.RecursosCurriculares.Context())
+                    {
+                        objetivoTransversal.Delete(context);
+
+                        context.SubmitChanges();
+                    };
+
+                    return this.Json("200", JsonRequestBehavior.AllowGet);
+                }
+                catch
+                {
+                    return this.Json("500", JsonRequestBehavior.AllowGet);
+                }
+            }
+
+            return this.Json("500", JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]
+        [HttpGet]
         public JsonResult GetObjetivoTransversales(string tipoEducacionCodigo, string gradoCodigo, string sectorId, string unidadId)
         {
             int t;
@@ -119,7 +187,7 @@ namespace RecursoCurricular.Web.UI.Areas.RecursosCurriculares.Controllers
 
                     foreach (RecursoCurricular.RecursosCurriculares.ObjetivoTransversalIndicador i in RecursoCurricular.RecursosCurriculares.ObjetivoTransversalIndicador.GetAll(o))
                     {
-                        objetivoTransversal.DetalleIndicadores += i.Descripcion.Length > 70 ? string.Format("<div>-{0}...</div>", i.Descripcion.Substring(0, 70)) : string.Format("<div>{0}</div>", i.Descripcion);
+                        objetivoTransversal.DetalleIndicadores += i.Descripcion.Length > 70 ? string.Format("<div>-{0}...</div>", i.Descripcion.Substring(0, 70)) : string.Format("<div>-{0}</div>", i.Descripcion);
                     }
 
                     objetivoTransversales.data.Add(objetivoTransversal);
@@ -205,8 +273,71 @@ namespace RecursoCurricular.Web.UI.Areas.RecursosCurriculares.Controllers
             return this.Json("500", JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize]
+        [HttpGet]
+        [RecursoCurricular.Web.Authorization(ActionType = new RecursoCurricular.Web.ActionType[] { RecursoCurricular.Web.ActionType.Edit }, Root = "ObjetivoTransversales", Area = Area)]
+        public JsonResult EditObjetivoTransversalIndicador(string tipoEducacionCodigo, string gradoCodigo, string sectorId, string unidadId, string objetivoTransversalId, string indicadorId)
+        {
+            int t;
+            int g;
+            Guid s;
+            Guid u;
+            Guid o;
+            Guid i;
 
-        //[Authorize]
+            if (int.TryParse(tipoEducacionCodigo, out t) && int.TryParse(gradoCodigo, out g) && Guid.TryParse(sectorId, out s) && Guid.TryParse(unidadId, out u) && Guid.TryParse(objetivoTransversalId, out o) && Guid.TryParse(indicadorId, out i) && t > 0 && g > 0)
+            {
+                RecursoCurricular.RecursosCurriculares.ObjetivoTransversalIndicador objetivoTransversalIndicador = RecursoCurricular.RecursosCurriculares.ObjetivoTransversalIndicador.Get(this.CurrentAnio.Numero, t, g, s, u, o, i);
+
+                return this.Json(new RecursoCurricular.Web.UI.Areas.RecursosCurriculares.Models.ObjetivoTransversal
+                {
+                    IndicadorItem = new RecursoCurricular.Web.UI.Areas.RecursosCurriculares.Models.ObjetivoTransversal.Indicador
+                    {
+                        Id = objetivoTransversalIndicador.Id,
+                        Numero = objetivoTransversalIndicador.Numero,
+                        Descripcion = objetivoTransversalIndicador.Descripcion
+                    },
+                    TipoEducacionNombre = objetivoTransversalIndicador.TipoEducacion.Nombre,
+                    GradoNombre = objetivoTransversalIndicador.Grado.Nombre,
+                    SectorNombre = objetivoTransversalIndicador.Sector.Nombre,
+                    UnidadNombre = objetivoTransversalIndicador.Unidad.Nombre,
+                    Descripcion = string.Format("{0}.- {1}", objetivoTransversalIndicador.ObjetivoTransversal.Numero, objetivoTransversalIndicador.ObjetivoTransversal.Descripcion)
+                }, JsonRequestBehavior.AllowGet);
+            }
+
+            return this.Json("500", JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]
+        [HttpGet]
+        [RecursoCurricular.Web.Authorization(ActionType = new RecursoCurricular.Web.ActionType[] { RecursoCurricular.Web.ActionType.Delete }, Root = "ObjetivoTransversales", Area = Area)]
+        public JsonResult DeleteObjetivoTransversalIndicador(string tipoEducacionCodigo, string gradoCodigo, string sectorId, string unidadId, string objetivoTransversalId, string indicadorId)
+        {
+            int t;
+            int g;
+            Guid s;
+            Guid u;
+            Guid o;
+            Guid i;
+
+            if (int.TryParse(tipoEducacionCodigo, out t) && int.TryParse(gradoCodigo, out g) && Guid.TryParse(sectorId, out s) && Guid.TryParse(unidadId, out u) && Guid.TryParse(objetivoTransversalId, out o) && Guid.TryParse(indicadorId, out i) && t > 0 && g > 0)
+            {
+                RecursoCurricular.RecursosCurriculares.ObjetivoTransversalIndicador objetivoTransversalIndicador = RecursoCurricular.RecursosCurriculares.ObjetivoTransversalIndicador.Get(this.CurrentAnio.Numero, t, g, s, u, o, i);
+
+                using (RecursoCurricular.RecursosCurriculares.Context context = new RecursoCurricular.RecursosCurriculares.Context())
+                {
+                    objetivoTransversalIndicador.Delete(context);
+
+                    context.SubmitChanges();
+                }
+
+                return this.Json("200", JsonRequestBehavior.AllowGet);
+            }
+
+            return this.Json("500", JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]
         [HttpGet]
         public JsonResult GetObjetivoTransversalIndicadores(string tipoEducacionCodigo, string gradoCodigo, string sectorId, string unidadId, string objetivoTransversalId)
         {
@@ -218,8 +349,7 @@ namespace RecursoCurricular.Web.UI.Areas.RecursosCurriculares.Controllers
 
             if (int.TryParse(tipoEducacionCodigo, out t) && int.TryParse(gradoCodigo, out g) && Guid.TryParse(sectorId, out s) && Guid.TryParse(unidadId, out u) && Guid.TryParse(objetivoTransversalId, out o) && t > 0 && g > 0)
             {
-                //RecursoCurricular.RecursosCurriculares.ObjetivoTransversal objetivoTransversal = RecursoCurricular.RecursosCurriculares.ObjetivoTransversal.Get(this.CurrentAnio.Numero, t, g, s, u, o);
-                RecursoCurricular.RecursosCurriculares.ObjetivoTransversal objetivoTransversal = RecursoCurricular.RecursosCurriculares.ObjetivoTransversal.Get(2018, t, g, s, u, o);
+                RecursoCurricular.RecursosCurriculares.ObjetivoTransversal objetivoTransversal = RecursoCurricular.RecursosCurriculares.ObjetivoTransversal.Get(this.CurrentAnio.Numero, t, g, s, u, o);
 
                 RecursoCurricular.Web.UI.Areas.RecursosCurriculares.Models.ObjetivoTransversal.Indicadores indicadores = new RecursoCurricular.Web.UI.Areas.RecursosCurriculares.Models.ObjetivoTransversal.Indicadores();
 

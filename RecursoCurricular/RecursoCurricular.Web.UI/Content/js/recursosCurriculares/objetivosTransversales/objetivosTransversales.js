@@ -148,34 +148,29 @@
 
         e.preventDefault();
 
-        $.getJSON("/RecursosCurriculares/AprendizajeEsperado/EditAprendizaje/" + $("#tipoEducacion").val() + "/" + $('#grado').val() + "/" + $('#sector').val() + "/" + $(this).attr('data-value'), function (data) {
+        $.getJSON("/RecursosCurriculares/ObjetivoTransversal/EditObjetivoTransversal/" + $("#tipoEducacion").val() + "/" + $('#grado').val() + "/" + $('#sector').val() + "/" + $('#unidad').val() + "/" + $(this).attr('data-value'), function (data) {
 
             if (data === "500") {
 
-                swal("Error!", "Existen problemas al editar el aprendizaje, por favor refresque el navegador y reintente", "error");
+                swal("Error!", "Existen problemas al editar el objetivo, por favor refresque el navegador y reintente", "error");
             }
             else {
 
-                $(":ui-fancytree").fancytree("destroy");
-
-                $('#aprendizajeId').val(data.Id);
-                $('#aprendizajeTipoEducacion').val(data.TipoEducacionNombre);
-                $('#aprendizajeGrado').val(data.GradoNombre);
-                $('#aprendizajeSector').val(data.SectorNombre);
-                $('#aprendizajeNumero').val(data.Numero);
-                $('#aprendizajeDescripcion').val(data.Descripcion);
+                $('#objetivoId').val(data.Id);
+                $('#objetivoTipoEducacion').val(data.TipoEducacionNombre);
+                $('#objetivoGrado').val(data.GradoNombre);
+                $('#objetivoSector').val(data.SectorNombre);
+                $('#objetivoUnidad').val(data.UnidadNombre);
+                $('#objetivoNumero').val(data.Numero);
+                $('#objetivoDescripcion').val(data.Descripcion);
 
                 tableIndicador = gridViewIndicador();
-
-                treeContenidos(contenidosId);
-
-                treeObjetivosVerticales(objetivosVerticalesId);
 
                 $('#indicadorForm').show(500);
 
                 $('#form').hide(500);
 
-                $('#aprendizajeForm').show(500);
+                $('#objetivoForm').show(500);
             }
         });
     })
@@ -184,13 +179,11 @@
 
         e.preventDefault();
 
-        e.preventDefault();
-
         var id = $(this).attr('data-value');
 
         swal({
             title: "¿Esta seguro?",
-            text: "Se eliminará el aprendizaje",
+            text: "Se eliminará el objetivo transversal",
             type: "warning",
             showCancelButton: true,
             cancelButtonText: "Cancelar",
@@ -202,23 +195,23 @@
 
                 $.ajax({
                     type: 'GET',
-                    url: '/RecursosCurriculares/AprendizajeEsperado/DeleteAprendizaje/' + $("#tipoEducacion").val() + "/" + $('#grado').val() + "/" + $('#sector').val() + "/" + id,
+                    url: '/RecursosCurriculares/ObjetivoTransversal/DeleteObjetivoTransversal/' + $("#tipoEducacion").val() + "/" + $('#grado').val() + "/" + $('#sector').val() + "/" + $('#unidad').val() + "/" + id,
                     success: function (data) {
 
                         if (data === "200") {
 
-                            tableAprendizaje.ajax.reload();
+                            tableObjetivo.ajax.reload();
 
-                            swal("Eliminado!", "El aprendizaje fue eliminado de forma correcta", "success");
+                            swal("Eliminado!", "El objetivo transversal fue eliminado de forma correcta", "success");
                         }
                         else {
 
-                            swal("Error!", "El aprendizaje no puede ser eliminado", "error");
+                            swal("Error!", "El objetivo transversal no puede ser eliminado", "error");
                         }
                     },
                     error: function (data) {
 
-                        swal("Error!", "El aprendizaje no puede ser eliminado", "error");
+                        swal("Error!", "El objetivo transversal no puede ser eliminado", "error");
                     }
                 });
             });
@@ -228,7 +221,7 @@
 
         e.preventDefault();
 
-        $.getJSON("/RecursosCurriculares/AprendizajeEsperado/EditIndicador/" + $("#tipoEducacion").val() + "/" + $('#grado').val() + "/" + $('#sector').val() + "/" + $('#aprendizajeId').val() + "/" + $(this).attr('data-value'), function (data) {
+        $.getJSON("/RecursosCurriculares/ObjetivoTransversal/EditObjetivoTransversalIndicador/" + $("#tipoEducacion").val() + "/" + $('#grado').val() + "/" + $('#sector').val() + "/" + $('#unidad').val() + "/" + $('#objetivoId').val() + "/" + $(this).attr('data-value'), function (data) {
 
             if (data === "500") {
 
@@ -240,9 +233,9 @@
                 $('#tipoEducacionIndicadorCodigo').val(data.TipoEducacionNombre);
                 $('#gradoIndicadorCodigo').val(data.GradoNombre);
                 $('#sectorIndicadorId').val(data.SectorNombre);
-                $('#aprendizajeIndicadorNumero').val(data.IndicadorItem.Numero);
-                $('#aprendizajeIndicadorDescripcion').val(data.Descripcion);
-                $('#aprendizajeIndicadorCategoria').val(data.IndicadorItem.CategoriaCodigo);
+                $('#unidadIndicadorId').val(data.UnidadNombre);
+                $('#objetivoIndicadorNumero').val(data.IndicadorItem.Numero);
+                $('#objetivoIndicadorDescripcion').val(data.Descripcion);
                 $('#indicadorDescripcion').val(data.IndicadorItem.Descripcion);
 
                 popUp();
@@ -270,10 +263,12 @@
 
                 $.ajax({
                     type: 'GET',
-                    url: '/RecursosCurriculares/AprendizajeEsperado/DeleteIndicador/' + $("#tipoEducacion").val() + "/" + $('#grado').val() + "/" + $('#sector').val() + "/" + $('#aprendizajeId').val() + "/" + id,
+                    url: '/RecursosCurriculares/ObjetivoTransversal/DeleteObjetivoTransversalIndicador/' + $("#tipoEducacion").val() + "/" + $('#grado').val() + "/" + $('#sector').val() + "/" + $('#unidad').val() + "/" + $('#objetivoId').val() + "/" + id,
                     success: function (data) {
 
                         if (data === "200") {
+
+                            tableObjetivo.ajax.reload();
 
                             tableIndicador.ajax.reload();
 
@@ -338,6 +333,8 @@
 
                         $('#indicadorForm').show();
 
+                        tableObjetivo.ajax.reload();
+
                         swal("Listo!", "Su información fue guardada correctamente", "success");
                     }
                     else {
@@ -400,6 +397,8 @@
 
                     if (data === "200") {
 
+                        tableObjetivo.ajax.reload();
+
                         tableIndicador.ajax.reload();
 
                         swal("Listo!", "Su información fue guardada correctamente", "success");
@@ -423,7 +422,7 @@
 
         $('#form').show(500);
 
-        $('#aprendizajeForm').hide(500);
+        $('#objetivoForm').hide(500);
 
         $('#indicadorForm').hide(500);
     })
