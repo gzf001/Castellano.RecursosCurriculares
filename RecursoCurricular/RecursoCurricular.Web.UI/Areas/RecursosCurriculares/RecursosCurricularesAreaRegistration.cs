@@ -173,6 +173,40 @@ namespace RecursoCurricular.Web.UI.Areas.RecursosCurriculares
                );
 
             #endregion
+
+            #region Unidad
+
+            context.MapRoute(
+                   name: "GetUnidadesRecursoCurricular",
+                   url: "RecursosCurriculares/Unidad/GetUnidades/{tipoEducacionCodigo}/{gradoCodigo}/{sectorId}",
+                   defaults: new { area = "RecursosCurriculares", controller = "Unidad", action = "GetUnidades" }
+               );
+
+            context.MapRoute(
+                   name: "GetAddUnidadRecursoCurricular",
+                   url: "RecursosCurriculares/Unidad/AddUnidad/{tipoEducacionCodigo}/{gradoCodigo}/{sectorId}",
+                   defaults: new { area = "RecursosCurriculares", controller = "Unidad", action = "AddUnidad" }
+               );
+
+            context.MapRoute(
+                   name: "GetEditUnidadRecursoCurricular",
+                   url: "RecursosCurriculares/Unidad/EditUnidad/{tipoEducacionCodigo}/{gradoCodigo}/{sectorId}/{unidadId}",
+                   defaults: new { area = "RecursosCurriculares", controller = "Unidad", action = "EditUnidad" }
+               );
+
+            context.MapRoute(
+                   name: "GetDeleteUnidadRecursoCurricular",
+                   url: "RecursosCurriculares/Unidad/DeleteUnidad/{tipoEducacionCodigo}/{gradoCodigo}/{sectorId}/{unidadId}",
+                   defaults: new { area = "RecursosCurriculares", controller = "Unidad", action = "DeleteUnidad" }
+               );
+
+            context.MapRoute(
+                   name: "GetUnidadHabilidadesRecursoCurricular",
+                   url: "RecursosCurriculares/Unidad/GetAprendizajes/{unidadId}/{tipoEducacionCodigo}/{gradoCodigo}/{sectorId}",
+                   defaults: new { area = "RecursosCurriculares", controller = "Unidad", action = "GetAprendizajes" }
+               );
+
+            #endregion
         }
     }
 }

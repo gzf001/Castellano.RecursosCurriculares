@@ -272,11 +272,13 @@ namespace RecursoCurricular.Web.UI.App_Start
             ScriptBundle contenidos = new ScriptBundle("~/js/contenidos");
             ScriptBundle objetivosVerticales = new ScriptBundle("~/js/objetivosVerticales");
             ScriptBundle aprendizajesEsperados = new ScriptBundle("~/js/aprendizajesEsperados");
+            ScriptBundle unidadesRecursosCurriculares = new ScriptBundle("~/js/unidadesRc");
 
             bundles.Add(ejeRecursosCurriculares.Include("~/Content/js/recursosCurriculares/ejes/ejes.js"));
             bundles.Add(contenidos.Include("~/Content/js/recursosCurriculares/contenidos/contenidos.js"));
             bundles.Add(objetivosVerticales.Include("~/Content/js/recursosCurriculares/objetivosVerticales/objetivosVerticales.js"));
             bundles.Add(aprendizajesEsperados.Include("~/Content/js/recursosCurriculares/aprendizajesEsperados/aprendizajesEsperados.js"));
+            bundles.Add(unidadesRecursosCurriculares.Include("~/Content/js/recursosCurriculares/unidades/unidades.js"));
 
             #endregion
 

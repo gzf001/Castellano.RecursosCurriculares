@@ -191,10 +191,12 @@
     <Compile Include="Areas\RecursosCurriculares\Controllers\EjeController.cs" />
     <Compile Include="Areas\RecursosCurriculares\Controllers\HomeController.cs" />
     <Compile Include="Areas\RecursosCurriculares\Controllers\ObjetivoVerticalController.cs" />
+    <Compile Include="Areas\RecursosCurriculares\Controllers\UnidadController.cs" />
     <Compile Include="Areas\RecursosCurriculares\Models\AprendizajeEsperado.cs" />
     <Compile Include="Areas\RecursosCurriculares\Models\Contenido.cs" />
     <Compile Include="Areas\RecursosCurriculares\Models\Eje.cs" />
     <Compile Include="Areas\RecursosCurriculares\Models\ObjetivoVertical.cs" />
+    <Compile Include="Areas\RecursosCurriculares\Models\Unidad.cs" />
     <Compile Include="Areas\RecursosCurriculares\RecursosCurricularesAreaRegistration.cs" />
     <Compile Include="Areas\Tic\Controllers\DimensionController.cs" />
     <Compile Include="Areas\Tic\Controllers\HabilidadController.cs" />
@@ -210,6 +212,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\JsonClass\Actitud.cs" />
+    <Compile Include="Helpers\JsonClass\Aprendizaje.cs" />
     <Compile Include="Helpers\JsonClass\Base.cs" />
     <Compile Include="Helpers\JsonClass\Conocimiento.cs" />
     <Compile Include="Helpers\JsonClass\Contenido.cs" />
@@ -690,6 +693,7 @@
     <Content Include="Content\js\recursosCurriculares\contenidos\contenidos.js" />
     <Content Include="Content\js\recursosCurriculares\ejes\ejes.js" />
     <Content Include="Content\js\recursosCurriculares\objetivosVerticales\objetivosVerticales.js" />
+    <Content Include="Content\js\recursosCurriculares\unidades\unidades.js" />
     <Content Include="Content\js\tooltipster-master\css\plugins\tooltipster\sideTip\themes\tooltipster-sideTip-borderless.min.css" />
     <Content Include="Content\js\tooltipster-master\css\plugins\tooltipster\sideTip\themes\tooltipster-sideTip-light.min.css" />
     <Content Include="Content\js\tooltipster-master\css\plugins\tooltipster\sideTip\themes\tooltipster-sideTip-noir.min.css" />
@@ -3715,6 +3719,7 @@
     <Content Include="Areas\RecursosCurriculares\Views\Home\Index.cshtml" />
     <Content Include="Areas\RecursosCurriculares\Views\ObjetivoVertical\ObjetivosVerticales.cshtml" />
     <Content Include="Areas\RecursosCurriculares\Views\AprendizajeEsperado\AprendizajesEsperados.cshtml" />
+    <Content Include="Areas\RecursosCurriculares\Views\Unidad\Unidades.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
