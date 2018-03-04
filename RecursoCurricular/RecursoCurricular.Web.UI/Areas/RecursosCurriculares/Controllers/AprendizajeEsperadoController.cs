@@ -38,7 +38,7 @@ namespace RecursoCurricular.Web.UI.Areas.RecursosCurriculares.Controllers
                 SectorId = model.SectorId,
                 Id = model.Id,
                 Numero = model.Numero,
-                Descripcion = model.Descripcion
+                Descripcion = model.Descripcion.Trim()
             };
 
             RecursoCurricular.Result resultado = RecursoCurricular.RecursosCurriculares.Aprendizaje.Save(aprendizaje, model.Contenidos, model.ObjetivosVerticales);
@@ -211,7 +211,7 @@ namespace RecursoCurricular.Web.UI.Areas.RecursosCurriculares.Controllers
                     Id = model.Id,
                     CategoriaCodigo = model.CategoriaCodigo > -1 ? model.CategoriaCodigo.Value : default(int),
                     Numero = model.Numero,
-                    Descripcion = model.Descripcion
+                    Descripcion = model.Descripcion.Trim()
                 }.Save(context);
 
                 context.SubmitChanges();
@@ -328,7 +328,7 @@ namespace RecursoCurricular.Web.UI.Areas.RecursosCurriculares.Controllers
 
             if (int.TryParse(tipoEducacionCodigo, out t) && int.TryParse(gradoCodigo, out g) && Guid.TryParse(sectorId, out s) && Guid.TryParse(aprendizajeId, out a) && t > 0 && g > 0)
             {
-                RecursoCurricular.RecursosCurriculares.Aprendizaje aprendizaje = RecursoCurricular.RecursosCurriculares.Aprendizaje.Get(2018, t, g, s, a);
+                RecursoCurricular.RecursosCurriculares.Aprendizaje aprendizaje = RecursoCurricular.RecursosCurriculares.Aprendizaje.Get(this.CurrentAnio.Numero, t, g, s, a);
 
                 RecursoCurricular.Web.UI.Areas.RecursosCurriculares.Models.AprendizajeEsperado.Indicadores indicadores = new RecursoCurricular.Web.UI.Areas.RecursosCurriculares.Models.AprendizajeEsperado.Indicadores();
 

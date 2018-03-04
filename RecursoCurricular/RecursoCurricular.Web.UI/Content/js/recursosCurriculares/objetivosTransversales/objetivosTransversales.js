@@ -1,12 +1,9 @@
 ﻿jQuery(document).ready(function () {
 
-    var contenidosId = [];
-    var objetivosVerticalesId = [];
-
-    var tableAprendizaje;
+    var tableObjetivo;
     var tableIndicador;
 
-    $('#aprendizajeForm').hide();
+    $('#objetivoForm').hide();
 
     $('#indicadorForm').hide();
 
@@ -30,7 +27,7 @@
             $("#grado").html(items);
         });
 
-        gridViewAprendizaje();
+        gridViewObjetivo();
     })
 
     $('#grado').change(function (e) {
@@ -53,53 +50,70 @@
             });
         }
 
-        gridViewAprendizaje();
+        gridViewObjetivo();
     })
 
     $('#sector').change(function (e) {
 
         e.preventDefault();
 
-        tableAprendizaje = gridViewAprendizaje();
+        $("#unidad").html("<option value='-1'>[Seleccione]</option>");
+
+        if ($('#sector').val() !== '-1') {
+
+            var tipoEducacion = $('#tipoEducacion').val();
+            var grado = $('#grado').val();
+            var sector = $(this).val();
+
+            $.getJSON('/RecursosCurriculares/Home/Unidades/' + tipoEducacion + "/" + grado + "/" + sector, function (data) {
+
+                var items = "";
+
+                $.each(data, function (i, unidad) {
+                    items += "<option value='" + unidad.Value + "'>" + unidad.Text + "</option>";
+                });
+
+                $("#unidad").html(items);
+            });
+        }
+
+        gridViewObjetivo();
     })
 
-    $('#accordion').accordion({
-        collapsible: true,
-        heightStyle: "content"
-    });
-
-    $(document).on('click', 'a[id=addAprendizaje]', function (e) {
+    $('#unidad').change(function (e) {
 
         e.preventDefault();
 
-        $.getJSON("/RecursosCurriculares/AprendizajeEsperado/AddAprendizaje/" + $("#tipoEducacion").val() + "/" + $('#grado').val() + "/" + $('#sector').val(), function (data) {
+        tableObjetivo = gridViewObjetivo();
+    })
+
+    $(document).on('click', 'a[id=addObjetivo]', function (e) {
+
+        e.preventDefault();
+
+        $.getJSON("/RecursosCurriculares/ObjetivoTransversal/AddObjetivoTransversal/" + $("#tipoEducacion").val() + "/" + $('#grado').val() + "/" + $('#sector').val() + "/" + $('#unidad').val(), function (data) {
 
             if (data === "500") {
 
-                swal("Error!", "Seleccione el sector", "error");
+                swal("Error!", "Seleccione la unidad", "error");
             }
             else {
 
-                $(":ui-fancytree").fancytree("destroy");
-
-                $('#aprendizajeId').val(data.Id);
-                $('#aprendizajeTipoEducacion').val(data.TipoEducacionNombre);
-                $('#aprendizajeGrado').val(data.GradoNombre);
-                $('#aprendizajeSector').val(data.SectorNombre);
-                $('#aprendizajeNumero').val(data.Numero);
-                $('#aprendizajeDescripcion').val(data.Descripcion);
+                $('#objetivoId').val(data.Id);
+                $('#objetivoTipoEducacion').val(data.TipoEducacionNombre);
+                $('#objetivoGrado').val(data.GradoNombre);
+                $('#objetivoSector').val(data.SectorNombre);
+                $('#objetivoUnidad').val(data.UnidadNombre);
+                $('#objetivoNumero').val(data.Numero);
+                $('#objetivoDescripcion').val(data.Descripcion);
 
                 tableIndicador = gridViewIndicador();
-
-                treeContenidos(contenidosId);
-
-                treeObjetivosVerticales(objetivosVerticalesId);
 
                 $('#indicadorForm').hide();
 
                 $('#form').hide(500);
 
-                $('#aprendizajeForm').show(500);
+                $('#objetivoForm').show(500);
             }
         })
     })
@@ -108,20 +122,21 @@
 
         e.preventDefault();
 
-        $.getJSON("/RecursosCurriculares/AprendizajeEsperado/AddIndicador/" + $("#tipoEducacion").val() + "/" + $('#grado').val() + "/" + $('#sector').val() + "/" + $('#aprendizajeId').val(), function (data) {
+        $.getJSON("/RecursosCurriculares/ObjetivoTransversal/AddObjetivoTransversalIndicador/" + $("#tipoEducacion").val() + "/" + $('#grado').val() + "/" + $('#sector').val() + "/" + $('#unidad').val() + "/" + $('#objetivoId').val(), function (data) {
 
             if (data === "500") {
 
                 swal("Error!", "Existen problemas al agregar un nuevo indicador, por favor refresque el navegador y reintente", "error");
             }
             else {
+
                 $('#indicadorId').val(data.IndicadorItem.Id)
                 $('#tipoEducacionIndicadorCodigo').val(data.TipoEducacionNombre);
                 $('#gradoIndicadorCodigo').val(data.GradoNombre);
                 $('#sectorIndicadorId').val(data.SectorNombre);
-                $('#aprendizajeIndicadorNumero').val(data.IndicadorItem.Numero);
-                $('#aprendizajeIndicadorDescripcion').val(data.Descripcion);
-                $('#aprendizajeIndicadorCategoria').val('-1');
+                $('#unidadIndicadorId').val(data.UnidadNombre);
+                $('#objetivoIndicadorNumero').val(data.IndicadorItem.Numero);
+                $('#objetivoIndicadorDescripcion').val(data.Descripcion);
                 $('#indicadorDescripcion').val(data.IndicadorItem.Descripcion);
 
                 popUp();
@@ -129,7 +144,7 @@
         });
     })
 
-    $(document).on('click', 'a[id=editAprendizaje]', function (e) {
+    $(document).on('click', 'a[id=editObjetivo]', function (e) {
 
         e.preventDefault();
 
@@ -165,7 +180,7 @@
         });
     })
 
-    $(document).on('click', 'a[id=deleteAprendizaje]', function (e) {
+    $(document).on('click', 'a[id=deleteObjetivo]', function (e) {
 
         e.preventDefault();
 
@@ -277,7 +292,7 @@
             });
     })
 
-    var validAprendizaje = $('#formAprendizaje').validate({
+    var validObjetivo = $('#formObjetivo').validate({
 
         errorClass: 'state-error',
         validClass: 'state-success',
@@ -289,7 +304,7 @@
         },
         messages: {
             "Descripcion": {
-                required: 'Ingrese la descripción del aprendizaje'
+                required: 'Ingrese la descripción del objetivo transversal'
             }
         },
         highlight: function (element, errorClass, validClass) {
@@ -303,55 +318,20 @@
         },
         submitHandler: function (form) {
 
-            var contenidos = [];
-            var objetivosVerticales = [];
-
-            var aprendizaje = {
+            var objetivo = {
                 tipoEducacionCodigo: $('#tipoEducacion').val(),
                 gradoCodigo: $('#grado').val(),
                 sectorId: $('#sector').val(),
-                id: $('#aprendizajeId').val(),
-                numero: $('#aprendizajeNumero').val(),
-                descripcion: $('#aprendizajeDescripcion').val()
+                unidadId: $('#unidad').val(),
+                id: $('#objetivoId').val(),
+                numero: $('#objetivoNumero').val(),
+                descripcion: $('#objetivoDescripcion').val()
             };
-
-            $(contenidosId).each(function (i) {
-
-                var ejeId = contenidosId[i].substring(0, 36);
-                var contenidoId = contenidosId[i].substring(36, 72);
-
-                var aprendizajeContenido = {
-                    tipoEducacionCodigo: aprendizaje.tipoEducacionCodigo,
-                    gradoCodigo: aprendizaje.gradoCodigo,
-                    sectorId: aprendizaje.sectorId,
-                    aprendizajeId: aprendizaje.id,
-                    ejeId: ejeId,
-                    contenidoId: contenidoId
-                };
-
-                contenidos.push(aprendizajeContenido);
-            });
-
-            $(objetivosVerticalesId).each(function (i) {
-
-                var aprendizajeObjetivoVertical = {
-                    tipoEducacionCodigo: aprendizaje.tipoEducacionCodigo,
-                    gradoCodigo: aprendizaje.gradoCodigo,
-                    sectorId: aprendizaje.sectorId,
-                    aprendizajeId: aprendizaje.id,
-                    objetivoVerticalId: objetivosVerticalesId[i]
-                };
-
-                objetivosVerticales.push(aprendizajeObjetivoVertical);
-            });
-
-            aprendizaje.contenidos = contenidos;
-            aprendizaje.objetivosVerticales = objetivosVerticales;
 
             $.ajax({
                 type: "POST",
-                url: "/RecursosCurriculares/AprendizajeEsperado/AprendizajesEsperados",
-                data: aprendizaje,
+                url: "/RecursosCurriculares/ObjetivoTransversal/ObjetivoTransversales",
+                data: objetivo,
                 success: function (data) {
 
                     if (data === "200") {
@@ -403,16 +383,16 @@
                 tipoEducacionCodigo: $('#tipoEducacion').val(),
                 gradoCodigo: $('#grado').val(),
                 sectorId: $('#sector').val(),
-                aprendizajeId: $('#aprendizajeId').val(),
+                unidadId: $('#unidad').val(),
+                objetivoTransversalId: $('#objetivoId').val(),
                 id: $('#indicadorId').val(),
-                categoriaCodigo: $('#aprendizajeIndicadorCategoria').val(),
-                numero: $('#aprendizajeIndicadorNumero').val(),
+                numero: $('#objetivoIndicadorNumero').val(),
                 descripcion: $('#indicadorDescripcion').val()
             };
 
             $.ajax({
                 type: "POST",
-                url: "/RecursosCurriculares/AprendizajeEsperado/Indicadores",
+                url: "/RecursosCurriculares/ObjetivoTransversal/ObjetivoTransversalIndicador",
                 data: obj,
                 success: function (data) {
 
@@ -456,16 +436,14 @@
     })
 })
 
-function gridViewAprendizaje() {
+function gridViewObjetivo() {
 
-    var table = $('#gridViewAprendizaje').DataTable({
-        "ajax": "/RecursosCurriculares/AprendizajeEsperado/GetAprendizajesEsperados/" + $('#tipoEducacion').val() + "/" + $('#grado').val() + "/" + $("#sector").val(),
+    var table = $('#gridViewObjetivo').DataTable({
+        "ajax": "/RecursosCurriculares/ObjetivoTransversal/GetObjetivoTransversales/" + $('#tipoEducacion').val() + "/" + $('#grado').val() + "/" + $("#sector").val() + "/" + $("#unidad").val(),
         "columns": [
             { "data": "Numero" },
             { "data": "Descripcion" },
             { "data": "DetalleIndicadores" },
-            { "data": "CMO" },
-            { "data": "OFV" },
             { "data": "Accion" }
         ],
         "destroy": true,
@@ -490,16 +468,6 @@ function gridViewAprendizaje() {
                 "targets": [3],
                 "searchable": false,
                 "sortable": false
-            },
-            {
-                "targets": [4],
-                "searchable": false,
-                "sortable": false
-            },
-            {
-                "targets": [5],
-                "searchable": false,
-                "sortable": false
             }
         ],
         "iDisplayLength": 5,
@@ -509,11 +477,11 @@ function gridViewAprendizaje() {
         ],
         "fnInitComplete": function (oSettings, json) {
 
-            if ($('#sector').val() !== "-1") {
+            if ($('#unidad').val() !== "-1") {
 
-                if (!$('#addAprendizaje').length) {
+                if (!$('#addObjetivo').length) {
 
-                    $("#gridViewAprendizaje_length").append('<br /><a class="btn btn-success btn-xs" id="addAprendizaje" href="#" title="Agregar aprendizaje" typebutton="Add"><i class="fa fa-plus"></i></a>');
+                    $("#gridViewObjetivo_length").append('<br /><a class="btn btn-success btn-xs" id="addObjetivo" href="#" title="Agregar objetivo transversal" typebutton="Add"><i class="fa fa-plus"></i></a>');
                 }
 
             }
@@ -527,11 +495,10 @@ function gridViewAprendizaje() {
 function gridViewIndicador() {
 
     var table = $('#gridViewIndicador').DataTable({
-        "ajax": "/RecursosCurriculares/AprendizajeEsperado/GetAprendizajesIndicadores/" + $('#tipoEducacion').val() + "/" + $('#grado').val() + "/" + $("#sector").val() + "/" + $("#aprendizajeId").val(),
+        "ajax": "/RecursosCurriculares/ObjetivoTransversal/GetObjetivoTransversalIndicadores/" + $('#tipoEducacion').val() + "/" + $('#grado').val() + "/" + $("#sector").val() + "/" + $("#unidad").val() + "/" + $("#objetivoId").val(),
         "columns": [
             { "data": "Numero" },
             { "data": "Descripcion" },
-            { "data": "Habilidad" },
             { "data": "Accion" }
         ],
         "destroy": true,
@@ -539,29 +506,24 @@ function gridViewIndicador() {
         "columnDefs": [
             {
                 "targets": [0],
-                "searchable": false,
+                "searchable": true,
                 "sortable": true
             },
             {
                 "targets": [1],
-                "searchable": true,
-                "sortable": true
+                "searchable": false,
+                "sortable": false
             },
             {
                 "targets": [2],
-                "searchable": true,
-                "sortable": true
-            },
-            {
-                "targets": [3],
                 "searchable": false,
                 "sortable": false
             }
         ],
         "iDisplayLength": 5,
         "aLengthMenu": [
-            [10, 15, 20, 25, 30, -1],
-            [10, 15, 20, 25, 30, "All"]
+            [5, 10, 15, 20, 25, 30, -1],
+            [5, 10, 15, 20, 25, 30, "All"]
         ],
         "fnInitComplete": function (oSettings, json) {
 
@@ -573,150 +535,6 @@ function gridViewIndicador() {
     });
 
     return table;
-}
-
-function treeContenidos(contenidosId) {
-
-    $("#contenidos").fancytree({
-        extensions: ["childcounter"],
-        source: $.ajax({
-            type: "GET",
-            url: "/RecursosCurriculares/AprendizajeEsperado/GetAprendizajeContenidos/" + $('#tipoEducacion').val() + '/' + $('#grado').val() + '/' + $('#sector').val() + '/' + $('#aprendizajeId').val(),
-            success: function (data) {
-
-                contenidosId.length = 0;
-
-                $(data).each(function (i, eje) {
-
-                    $(eje.children).each(function (j, contenido) {
-
-                        if (contenido.selected) {
-
-                            contenidosId.push(contenido.key);
-                        }
-                    });
-                });
-            },
-            error: function (data) {
-
-                swal("Error!", "Se ha producido un error al cargar los contenidos", "error");
-            }
-        }),
-        selectMode: 3,
-        checkbox: true, // Show checkboxes.
-        clickFolderMode: 2, // 1:activate, 2:expand, 3:activate and expand, 4:activate (dblclick expands)
-        select: function (event, data) {
-
-            var contenidoId;
-            var index;
-
-            if (data.node.key === 'eje') {
-
-                if (data.node.selected) {
-
-                    $(data.node.children).each(function (i) {
-
-                        contenidoId = data.node.children[i].key;
-
-                        index = jQuery.inArray(contenidoId, contenidosId);
-
-                        if (index === -1) {
-
-                            contenidosId.push(contenidoId);
-                        }
-                    });
-                }
-                else {
-
-                    $(data.node.children).each(function (i) {
-
-                        contenidoId = data.node.children[i].key;
-
-                        index = jQuery.inArray(contenidoId, contenidosId);
-
-                        if (index !== -1) {
-
-                            contenidosId.splice(index, 1);
-                        }
-                    });
-                }
-            }
-            else {
-
-                contenidoId = data.node.key;
-
-                index = jQuery.inArray(contenidoId, contenidosId);
-
-                if (data.node.selected) {
-
-                    if (index === -1) {
-
-                        contenidosId.push(contenidoId);
-                    }
-                } else {
-
-                    contenidosId.splice(index, 1);
-                }
-            }
-        },
-        childcounter: {
-            deep: true,
-            hideZeros: true,
-            hideExpanded: true
-        }
-    })
-}
-
-function treeObjetivosVerticales(objetivosVerticalesId) {
-
-    $("#objetivosVerticales").fancytree({
-        extensions: ["childcounter"],
-        source: $.ajax({
-            type: "GET",
-            url: "/RecursosCurriculares/AprendizajeEsperado/GetAprendizajeObjetivosVerticales/" + $('#tipoEducacion').val() + '/' + $('#grado').val() + '/' + $('#sector').val() + '/' + $('#aprendizajeId').val(),
-            success: function (data) {
-
-                objetivosVerticalesId.length = 0;
-
-                $(data).each(function (i, objetivoVertical) {
-
-                    if (objetivoVertical.selected) {
-
-                        objetivosVerticalesId.push(objetivoVertical.key);
-                    }
-                });
-            },
-            error: function (data) {
-
-                swal("Error!", "Se ha producido un error al cargar los objetivos verticales", "error");
-            }
-        }),
-        selectMode: 3,
-        checkbox: true, // Show checkboxes.
-        clickFolderMode: 2, // 1:activate, 2:expand, 3:activate and expand, 4:activate (dblclick expands)
-        select: function (event, data) {
-
-            var objetivoVerticalId = data.node.key;
-
-            var index = jQuery.inArray(objetivoVerticalId, objetivosVerticalesId);
-
-            if (data.node.selected) {
-
-                if (index === -1) {
-
-                    objetivosVerticalesId.push(objetivoVerticalId);
-                }
-            } else {
-
-                objetivosVerticalesId.splice(index, 1);
-            }
-        },
-        childcounter: {
-            deep: true,
-            hideZeros: true,
-            hideExpanded: true
-        }
-    })
 }
 
 function popUp() {

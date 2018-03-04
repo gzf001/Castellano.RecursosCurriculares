@@ -206,6 +206,40 @@ namespace RecursoCurricular.Web.UI.Areas.RecursosCurriculares
                    defaults: new { area = "RecursosCurriculares", controller = "Unidad", action = "GetAprendizajes" }
                );
 
+            context.MapRoute(
+                   name: "GetUnidadesComboRecursosCurriculares",
+                   url: "RecursosCurriculares/Home/Unidades/{tipoEducacionCodigo}/{gradoCodigo}/{sectorId}",
+                   defaults: new { area = "RecursosCurriculares", controller = "Home", action = "Unidades" }
+               );
+
+            #endregion
+
+            #region ObjetivoTransversal
+
+            context.MapRoute(
+                   name: "GetObjetivoTransversales",
+                   url: "RecursosCurriculares/ObjetivoTransversal/GetObjetivoTransversales/{tipoEducacionCodigo}/{GradoCodigo}/{sectorId}/{unidadId}",
+                   defaults: new { area = "RecursosCurriculares", controller = "ObjetivoTransversal", action = "GetObjetivoTransversales" }
+               );
+
+            context.MapRoute(
+                   name: "AddObjetivoTransversal",
+                   url: "RecursosCurriculares/ObjetivoTransversal/AddObjetivoTransversal/{tipoEducacionCodigo}/{GradoCodigo}/{sectorId}/{unidadId}",
+                   defaults: new { area = "RecursosCurriculares", controller = "ObjetivoTransversal", action = "AddObjetivoTransversal" }
+               );
+
+            context.MapRoute(
+                   name: "AddObjetivoTransversalIndicador",
+                   url: "RecursosCurriculares/ObjetivoTransversal/AddObjetivoTransversalIndicador/{tipoEducacionCodigo}/{GradoCodigo}/{sectorId}/{unidadId}/{objetivoTransversalId}",
+                   defaults: new { area = "RecursosCurriculares", controller = "ObjetivoTransversal", action = "AddObjetivoTransversalIndicador" }
+               );
+
+            context.MapRoute(
+                   name: "GetObjetivoTransversalIndicadores",
+                   url: "RecursosCurriculares/ObjetivoTransversal/GetObjetivoTransversalIndicadores/{tipoEducacionCodigo}/{GradoCodigo}/{sectorId}/{unidadId}/{objetivoTransversalId}",
+                   defaults: new { area = "RecursosCurriculares", controller = "ObjetivoTransversal", action = "GetObjetivoTransversalIndicadores" }
+               );
+
             #endregion
         }
     }
