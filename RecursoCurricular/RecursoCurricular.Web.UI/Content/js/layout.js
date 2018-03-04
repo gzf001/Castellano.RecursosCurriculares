@@ -2,6 +2,14 @@
 
     function () {
 
+        $(".loader").hide();
+
+        $(document).ajaxStart(function () {
+            $(".loader").show();
+        }).ajaxStop(function () {
+            $(".loader").hide();
+        });
+
         $('.table').on('draw.dt', function () {
 
             $('a[title!=""]').tooltipster();
