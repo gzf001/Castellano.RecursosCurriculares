@@ -19,10 +19,16 @@ namespace RecursoCurricular.Web.UI.Models
             this.UserName = string.Format("{0} {1} {2}", usuario.Persona.Nombres, usuario.Persona.ApellidoPaterno, string.IsNullOrEmpty(usuario.Persona.ApellidoMaterno) ? usuario.Persona.ApellidoMaterno : string.Empty);
 
             this.Anio = perfilUsuario == null ? string.Empty : perfilUsuario.Valor;
+
+            string[] ruta = perfilUsuario.Url.Split('/');
+
+            this.Action = perfilUsuario == null ? "Administracion/Admin" : perfilUsuario.Url;
         }
 
         private string userName;
         private string anio;
+        private string action;
+        private string controller;
 
         public string UserName
         {
@@ -47,6 +53,18 @@ namespace RecursoCurricular.Web.UI.Models
             {
                 anio = value;
             }
+        }
+
+        public string Action
+        {
+            get;
+            set;
+        }
+
+        public string Controller
+        {
+            get;
+            set;
         }
     }
 }

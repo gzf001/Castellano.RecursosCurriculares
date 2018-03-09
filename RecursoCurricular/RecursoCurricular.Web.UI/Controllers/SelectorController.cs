@@ -35,8 +35,6 @@ namespace RecursoCurricular.Web.UI.Controllers
             }
 
             return this.Redirect(perfilUsuario.Url);
-
-            //return View();
         }
     }
 }

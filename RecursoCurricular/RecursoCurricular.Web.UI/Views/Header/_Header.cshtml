@@ -1,5 +1,25 @@
 ﻿@model RecursoCurricular.Web.UI.Models.PartialHeader
 
+@using RecursoCurricular.Helpers
+
+<div class="navbar-branding">
+    <span class="navbar-brand">
+        @Html.ActionImage("Index", "", "/Content/images/NetCoreIconoLogged.png")
+    </span>
+    <span id="toggle_sidemenu_l" class="ad ad-lines"></span>
+</div>
+<ul class="nav navbar-nav navbar-left">
+    <li>
+        <a class="sidebar-menu-toggle" href="#">
+            @*<span class="ad ad-ruby fs18"></span>*@
+        </a>
+    </li>
+    <li>
+        <a class="topbar-menu-toggle" href="#">
+            @*<span class="ad ad-wand fs16"></span>*@
+        </a>
+    </li>
+</ul>
 <ul class="nav navbar-nav navbar-right">
     <li>
          @Html.ActionLink(string.Format("Año: {0}", @Model.Anio), "Selector", "Selector", new { area = "" }, new { @class = "btn active btn-block text-white" })

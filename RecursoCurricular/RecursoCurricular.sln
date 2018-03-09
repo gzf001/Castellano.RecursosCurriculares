@@ -47,6 +47,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecursoCurricular.Helpers",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecursoCurricular.Web", "RecursoCurricular.Web\RecursoCurricular.Web.csproj", "{F7016762-0635-4EA2-8B16-044A161ECA9B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecursoCurricular.Api", "RecursoCurricular.Api\RecursoCurricular.Api.csproj", "{F433A3A4-FA6E-4140-B092-D70B43D2E087}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -89,6 +91,10 @@ Global
 		{F7016762-0635-4EA2-8B16-044A161ECA9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7016762-0635-4EA2-8B16-044A161ECA9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7016762-0635-4EA2-8B16-044A161ECA9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F433A3A4-FA6E-4140-B092-D70B43D2E087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F433A3A4-FA6E-4140-B092-D70B43D2E087}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F433A3A4-FA6E-4140-B092-D70B43D2E087}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F433A3A4-FA6E-4140-B092-D70B43D2E087}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -109,5 +115,6 @@ Global
 		{98D820C3-DD17-46C4-AFEF-A48220D9A18D} = {E47288E2-41EE-4DF0-A75A-875D18E6E021}
 		{644D997A-AD2E-4AE4-9F90-F6B1B1173FE3} = {BADDB3C1-7A3C-44FE-B0CA-F2CE2F031226}
 		{F7016762-0635-4EA2-8B16-044A161ECA9B} = {98D820C3-DD17-46C4-AFEF-A48220D9A18D}
+		{F433A3A4-FA6E-4140-B092-D70B43D2E087} = {CA394821-1577-4045-A8E2-51ED3C443E39}
 	EndGlobalSection
 EndGlobal

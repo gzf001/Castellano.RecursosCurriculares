@@ -81,8 +81,8 @@ namespace RecursoCurricular.Membresia
             string body = string.Empty;
 
             to = persona.Email.ToLower();
-            subject = "Información solicitada de sistemas NetCore";
-            body = "Estimado(a) " + persona.Nombre + ", hemos recibido una solicitud de recuperación de contraseña en la aplicación NetCore, por lo que le hacemos llegar los datos de acceso para el inicio de sesión." + System.Environment.NewLine;
+            subject = "Información solicitada del sistema de administración de recursos curriculares";
+            body = "Estimado(a) " + persona.Nombre + ", hemos recibido una solicitud de recuperación de contraseña en la aplicación de administración de recursos curriculares, por lo que le hacemos llegar los datos de acceso para el inicio de sesión." + System.Environment.NewLine;
             body += "R.U.N.: " + string.Format("{0}-{1}", cuerpo, digito) + System.Environment.NewLine;
             body += "Contraseña: " + Account.DecodePassword(usuario.Password) + System.Environment.NewLine;
             body += "Esperamos que la información le sea de utilidad." + System.Environment.NewLine;

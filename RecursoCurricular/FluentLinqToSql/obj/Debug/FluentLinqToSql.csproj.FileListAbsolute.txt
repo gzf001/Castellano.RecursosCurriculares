@@ -11,3 +11,4 @@ C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\FluentLinqToSql\b
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\FluentLinqToSql\bin\Debug\FluentLinqToSql.pdb
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\FluentLinqToSql\obj\Debug\FluentLinqToSql.dll
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\FluentLinqToSql\obj\Debug\FluentLinqToSql.pdb
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\FluentLinqToSql\obj\Debug\FluentLinqToSql.csprojResolveAssemblyReference.cache

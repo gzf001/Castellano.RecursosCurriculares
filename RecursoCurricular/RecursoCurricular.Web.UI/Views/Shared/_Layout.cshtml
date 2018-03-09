@@ -53,25 +53,7 @@
     <div id="main">
 
         @*-- Start: Header *@
-        <header class="navbar navbar-fixed-top">
-            <div class="navbar-branding">
-                <span class="navbar-brand">
-                    @Html.ActionImage("Index", "Administracion/Admin", "/Content/images/NetCoreIconoLogged.png")
-                </span>
-                <span id="toggle_sidemenu_l" class="ad ad-lines"></span>
-            </div>
-            <ul class="nav navbar-nav navbar-left">
-                <li>
-                    <a class="sidebar-menu-toggle" href="#">
-                        <span class="ad ad-ruby fs18"></span>
-                    </a>
-                </li>
-                <li>
-                    <a class="topbar-menu-toggle" href="#">
-                        <span class="ad ad-wand fs16"></span>
-                    </a>
-                </li>
-            </ul>
+        <header class="navbar navbar-fixed-top">            
             @Html.Partial("../Header/_Header", new RecursoCurricular.Web.UI.Models.PartialHeader(new Guid(this.User.Identity.Name)))
         </header>
         @*-- End: Header *@
