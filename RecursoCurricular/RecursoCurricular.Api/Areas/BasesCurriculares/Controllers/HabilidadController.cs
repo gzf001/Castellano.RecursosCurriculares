@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace RecursoCurricular.Api.Areas.BasesCurriculares.Controllers
 {
-    public class ActitudController : ApiController
+    public class HabilidadController : ApiController
     {
         [HttpGet]
         public RecursoCurricular.Api.Models.Result Actitud([FromUri]RecursoCurricular.Api.Areas.BasesCurriculares.Models.Parametro parametro)
@@ -23,13 +23,13 @@ namespace RecursoCurricular.Api.Areas.BasesCurriculares.Controllers
                 return result;
             }
 
-            RecursoCurricular.BaseCurricular.Actitud actitud = RecursoCurricular.BaseCurricular.Actitud.Get(parametro.TipoEducacionCodigo, parametro.AnioNumero, parametro.SectorId, parametro.Id);
+            RecursoCurricular.BaseCurricular.Habilidad habilidad = RecursoCurricular.BaseCurricular.Habilidad.Get(parametro.Id, parametro.TipoEducacionCodigo, parametro.AnioNumero, parametro.SectorId);
 
-            return new RecursoCurricular.Api.Areas.BasesCurriculares.Models.Actitud
+            return new RecursoCurricular.Api.Areas.BasesCurriculares.Models.Habilidad
             {
                 Status = "OK",
                 Message = "Correcto",
-                Item = actitud
+                Item = habilidad
             };
         }
 
@@ -53,9 +53,9 @@ namespace RecursoCurricular.Api.Areas.BasesCurriculares.Controllers
 
             RecursoCurricular.Educacion.Sector sector = RecursoCurricular.Educacion.Sector.Get(parametro.SectorId);
 
-            List<RecursoCurricular.BaseCurricular.Actitud> actitudes = RecursoCurricular.BaseCurricular.Actitud.GetAll(tipoEducacion, anio, sector);
+            List<RecursoCurricular.BaseCurricular.Habilidad> habilidades = RecursoCurricular.BaseCurricular.Habilidad.GetAll(anio, tipoEducacion, sector);
 
-            return new RecursoCurricular.Api.Areas.BasesCurriculares.Models.Actitud { Status = "OK", Message = "Correcto", Actitudes = actitudes };
+            return new RecursoCurricular.Api.Areas.BasesCurriculares.Models.Habilidad { Status = "OK", Message = "Correcto", Habilidades = habilidades };
         }
     }
 }

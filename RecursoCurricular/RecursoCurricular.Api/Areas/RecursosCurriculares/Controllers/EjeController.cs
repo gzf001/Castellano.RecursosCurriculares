@@ -5,12 +5,12 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace RecursoCurricular.Api.Areas.BasesCurriculares.Controllers
+namespace RecursoCurricular.Api.Areas.RecursosCurriculares.Controllers
 {
-    public class ActitudController : ApiController
+    public class EjeController : ApiController
     {
         [HttpGet]
-        public RecursoCurricular.Api.Models.Result Actitud([FromUri]RecursoCurricular.Api.Areas.BasesCurriculares.Models.Parametro parametro)
+        public RecursoCurricular.Api.Models.Result Eje([FromUri]RecursoCurricular.Api.Areas.RecursosCurriculares.Models.Parametro parametro)
         {
             string token = this.Request.Headers.GetValues("Token").First();
 
@@ -23,18 +23,18 @@ namespace RecursoCurricular.Api.Areas.BasesCurriculares.Controllers
                 return result;
             }
 
-            RecursoCurricular.BaseCurricular.Actitud actitud = RecursoCurricular.BaseCurricular.Actitud.Get(parametro.TipoEducacionCodigo, parametro.AnioNumero, parametro.SectorId, parametro.Id);
+            RecursoCurricular.RecursosCurriculares.Eje eje = RecursoCurricular.RecursosCurriculares.Eje.Get(parametro.AnioNumero, parametro.SectorId, parametro.Id);
 
-            return new RecursoCurricular.Api.Areas.BasesCurriculares.Models.Actitud
+            return new RecursoCurricular.Api.Areas.RecursosCurriculares.Models.Eje
             {
                 Status = "OK",
                 Message = "Correcto",
-                Item = actitud
+                Item = eje
             };
         }
 
         [HttpPost]
-        public RecursoCurricular.Api.Models.Result Actitudes([FromBody] RecursoCurricular.Api.Areas.BasesCurriculares.Models.Parametro parametro)
+        public RecursoCurricular.Api.Models.Result Ejes([FromBody] RecursoCurricular.Api.Areas.RecursosCurriculares.Models.Parametro parametro)
         {
             string token = this.Request.Headers.GetValues("Token").First();
 
@@ -53,9 +53,9 @@ namespace RecursoCurricular.Api.Areas.BasesCurriculares.Controllers
 
             RecursoCurricular.Educacion.Sector sector = RecursoCurricular.Educacion.Sector.Get(parametro.SectorId);
 
-            List<RecursoCurricular.BaseCurricular.Actitud> actitudes = RecursoCurricular.BaseCurricular.Actitud.GetAll(tipoEducacion, anio, sector);
+            List<RecursoCurricular.RecursosCurriculares.Eje> ejes = RecursoCurricular.RecursosCurriculares.Eje.GetAll(anio, sector, tipoEducacion);
 
-            return new RecursoCurricular.Api.Areas.BasesCurriculares.Models.Actitud { Status = "OK", Message = "Correcto", Actitudes = actitudes };
+            return new RecursoCurricular.Api.Areas.RecursosCurriculares.Models.Eje { Status = "OK", Message = "Correcto", Ejes = ejes };
         }
     }
 }

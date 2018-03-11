@@ -5,7 +5,7 @@ using System.Web;
 
 namespace RecursoCurricular.Api.Models
 {
-    public abstract class Result
+    public class Result
     {
         public string Status
         {

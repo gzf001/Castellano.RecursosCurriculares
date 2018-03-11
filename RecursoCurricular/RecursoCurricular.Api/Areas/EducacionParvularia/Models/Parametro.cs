@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace RecursoCurricular.Api.Areas.BasesCurriculares.Models
+namespace RecursoCurricular.Api.Areas.EducacionParvularia.Models
 {
     public class Parametro : RecursoCurricular.Api.Models.Parametro
     {
-        public Guid EjeId
+        public int AmbitoExperienciaAprendizajeCodigo
         {
             get;
             set;
         }
 
-        public Guid ObjetivoAprendizajeId
+        public Guid NucleoAprendizajeId
         {
             get;
             set;
         }
 
-        public Guid HabilidadId
+        public int CicloCodigo
         {
             get;
             set;

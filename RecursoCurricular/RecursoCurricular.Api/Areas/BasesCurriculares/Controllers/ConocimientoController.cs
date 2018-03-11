@@ -7,10 +7,10 @@ using System.Web.Http;
 
 namespace RecursoCurricular.Api.Areas.BasesCurriculares.Controllers
 {
-    public class ActitudController : ApiController
+    public class ConocimientoController : ApiController
     {
         [HttpGet]
-        public RecursoCurricular.Api.Models.Result Actitud([FromUri]RecursoCurricular.Api.Areas.BasesCurriculares.Models.Parametro parametro)
+        public RecursoCurricular.Api.Models.Result Conocimiento([FromUri]RecursoCurricular.Api.Areas.BasesCurriculares.Models.Parametro parametro)
         {
             string token = this.Request.Headers.GetValues("Token").First();
 
@@ -23,18 +23,18 @@ namespace RecursoCurricular.Api.Areas.BasesCurriculares.Controllers
                 return result;
             }
 
-            RecursoCurricular.BaseCurricular.Actitud actitud = RecursoCurricular.BaseCurricular.Actitud.Get(parametro.TipoEducacionCodigo, parametro.AnioNumero, parametro.SectorId, parametro.Id);
+            RecursoCurricular.BaseCurricular.Conocimiento conocimiento = RecursoCurricular.BaseCurricular.Conocimiento.Get(parametro.TipoEducacionCodigo, parametro.AnioNumero, parametro.SectorId, parametro.Id);
 
-            return new RecursoCurricular.Api.Areas.BasesCurriculares.Models.Actitud
+            return new RecursoCurricular.Api.Areas.BasesCurriculares.Models.Conocimiento
             {
                 Status = "OK",
                 Message = "Correcto",
-                Item = actitud
+                Item = conocimiento
             };
         }
 
         [HttpPost]
-        public RecursoCurricular.Api.Models.Result Actitudes([FromBody] RecursoCurricular.Api.Areas.BasesCurriculares.Models.Parametro parametro)
+        public RecursoCurricular.Api.Models.Result Conocimientos([FromBody] RecursoCurricular.Api.Areas.BasesCurriculares.Models.Parametro parametro)
         {
             string token = this.Request.Headers.GetValues("Token").First();
 
@@ -53,9 +53,10 @@ namespace RecursoCurricular.Api.Areas.BasesCurriculares.Controllers
 
             RecursoCurricular.Educacion.Sector sector = RecursoCurricular.Educacion.Sector.Get(parametro.SectorId);
 
-            List<RecursoCurricular.BaseCurricular.Actitud> actitudes = RecursoCurricular.BaseCurricular.Actitud.GetAll(tipoEducacion, anio, sector);
+            List<RecursoCurricular.BaseCurricular.Conocimiento> conocimientos = RecursoCurricular.BaseCurricular.Conocimiento.GetAll(tipoEducacion, anio, sector);
 
-            return new RecursoCurricular.Api.Areas.BasesCurriculares.Models.Actitud { Status = "OK", Message = "Correcto", Actitudes = actitudes };
+            return new RecursoCurricular.Api.Areas.BasesCurriculares.Models.Conocimiento { Status = "OK", Message = "Correcto", Conocimientos = conocimientos };
         }
+
     }
 }

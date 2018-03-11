@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace RecursoCurricular.Api.Areas.BasesCurriculares.Models
+namespace RecursoCurricular.Api.Areas.RecursosCurriculares.Models
 {
     public class Parametro : RecursoCurricular.Api.Models.Parametro
     {
@@ -20,6 +20,18 @@ namespace RecursoCurricular.Api.Areas.BasesCurriculares.Models
         }
 
         public Guid HabilidadId
+        {
+            get;
+            set;
+        }
+
+        public Guid UnidadId
+        {
+            get;
+            set;
+        }
+
+        public Guid AprendizajeId
         {
             get;
             set;

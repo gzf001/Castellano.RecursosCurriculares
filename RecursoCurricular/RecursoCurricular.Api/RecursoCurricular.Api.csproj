@@ -148,8 +148,34 @@
     <Compile Include="Areas\Administracion\Models\Usuario.cs" />
     <Compile Include="Areas\BasesCurriculares\BasesCurricularesAreaRegistration.cs" />
     <Compile Include="Areas\BasesCurriculares\Controllers\ActitudController.cs" />
+    <Compile Include="Areas\BasesCurriculares\Controllers\ConocimientoController.cs" />
+    <Compile Include="Areas\BasesCurriculares\Controllers\DimensionOATController.cs" />
+    <Compile Include="Areas\BasesCurriculares\Controllers\EjeBaseCurricularController.cs" />
+    <Compile Include="Areas\BasesCurriculares\Controllers\HabilidadController.cs" />
+    <Compile Include="Areas\BasesCurriculares\Controllers\IndicadorController.cs" />
+    <Compile Include="Areas\BasesCurriculares\Controllers\ObjetivoAprendizajeController.cs" />
+    <Compile Include="Areas\BasesCurriculares\Controllers\SubHabilidadController.cs" />
+    <Compile Include="Areas\BasesCurriculares\Controllers\UnidadController.cs" />
     <Compile Include="Areas\BasesCurriculares\Models\Actitud.cs" />
+    <Compile Include="Areas\BasesCurriculares\Models\Conocimiento.cs" />
+    <Compile Include="Areas\BasesCurriculares\Models\DimensionOAT.cs" />
+    <Compile Include="Areas\BasesCurriculares\Models\Eje.cs" />
+    <Compile Include="Areas\BasesCurriculares\Models\Habilidad.cs" />
+    <Compile Include="Areas\BasesCurriculares\Models\Indicador.cs" />
+    <Compile Include="Areas\BasesCurriculares\Models\ObjetivoAprendizaje.cs" />
     <Compile Include="Areas\BasesCurriculares\Models\Parametro.cs" />
+    <Compile Include="Areas\BasesCurriculares\Models\SubHabilidad.cs" />
+    <Compile Include="Areas\BasesCurriculares\Models\Unidad.cs" />
+    <Compile Include="Areas\EducacionParvularia\Controllers\AprendizajeEsperadoParvuloController.cs" />
+    <Compile Include="Areas\EducacionParvularia\Controllers\EjeParvuloController.cs" />
+    <Compile Include="Areas\EducacionParvularia\Controllers\NucleoController.cs" />
+    <Compile Include="Areas\EducacionParvularia\Controllers\PrincipioPedagogicoController.cs" />
+    <Compile Include="Areas\EducacionParvularia\EducacionParvulariaAreaRegistration.cs" />
+    <Compile Include="Areas\EducacionParvularia\Models\AprendizajeEsperado.cs" />
+    <Compile Include="Areas\EducacionParvularia\Models\Eje.cs" />
+    <Compile Include="Areas\EducacionParvularia\Models\Nucleo.cs" />
+    <Compile Include="Areas\EducacionParvularia\Models\Parametro.cs" />
+    <Compile Include="Areas\EducacionParvularia\Models\PrincipioPedagogico.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
     <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
@@ -178,12 +204,31 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Areas\RecursosCurriculares\Controllers\AprendizajeEsperadoController.cs" />
+    <Compile Include="Areas\RecursosCurriculares\Controllers\AprendizajeIndicadorController.cs" />
+    <Compile Include="Areas\RecursosCurriculares\Controllers\ContenidoController.cs" />
+    <Compile Include="Areas\RecursosCurriculares\Controllers\EjeController.cs" />
+    <Compile Include="Areas\RecursosCurriculares\Controllers\ObjetivoTransversalController.cs" />
+    <Compile Include="Areas\RecursosCurriculares\Controllers\ObjetivoVerticalController.cs" />
+    <Compile Include="Areas\RecursosCurriculares\Controllers\UnidadAprendizajeController.cs" />
+    <Compile Include="Areas\RecursosCurriculares\Models\AprendizajeEsperado.cs" />
+    <Compile Include="Areas\RecursosCurriculares\Models\AprendizajeIndicador.cs" />
+    <Compile Include="Areas\RecursosCurriculares\Models\Contenido.cs" />
+    <Compile Include="Areas\RecursosCurriculares\Models\Eje.cs" />
+    <Compile Include="Areas\RecursosCurriculares\Models\ObjetivoTransversal.cs" />
+    <Compile Include="Areas\RecursosCurriculares\Models\ObjetivoVertical.cs" />
+    <Compile Include="Areas\RecursosCurriculares\Models\Parametro.cs" />
+    <Compile Include="Areas\RecursosCurriculares\Models\Unidad.cs" />
+    <Compile Include="Areas\RecursosCurriculares\RecursosCurricularesAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\IValidate.cs" />
+    <Compile Include="Models\Parametro.cs" />
     <Compile Include="Models\Result.cs" />
+    <Compile Include="Models\TokenValido.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -220,6 +265,8 @@
     <Content Include="Areas\BasesCurriculares\Views\web.config" />
     <Content Include="Areas\Administracion\Views\web.config" />
     <Content Include="ConnectionStrings.config" />
+    <Content Include="Areas\EducacionParvularia\Views\web.config" />
+    <Content Include="Areas\RecursosCurriculares\Views\web.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -245,6 +292,8 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Administracion\Views\Shared\" />
     <Folder Include="Areas\BasesCurriculares\Views\Shared\" />
+    <Folder Include="Areas\EducacionParvularia\Views\Shared\" />
+    <Folder Include="Areas\RecursosCurriculares\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -273,6 +322,10 @@
     <ProjectReference Include="..\RecursoCurricular.Educacion\RecursoCurricular.Educacion.csproj">
       <Project>{f2f77c22-b3a6-4ea8-8f88-58c9234ab08e}</Project>
       <Name>RecursoCurricular.Educacion</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RecursoCurricular.RecursosCurriculares\RecursoCurricular.RecursosCurriculares.csproj">
+      <Project>{040ed32e-58e8-45fd-91ee-6f205f8353a8}</Project>
+      <Name>RecursoCurricular.RecursosCurriculares</Name>
     </ProjectReference>
     <ProjectReference Include="..\RecursoCurricular\RecursoCurricular.csproj">
       <Project>{31fe3606-5aba-44fb-9284-3ddbb8f68ffe}</Project>

@@ -5,15 +5,15 @@ using System.Web;
 
 namespace RecursoCurricular.Api.Areas.BasesCurriculares.Models
 {
-    public class Actitud : RecursoCurricular.Api.Models.Result
+    public class Habilidad : RecursoCurricular.Api.Models.Result
     {
-        public RecursoCurricular.BaseCurricular.Actitud Item
+        public RecursoCurricular.BaseCurricular.Habilidad Item
         {
             get;
             set;
         }
 
-        public List<RecursoCurricular.BaseCurricular.Actitud> Actitudes
+        public List<RecursoCurricular.BaseCurricular.Habilidad> Habilidades
         {
             get;
             set;
