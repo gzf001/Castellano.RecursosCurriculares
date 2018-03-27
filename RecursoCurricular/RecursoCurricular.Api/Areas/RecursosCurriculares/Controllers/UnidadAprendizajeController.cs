@@ -12,7 +12,25 @@ namespace RecursoCurricular.Api.Areas.RecursosCurriculares.Controllers
         [HttpGet]
         public RecursoCurricular.Api.Models.Result Unidad([FromUri]RecursoCurricular.Api.Areas.RecursosCurriculares.Models.Parametro parametro)
         {
-            string token = this.Request.Headers.GetValues("Token").First();
+            string token = string.Empty;
+
+            try
+            {
+                token = this.Request.Headers.GetValues("Token").First();
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.ToLower().Contains("encabezado"))
+                {
+                    return new Api.Models.Result
+                    {
+                        Status = "Error",
+                        Message = "No se encontro token"
+                    };
+                }
+
+                throw ex;
+            }
 
             RecursoCurricular.Api.Models.TokenValido tv = new RecursoCurricular.Api.Models.TokenValido();
 
@@ -23,13 +41,13 @@ namespace RecursoCurricular.Api.Areas.RecursosCurriculares.Controllers
                 return result;
             }
 
-            RecursoCurricular.RecursosCurriculares.Unidad Unidad = RecursoCurricular.RecursosCurriculares.Unidad.Get(parametro.TipoEducacionCodigo, parametro.AnioNumero, parametro.GradoCodigo, parametro.SectorId, parametro.Id);
+            RecursoCurricular.RecursosCurriculares.Unidad unidad = RecursoCurricular.RecursosCurriculares.Unidad.Get(parametro.TipoEducacionCodigo, parametro.AnioNumero, parametro.GradoCodigo, parametro.SectorId, parametro.Id);
 
             return new RecursoCurricular.Api.Areas.RecursosCurriculares.Models.Unidad
             {
                 Status = "OK",
                 Message = "Correcto",
-                Item = Unidad
+                Item = unidad
             };
         }
 
@@ -55,7 +73,7 @@ namespace RecursoCurricular.Api.Areas.RecursosCurriculares.Controllers
 
             List<RecursoCurricular.RecursosCurriculares.Unidad> unidades = RecursoCurricular.RecursosCurriculares.Unidad.GetAll(anio, grado, sector);
 
-            return new RecursoCurricular.Api.Areas.RecursosCurriculares.Models.Unidad { Status = "OK", Message = "Correcto", Unidades = unidades };
+            return new RecursoCurricular.Api.Areas.RecursosCurriculares.Models.Unidad { Status = "OK", Message = "Correcto", Lista = unidades };
         }
     }
 }
