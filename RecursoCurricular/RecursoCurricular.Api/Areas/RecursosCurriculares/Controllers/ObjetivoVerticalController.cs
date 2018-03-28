@@ -10,6 +10,7 @@ namespace RecursoCurricular.Api.Areas.RecursosCurriculares.Controllers
     public class ObjetivoVerticalController : ApiController
     {
         [HttpGet]
+        [Route("api/ObjetivoVertical")]
         public RecursoCurricular.Api.Models.Result ObjetivoVertical([FromUri]RecursoCurricular.Api.Areas.RecursosCurriculares.Models.Parametro parametro)
         {
             string token = this.Request.Headers.GetValues("Token").First();
@@ -34,6 +35,7 @@ namespace RecursoCurricular.Api.Areas.RecursosCurriculares.Controllers
         }
 
         [HttpPost]
+        [Route("api/ObjetivosVerticales")]
         public RecursoCurricular.Api.Models.Result ObjetivosVerticales([FromBody] RecursoCurricular.Api.Areas.RecursosCurriculares.Models.Parametro parametro)
         {
             string token = this.Request.Headers.GetValues("Token").First();
@@ -55,7 +57,29 @@ namespace RecursoCurricular.Api.Areas.RecursosCurriculares.Controllers
 
             List<RecursoCurricular.RecursosCurriculares.ObjetivoVertical> objetivosVerticales = RecursoCurricular.RecursosCurriculares.ObjetivoVertical.GetAll(anio, grado, sector);
 
-            return new RecursoCurricular.Api.Areas.RecursosCurriculares.Models.ObjetivoVertical { Status = "OK", Message = "Correcto", ObjetivosVerticales = objetivosVerticales };
+            return new RecursoCurricular.Api.Areas.RecursosCurriculares.Models.ObjetivoVertical { Status = "OK", Message = "Correcto", Lista = objetivosVerticales };
+        }
+
+        [HttpPost]
+        [Route("api/AprendizajeObjetivosVerticales")]
+        public RecursoCurricular.Api.Models.Result AprendizajeObjetivosVerticales([FromBody] RecursoCurricular.Api.Areas.RecursosCurriculares.Models.Parametro parametro)
+        {
+            string token = this.Request.Headers.GetValues("Token").First();
+
+            RecursoCurricular.Api.Models.TokenValido tv = new RecursoCurricular.Api.Models.TokenValido();
+
+            RecursoCurricular.Api.Models.Result result = tv.ValidateToken(token);
+
+            if (!result.Status.Equals("OK"))
+            {
+                return result;
+            }
+
+            RecursoCurricular.RecursosCurriculares.Aprendizaje aprendizaje = RecursoCurricular.RecursosCurriculares.Aprendizaje.Get(parametro.AnioNumero, parametro.TipoEducacionCodigo, parametro.GradoCodigo, parametro.SectorId, parametro.AprendizajeId);
+
+            List<RecursoCurricular.RecursosCurriculares.ObjetivoVertical> objetivosVerticales = RecursoCurricular.RecursosCurriculares.ObjetivoVertical.GetAll(aprendizaje);
+
+            return new RecursoCurricular.Api.Areas.RecursosCurriculares.Models.ObjetivoVertical { Status = "OK", Message = "Correcto", Lista = objetivosVerticales };
         }
     }
 }

@@ -27,8 +27,6 @@ namespace RecursoCurricular.Web.UI.Models
 
         private string userName;
         private string anio;
-        private string action;
-        private string controller;
 
         public string UserName
         {

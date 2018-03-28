@@ -10,6 +10,7 @@ namespace RecursoCurricular.Api.Areas.RecursosCurriculares.Controllers
     public class EjeController : ApiController
     {
         [HttpGet]
+        [Route("api/Eje")]
         public RecursoCurricular.Api.Models.Result Eje([FromUri]RecursoCurricular.Api.Areas.RecursosCurriculares.Models.Parametro parametro)
         {
             string token = this.Request.Headers.GetValues("Token").First();
@@ -23,17 +24,27 @@ namespace RecursoCurricular.Api.Areas.RecursosCurriculares.Controllers
                 return result;
             }
 
-            RecursoCurricular.RecursosCurriculares.Eje eje = RecursoCurricular.RecursosCurriculares.Eje.Get(parametro.AnioNumero, parametro.SectorId, parametro.Id);
+            RecursoCurricular.RecursosCurriculares.TipoEducacionEje tipoEducacionEje = RecursoCurricular.RecursosCurriculares.TipoEducacionEje.Get(parametro.TipoEducacionCodigo, parametro.AnioNumero, parametro.SectorId, parametro.Id);
+
+            if (tipoEducacionEje == null)
+            {
+                return new RecursoCurricular.Api.Areas.RecursosCurriculares.Models.Eje
+                {
+                    Status = "ERROR",
+                    Message = "Incorrecto"
+                };
+            }
 
             return new RecursoCurricular.Api.Areas.RecursosCurriculares.Models.Eje
             {
                 Status = "OK",
                 Message = "Correcto",
-                Item = eje
+                Item = tipoEducacionEje.Eje
             };
         }
 
         [HttpPost]
+        [Route("api/Ejes")]
         public RecursoCurricular.Api.Models.Result Ejes([FromBody] RecursoCurricular.Api.Areas.RecursosCurriculares.Models.Parametro parametro)
         {
             string token = this.Request.Headers.GetValues("Token").First();
@@ -55,7 +66,7 @@ namespace RecursoCurricular.Api.Areas.RecursosCurriculares.Controllers
 
             List<RecursoCurricular.RecursosCurriculares.Eje> ejes = RecursoCurricular.RecursosCurriculares.Eje.GetAll(anio, sector, tipoEducacion);
 
-            return new RecursoCurricular.Api.Areas.RecursosCurriculares.Models.Eje { Status = "OK", Message = "Correcto", Ejes = ejes };
+            return new RecursoCurricular.Api.Areas.RecursosCurriculares.Models.Eje { Status = "OK", Message = "Correcto", Lista = ejes };
         }
     }
 }

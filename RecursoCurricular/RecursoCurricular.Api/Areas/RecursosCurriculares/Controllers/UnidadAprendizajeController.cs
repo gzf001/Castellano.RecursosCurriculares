@@ -10,6 +10,7 @@ namespace RecursoCurricular.Api.Areas.RecursosCurriculares.Controllers
     public class UnidadAprendizajeController : ApiController
     {
         [HttpGet]
+        [Route("api/UnidadRecursoCurricular")]
         public RecursoCurricular.Api.Models.Result Unidad([FromUri]RecursoCurricular.Api.Areas.RecursosCurriculares.Models.Parametro parametro)
         {
             string token = string.Empty;
@@ -52,6 +53,7 @@ namespace RecursoCurricular.Api.Areas.RecursosCurriculares.Controllers
         }
 
         [HttpPost]
+        [Route("api/UnidadesRecursoCurricular")]
         public RecursoCurricular.Api.Models.Result Unidades([FromBody] RecursoCurricular.Api.Areas.RecursosCurriculares.Models.Parametro parametro)
         {
             string token = this.Request.Headers.GetValues("Token").First();

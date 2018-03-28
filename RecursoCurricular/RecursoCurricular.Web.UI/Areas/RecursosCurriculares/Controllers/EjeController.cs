@@ -41,16 +41,28 @@ namespace RecursoCurricular.Web.UI.Areas.RecursosCurriculares.Controllers
 
             try
             {
+                RecursoCurricular.RecursosCurriculares.Eje eje = new RecursoCurricular.RecursosCurriculares.Eje
+                {
+                    AnoNumero = this.CurrentAnio.Numero,
+                    SectorId = model.SectorId,
+                    Id = model.Id,
+                    Numero = model.Numero,
+                    Nombre = model.Nombre.Trim()
+                };
+
                 using (RecursoCurricular.RecursosCurriculares.Context context = new RecursoCurricular.RecursosCurriculares.Context())
                 {
-                    new RecursoCurricular.RecursosCurriculares.Eje
+                    foreach (RecursoCurricular.RecursosCurriculares.TipoEducacionEje tipoEducacionEje in RecursoCurricular.RecursosCurriculares.TipoEducacionEje.GetAll(eje))
                     {
-                        AnoNumero = this.CurrentAnio.Numero,
-                        SectorId = model.SectorId,
-                        Id = model.Id,
-                        Numero = model.Numero,
-                        Nombre = model.Nombre.Trim()
-                    }.Save(context);
+                        tipoEducacionEje.Delete(context);
+                    }
+
+                    context.SubmitChanges();
+                }
+
+                using (RecursoCurricular.RecursosCurriculares.Context context = new RecursoCurricular.RecursosCurriculares.Context())
+                {
+                    eje.Save(context);
 
                     foreach (int tipoEducacionCodigo in model.SelectedTipoEducacion)
                     {

@@ -10,6 +10,7 @@ namespace RecursoCurricular.Api.Areas.RecursosCurriculares.Controllers
     public class AprendizajeIndicadorController : ApiController
     {
         [HttpGet]
+        [Route("api/AprendizajeIndicador")]
         public RecursoCurricular.Api.Models.Result AprendizajeIndicador([FromUri]RecursoCurricular.Api.Areas.RecursosCurriculares.Models.Parametro parametro)
         {
             string token = this.Request.Headers.GetValues("Token").First();
@@ -34,6 +35,7 @@ namespace RecursoCurricular.Api.Areas.RecursosCurriculares.Controllers
         }
 
         [HttpPost]
+        [Route("api/AprendizajesIndicadores")]
         public RecursoCurricular.Api.Models.Result AprendizajesIndicadores([FromBody] RecursoCurricular.Api.Areas.RecursosCurriculares.Models.Parametro parametro)
         {
             string token = this.Request.Headers.GetValues("Token").First();
@@ -51,7 +53,7 @@ namespace RecursoCurricular.Api.Areas.RecursosCurriculares.Controllers
 
             List<RecursoCurricular.RecursosCurriculares.AprendizajeIndicador> aprendizajesIndicadores = RecursoCurricular.RecursosCurriculares.AprendizajeIndicador.GetAll(aprendizaje);
 
-            return new RecursoCurricular.Api.Areas.RecursosCurriculares.Models.AprendizajeIndicador { Status = "OK", Message = "Correcto", Indicadores = aprendizajesIndicadores };
+            return new RecursoCurricular.Api.Areas.RecursosCurriculares.Models.AprendizajeIndicador { Status = "OK", Message = "Correcto", Lista = aprendizajesIndicadores };
         }
     }
 }

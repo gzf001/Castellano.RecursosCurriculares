@@ -10,6 +10,7 @@ namespace RecursoCurricular.Api.Areas.RecursosCurriculares.Controllers
     public class AprendizajeEsperadoController : ApiController
     {
         [HttpGet]
+        [Route("api/AprendizajeEsperado")]
         public RecursoCurricular.Api.Models.Result AprendizajeEsperado([FromUri]RecursoCurricular.Api.Areas.RecursosCurriculares.Models.Parametro parametro)
         {
             string token = this.Request.Headers.GetValues("Token").First();

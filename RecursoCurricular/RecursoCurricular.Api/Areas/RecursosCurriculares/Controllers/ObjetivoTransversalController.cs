@@ -57,7 +57,7 @@ namespace RecursoCurricular.Api.Areas.RecursosCurriculares.Controllers
 
             List<RecursoCurricular.RecursosCurriculares.ObjetivoTransversal> objetivosTransversales = RecursoCurricular.RecursosCurriculares.ObjetivoTransversal.GetAll(unidad);
 
-            return new RecursoCurricular.Api.Areas.RecursosCurriculares.Models.ObjetivoTransversal { Status = "OK", Message = "Correcto", ObjetivosTransversales = objetivosTransversales };
+            return new RecursoCurricular.Api.Areas.RecursosCurriculares.Models.ObjetivoTransversal { Status = "OK", Message = "Correcto", Lista = objetivosTransversales };
         }
     }
 }
