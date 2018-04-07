@@ -55,5 +55,31 @@ namespace RecursoCurricular.Api.Areas.RecursosCurriculares.Controllers
 
             return new RecursoCurricular.Api.Areas.RecursosCurriculares.Models.AprendizajeIndicador { Status = "OK", Message = "Correcto", Lista = aprendizajesIndicadores };
         }
+
+        [HttpPost]
+        [Route("api/AprendizajesIndicadoresGradoSector")]
+        public RecursoCurricular.Api.Models.Result AprendizajesIndicadoresGradoSector([FromBody] RecursoCurricular.Api.Areas.RecursosCurriculares.Models.Parametro parametro)
+        {
+            string token = this.Request.Headers.GetValues("Token").First();
+
+            RecursoCurricular.Api.Models.TokenValido tv = new RecursoCurricular.Api.Models.TokenValido();
+
+            RecursoCurricular.Api.Models.Result result = tv.ValidateToken(token);
+
+            if (!result.Status.Equals("OK"))
+            {
+                return result;
+            }
+
+            RecursoCurricular.Anio anio = RecursoCurricular.Anio.Get(parametro.AnioNumero);
+
+            RecursoCurricular.Educacion.Grado grado = RecursoCurricular.Educacion.Grado.Get(parametro.TipoEducacionCodigo, parametro.GradoCodigo);
+
+            RecursoCurricular.Educacion.Sector sector = RecursoCurricular.Educacion.Sector.Get(parametro.SectorId);
+
+            List<RecursoCurricular.RecursosCurriculares.AprendizajeIndicador> aprendizajesIndicadores = RecursoCurricular.RecursosCurriculares.AprendizajeIndicador.GetAll(anio, grado, sector);
+
+            return new RecursoCurricular.Api.Areas.RecursosCurriculares.Models.AprendizajeIndicador { Status = "OK", Message = "Correcto", Lista = aprendizajesIndicadores };
+        }
     }
 }

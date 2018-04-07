@@ -205,6 +205,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Areas\RecursosCurriculares\Controllers\AprendizajeContenidoController.cs" />
     <Compile Include="Areas\RecursosCurriculares\Controllers\AprendizajeEsperadoController.cs" />
     <Compile Include="Areas\RecursosCurriculares\Controllers\AprendizajeIndicadorController.cs" />
     <Compile Include="Areas\RecursosCurriculares\Controllers\ContenidoController.cs" />
@@ -212,6 +213,8 @@
     <Compile Include="Areas\RecursosCurriculares\Controllers\ObjetivoTransversalController.cs" />
     <Compile Include="Areas\RecursosCurriculares\Controllers\ObjetivoVerticalController.cs" />
     <Compile Include="Areas\RecursosCurriculares\Controllers\UnidadAprendizajeController.cs" />
+    <Compile Include="Areas\RecursosCurriculares\Controllers\UnidadRecursoCurricularController.cs" />
+    <Compile Include="Areas\RecursosCurriculares\Models\AprendizajeContenido.cs" />
     <Compile Include="Areas\RecursosCurriculares\Models\AprendizajeEsperado.cs" />
     <Compile Include="Areas\RecursosCurriculares\Models\AprendizajeIndicador.cs" />
     <Compile Include="Areas\RecursosCurriculares\Models\Contenido.cs" />
@@ -219,7 +222,10 @@
     <Compile Include="Areas\RecursosCurriculares\Models\ObjetivoTransversal.cs" />
     <Compile Include="Areas\RecursosCurriculares\Models\ObjetivoVertical.cs" />
     <Compile Include="Areas\RecursosCurriculares\Models\Parametro.cs" />
+    <Compile Include="Areas\RecursosCurriculares\Models\PassingObject\Eje.cs" />
+    <Compile Include="Areas\RecursosCurriculares\Models\PassingObject\EjeAno.cs" />
     <Compile Include="Areas\RecursosCurriculares\Models\Unidad.cs" />
+    <Compile Include="Areas\RecursosCurriculares\Models\UnidadAprendizaje.cs" />
     <Compile Include="Areas\RecursosCurriculares\RecursosCurricularesAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />

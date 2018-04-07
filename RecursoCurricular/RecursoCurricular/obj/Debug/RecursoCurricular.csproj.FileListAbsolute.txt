@@ -24,3 +24,5 @@ C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular\obj\Debug\RecursoCurricular.csprojResolveAssemblyReference.cache
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular\obj\Debug\RecursoCurricular.dll
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular\obj\Debug\RecursoCurricular.pdb
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular\bin\Debug\Newtonsoft.Json.dll
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular\bin\Debug\Newtonsoft.Json.xml

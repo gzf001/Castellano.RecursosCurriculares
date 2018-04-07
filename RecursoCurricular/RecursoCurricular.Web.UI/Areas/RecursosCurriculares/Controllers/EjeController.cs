@@ -76,6 +76,8 @@ namespace RecursoCurricular.Web.UI.Areas.RecursosCurriculares.Controllers
                     }
 
                     context.SubmitChanges();
+
+                    eje.SyncUp();
                 }
 
                 return this.Json("200", JsonRequestBehavior.DenyGet);

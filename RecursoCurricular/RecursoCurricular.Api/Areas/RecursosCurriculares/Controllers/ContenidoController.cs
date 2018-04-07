@@ -94,10 +94,36 @@ namespace RecursoCurricular.Api.Areas.RecursosCurriculares.Controllers
             {
                 return result;
             }
-            
+
             RecursoCurricular.RecursosCurriculares.Aprendizaje aprendizaje = RecursoCurricular.RecursosCurriculares.Aprendizaje.Get(parametro.AnioNumero, parametro.TipoEducacionCodigo, parametro.GradoCodigo, parametro.SectorId, parametro.AprendizajeId);
 
             List<RecursoCurricular.RecursosCurriculares.Contenido> contenidos = RecursoCurricular.RecursosCurriculares.Contenido.GetAll(aprendizaje);
+
+            return new RecursoCurricular.Api.Areas.RecursosCurriculares.Models.Contenido { Status = "OK", Message = "Correcto", Lista = contenidos };
+        }
+
+        [HttpPost]
+        [Route("api/ContenidosGradoSector")]
+        public RecursoCurricular.Api.Models.Result ContenidosGradoSector([FromBody] RecursoCurricular.Api.Areas.RecursosCurriculares.Models.Parametro parametro)
+        {
+            string token = this.Request.Headers.GetValues("Token").First();
+
+            RecursoCurricular.Api.Models.TokenValido tv = new RecursoCurricular.Api.Models.TokenValido();
+
+            RecursoCurricular.Api.Models.Result result = tv.ValidateToken(token);
+
+            if (!result.Status.Equals("OK"))
+            {
+                return result;
+            }
+
+            RecursoCurricular.Anio anio = RecursoCurricular.Anio.Get(parametro.AnioNumero);
+
+            RecursoCurricular.Educacion.Grado grado = RecursoCurricular.Educacion.Grado.Get(parametro.TipoEducacionCodigo, parametro.GradoCodigo);
+
+            RecursoCurricular.Educacion.Sector sector = RecursoCurricular.Educacion.Sector.Get(parametro.SectorId);
+
+            List<RecursoCurricular.RecursosCurriculares.Contenido> contenidos = RecursoCurricular.RecursosCurriculares.Contenido.GetAll(anio, sector, grado);
 
             return new RecursoCurricular.Api.Areas.RecursosCurriculares.Models.Contenido { Status = "OK", Message = "Correcto", Lista = contenidos };
         }

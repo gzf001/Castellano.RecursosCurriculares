@@ -92,6 +92,10 @@
     <Compile Include="Entity\TipoEducacionEje.cs" />
     <Compile Include="Entity\Unidad.cs" />
     <Compile Include="Entity\UnidadAprendizaje.cs" />
+    <Compile Include="PassingObject\Contenido.cs" />
+    <Compile Include="PassingObject\ContenidoAno.cs" />
+    <Compile Include="PassingObject\Eje.cs" />
+    <Compile Include="PassingObject\EjeAno.cs" />
     <Compile Include="Persistent\Aprendizaje.cs" />
     <Compile Include="Persistent\AprendizajeContenido.cs" />
     <Compile Include="Persistent\AprendizajeIndicador.cs" />

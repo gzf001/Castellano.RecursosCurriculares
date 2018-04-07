@@ -9,52 +9,9 @@ namespace RecursoCurricular.Api.Areas.RecursosCurriculares.Controllers
 {
     public class UnidadAprendizajeController : ApiController
     {
-        [HttpGet]
-        [Route("api/UnidadRecursoCurricular")]
-        public RecursoCurricular.Api.Models.Result Unidad([FromUri]RecursoCurricular.Api.Areas.RecursosCurriculares.Models.Parametro parametro)
-        {
-            string token = string.Empty;
-
-            try
-            {
-                token = this.Request.Headers.GetValues("Token").First();
-            }
-            catch (Exception ex)
-            {
-                if (ex.Message.ToLower().Contains("encabezado"))
-                {
-                    return new Api.Models.Result
-                    {
-                        Status = "Error",
-                        Message = "No se encontro token"
-                    };
-                }
-
-                throw ex;
-            }
-
-            RecursoCurricular.Api.Models.TokenValido tv = new RecursoCurricular.Api.Models.TokenValido();
-
-            RecursoCurricular.Api.Models.Result result = tv.ValidateToken(token);
-
-            if (!result.Status.Equals("OK"))
-            {
-                return result;
-            }
-
-            RecursoCurricular.RecursosCurriculares.Unidad unidad = RecursoCurricular.RecursosCurriculares.Unidad.Get(parametro.TipoEducacionCodigo, parametro.AnioNumero, parametro.GradoCodigo, parametro.SectorId, parametro.Id);
-
-            return new RecursoCurricular.Api.Areas.RecursosCurriculares.Models.Unidad
-            {
-                Status = "OK",
-                Message = "Correcto",
-                Item = unidad
-            };
-        }
-
         [HttpPost]
-        [Route("api/UnidadesRecursoCurricular")]
-        public RecursoCurricular.Api.Models.Result Unidades([FromBody] RecursoCurricular.Api.Areas.RecursosCurriculares.Models.Parametro parametro)
+        [Route("api/UnidadesAprendizajes")]
+        public RecursoCurricular.Api.Models.Result UnidadesAprendizajes([FromBody] RecursoCurricular.Api.Areas.RecursosCurriculares.Models.Parametro parametro)
         {
             string token = this.Request.Headers.GetValues("Token").First();
 
@@ -73,9 +30,9 @@ namespace RecursoCurricular.Api.Areas.RecursosCurriculares.Controllers
 
             RecursoCurricular.Educacion.Sector sector = RecursoCurricular.Educacion.Sector.Get(parametro.SectorId);
 
-            List<RecursoCurricular.RecursosCurriculares.Unidad> unidades = RecursoCurricular.RecursosCurriculares.Unidad.GetAll(anio, grado, sector);
+            List<RecursoCurricular.RecursosCurriculares.UnidadAprendizaje> unidadesAprendizaje = RecursoCurricular.RecursosCurriculares.UnidadAprendizaje.GetAll(anio, grado, sector);
 
-            return new RecursoCurricular.Api.Areas.RecursosCurriculares.Models.Unidad { Status = "OK", Message = "Correcto", Lista = unidades };
+            return new RecursoCurricular.Api.Areas.RecursosCurriculares.Models.UnidadAprendizaje { Status = "OK", Message = "Correcto", Lista = unidadesAprendizaje };
         }
     }
 }
