@@ -34,7 +34,7 @@ namespace RecursoCurricular.Web.UI.Areas.RecursosCurriculares.Controllers
             {
                 using (RecursoCurricular.RecursosCurriculares.Context context = new RecursoCurricular.RecursosCurriculares.Context())
                 {
-                    new RecursoCurricular.RecursosCurriculares.ObjetivoTransversal
+                    RecursoCurricular.RecursosCurriculares.ObjetivoTransversal objetivoTransversal = new RecursoCurricular.RecursosCurriculares.ObjetivoTransversal
                     {
                         AnoNumero = this.CurrentAnio.Numero,
                         TipoEducacionCodigo = model.TipoEducacionCodigo,
@@ -44,9 +44,13 @@ namespace RecursoCurricular.Web.UI.Areas.RecursosCurriculares.Controllers
                         Id = model.Id,
                         Numero = model.Numero,
                         Descripcion = model.Descripcion.Trim()
-                    }.Save(context);
+                    };
+
+                    objetivoTransversal.Save(context);
 
                     context.SubmitChanges();
+
+                    objetivoTransversal.SyncUp();
                 }
 
                 return this.Json("200", JsonRequestBehavior.DenyGet);
@@ -217,7 +221,7 @@ namespace RecursoCurricular.Web.UI.Areas.RecursosCurriculares.Controllers
 
             using (RecursoCurricular.RecursosCurriculares.Context context = new RecursoCurricular.RecursosCurriculares.Context())
             {
-                new RecursoCurricular.RecursosCurriculares.ObjetivoTransversalIndicador
+                RecursoCurricular.RecursosCurriculares.ObjetivoTransversalIndicador objetivoTransversalIndicador = new RecursoCurricular.RecursosCurriculares.ObjetivoTransversalIndicador
                 {
                     AnoNumero = this.CurrentAnio.Numero,
                     TipoEducacionCodigo = model.TipoEducacionCodigo,
@@ -228,9 +232,13 @@ namespace RecursoCurricular.Web.UI.Areas.RecursosCurriculares.Controllers
                     Id = model.Id,
                     Numero = model.Numero,
                     Descripcion = model.Descripcion.Trim()
-                }.Save(context);
+                };
+
+                objetivoTransversalIndicador.Save(context);
 
                 context.SubmitChanges();
+
+                objetivoTransversalIndicador.SyncUp();
             }
 
             return this.Json("200", JsonRequestBehavior.DenyGet);

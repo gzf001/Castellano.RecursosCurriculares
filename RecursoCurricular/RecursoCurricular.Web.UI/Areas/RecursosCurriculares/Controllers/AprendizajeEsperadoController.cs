@@ -201,7 +201,7 @@ namespace RecursoCurricular.Web.UI.Areas.RecursosCurriculares.Controllers
 
             using (RecursoCurricular.RecursosCurriculares.Context context = new RecursoCurricular.RecursosCurriculares.Context())
             {
-                new RecursoCurricular.RecursosCurriculares.AprendizajeIndicador
+                RecursoCurricular.RecursosCurriculares.AprendizajeIndicador aprendizajeIndicador = new RecursoCurricular.RecursosCurriculares.AprendizajeIndicador
                 {
                     AnoNumero = this.CurrentAnio.Numero,
                     TipoEducacionCodigo = model.TipoEducacionCodigo,
@@ -212,9 +212,13 @@ namespace RecursoCurricular.Web.UI.Areas.RecursosCurriculares.Controllers
                     CategoriaCodigo = model.CategoriaCodigo > -1 ? model.CategoriaCodigo.Value : default(int),
                     Numero = model.Numero,
                     Descripcion = model.Descripcion.Trim()
-                }.Save(context);
+                };
+
+                aprendizajeIndicador.Save(context);
 
                 context.SubmitChanges();
+
+                aprendizajeIndicador.SyncUp();
             }
 
             return this.Json("200", JsonRequestBehavior.DenyGet);

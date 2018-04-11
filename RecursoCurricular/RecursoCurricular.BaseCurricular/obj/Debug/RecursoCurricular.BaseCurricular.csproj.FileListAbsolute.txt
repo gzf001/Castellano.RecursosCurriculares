@@ -10,6 +10,7 @@ C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\bin\Debug\System.Web.WebPages.Deployment.dll
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\bin\Debug\System.Web.WebPages.dll
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\bin\Debug\System.Web.WebPages.Razor.dll
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\bin\Debug\Newtonsoft.Json.dll
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\bin\Debug\FluentLinqToSql.pdb
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\bin\Debug\RecursoCurricular.Educacion.pdb
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\bin\Debug\RecursoCurricular.pdb
@@ -19,6 +20,7 @@ C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\bin\Debug\System.Web.WebPages.xml
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\bin\Debug\System.Web.WebPages.Razor.xml
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\bin\Debug\Newtonsoft.Json.xml
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\bin\Debug\es\System.Web.Helpers.resources.dll
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\bin\Debug\es\System.Web.Mvc.resources.dll
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\bin\Debug\es\System.Web.Razor.resources.dll
@@ -28,5 +30,3 @@ C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\obj\Debug\RecursoCurricular.BaseCurricular.csprojResolveAssemblyReference.cache
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\obj\Debug\RecursoCurricular.BaseCurricular.dll
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\obj\Debug\RecursoCurricular.BaseCurricular.pdb
-C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\bin\Debug\Newtonsoft.Json.dll
-C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular.BaseCurricular\bin\Debug\Newtonsoft.Json.xml

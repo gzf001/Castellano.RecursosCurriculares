@@ -2,6 +2,7 @@ C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular\bin\Debug\RecursoCurricular.pdb
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular\bin\Debug\FluentLinqToSql.dll
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular\bin\Debug\Newtonsoft.Json.dll
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular\bin\Debug\System.Web.Helpers.dll
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular\bin\Debug\System.Web.Mvc.dll
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular\bin\Debug\System.Web.Razor.dll
@@ -9,6 +10,7 @@ C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular\bin\Debug\System.Web.WebPages.dll
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular\bin\Debug\System.Web.WebPages.Razor.dll
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular\bin\Debug\FluentLinqToSql.pdb
+C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular\bin\Debug\Newtonsoft.Json.xml
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular\bin\Debug\System.Web.Helpers.xml
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular\bin\Debug\System.Web.Mvc.xml
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular\bin\Debug\System.Web.Razor.xml
@@ -24,5 +26,3 @@ C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular\obj\Debug\RecursoCurricular.csprojResolveAssemblyReference.cache
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular\obj\Debug\RecursoCurricular.dll
 C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular\obj\Debug\RecursoCurricular.pdb
-C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular\bin\Debug\Newtonsoft.Json.dll
-C:\Proyectos\Castellano.RecursosCurriculares\RecursoCurricular\RecursoCurricular\bin\Debug\Newtonsoft.Json.xml

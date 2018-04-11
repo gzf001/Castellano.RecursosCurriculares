@@ -109,6 +109,25 @@
     <Compile Include="Entity\UnidadObjetivoAprendizaje.cs" />
     <Compile Include="Entity\UnidadSubHabilidad.cs" />
     <Compile Include="OrdenObjetivoAprendizaje.cs" />
+    <Compile Include="PassingObject\Actitud.cs" />
+    <Compile Include="PassingObject\AmbitoExperienciaAprendizaje.cs" />
+    <Compile Include="PassingObject\AprendizajeEsperadoParvulo.cs" />
+    <Compile Include="PassingObject\Conocimiento.cs" />
+    <Compile Include="PassingObject\DimensionOAT.cs" />
+    <Compile Include="PassingObject\Eje.cs" />
+    <Compile Include="PassingObject\EjeParvulo.cs" />
+    <Compile Include="PassingObject\Habilidad.cs" />
+    <Compile Include="PassingObject\Indicador.cs" />
+    <Compile Include="PassingObject\NucleoAprendizaje.cs" />
+    <Compile Include="PassingObject\ObjetivoAprendizaje.cs" />
+    <Compile Include="PassingObject\ObjetivoAprendizajeTransversal.cs" />
+    <Compile Include="PassingObject\SubHabilidad.cs" />
+    <Compile Include="PassingObject\Unidad.cs" />
+    <Compile Include="PassingObject\UnidadActitud.cs" />
+    <Compile Include="PassingObject\UnidadConocimiento.cs" />
+    <Compile Include="PassingObject\UnidadIndicador.cs" />
+    <Compile Include="PassingObject\UnidadObjetivoAprendizaje.cs" />
+    <Compile Include="PassingObject\UnidadSubHabilidad.cs" />
     <Compile Include="Persistent\Actitud.cs" />
     <Compile Include="Persistent\AprendizajeEsperadoParvulo.cs" />
     <Compile Include="Persistent\Conocimiento.cs" />
@@ -148,5 +167,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
