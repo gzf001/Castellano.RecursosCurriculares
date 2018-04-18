@@ -37,7 +37,7 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Controllers
             {
                 using (RecursoCurricular.BaseCurricular.Context context = new RecursoCurricular.BaseCurricular.Context())
                 {
-                    new RecursoCurricular.BaseCurricular.ObjetivoAprendizajeTransversal
+                    RecursoCurricular.BaseCurricular.ObjetivoAprendizajeTransversal objetivoAprendizajeTransversal = new RecursoCurricular.BaseCurricular.ObjetivoAprendizajeTransversal
                     {
                         DimensionOATId = model.DimensionOATId,
                         AnoNumero = this.CurrentAnio.Numero,
@@ -45,9 +45,13 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Controllers
                         Numero = model.Numero,
                         Nombre = model.Nombre.Trim(),
                         Descripcion = string.IsNullOrEmpty(model.Descripcion) ? default(string) : model.Descripcion.Trim()
-                    }.Save(context);
+                    };
+
+                    objetivoAprendizajeTransversal.Save(context);
 
                     context.SubmitChanges();
+
+                    objetivoAprendizajeTransversal.SyncUp();
                 }
 
                 return this.Json("200", JsonRequestBehavior.DenyGet);

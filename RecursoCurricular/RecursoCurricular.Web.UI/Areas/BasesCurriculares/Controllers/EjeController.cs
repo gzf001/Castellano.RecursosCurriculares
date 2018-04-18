@@ -43,14 +43,16 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Controllers
             {
                 using (RecursoCurricular.BaseCurricular.Context context = new RecursoCurricular.BaseCurricular.Context())
                 {
-                    new RecursoCurricular.BaseCurricular.Eje
+                    RecursoCurricular.BaseCurricular.Eje eje = new RecursoCurricular.BaseCurricular.Eje
                     {
                         AnoNumero = this.CurrentAnio.Numero,
                         SectorId = model.SectorId,
                         Id = model.Id,
                         Numero = model.Numero,
                         Nombre = model.Nombre.Trim()
-                    }.Save(context);
+                    };
+
+                    eje.Save(context);
 
                     foreach (int tipoEducacionCodigo in model.SelectedTipoEducacion)
                     {
@@ -64,6 +66,8 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Controllers
                     }
 
                     context.SubmitChanges();
+
+                    eje.SyncUp();
                 }
 
                 return this.Json("200", JsonRequestBehavior.DenyGet);

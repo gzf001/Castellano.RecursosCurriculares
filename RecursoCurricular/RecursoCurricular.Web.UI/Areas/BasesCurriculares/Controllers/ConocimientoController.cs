@@ -32,7 +32,7 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Controllers
             {
                 using (RecursoCurricular.BaseCurricular.Context context = new RecursoCurricular.BaseCurricular.Context())
                 {
-                    new RecursoCurricular.BaseCurricular.Conocimiento
+                    RecursoCurricular.BaseCurricular.Conocimiento conocimiento = new RecursoCurricular.BaseCurricular.Conocimiento
                     {
                         TipoEducacionCodigo = model.TipoEducacionCodigo,
                         AnoNumero = this.CurrentAnio.Numero,
@@ -41,9 +41,13 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Controllers
                         Numero = model.Numero,
                         Nombre = model.Nombre.Trim(),
                         Descripcion = string.IsNullOrEmpty(model.Descripcion) ? default(string) : model.Descripcion.Trim()
-                    }.Save(context);
+                    };
+
+                    conocimiento.Save(context);
 
                     context.SubmitChanges();
+
+                    conocimiento.SyncUp();
                 }
 
                 return this.Json("200", JsonRequestBehavior.DenyGet);

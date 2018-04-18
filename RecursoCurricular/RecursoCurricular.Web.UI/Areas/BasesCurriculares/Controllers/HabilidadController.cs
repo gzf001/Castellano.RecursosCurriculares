@@ -32,7 +32,7 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Controllers
             {
                 using (RecursoCurricular.BaseCurricular.Context context = new RecursoCurricular.BaseCurricular.Context())
                 {
-                    new RecursoCurricular.BaseCurricular.Habilidad
+                    RecursoCurricular.BaseCurricular.Habilidad habilidad = new RecursoCurricular.BaseCurricular.Habilidad
                     {
                         Id = model.Id,
                         TipoEducacionCodigo = model.TipoEducacionCodigo,
@@ -40,9 +40,13 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Controllers
                         SectorId = model.SectorId,
                         Numero = model.Numero,
                         Descripcion = model.Descripcion.Trim()
-                    }.Save(context);
+                    };
+
+                    habilidad.Save(context);
 
                     context.SubmitChanges();
+
+                    habilidad.SyncUp();
                 }
 
                 return this.Json("200", JsonRequestBehavior.DenyGet);

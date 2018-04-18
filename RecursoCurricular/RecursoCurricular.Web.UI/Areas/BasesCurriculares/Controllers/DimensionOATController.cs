@@ -30,20 +30,22 @@ namespace RecursoCurricular.Web.UI.Areas.BasesCurriculares.Controllers
 
             try
             {
-                RecursoCurricular.BaseCurricular.DimensionOAT dimensionOAT = RecursoCurricular.BaseCurricular.DimensionOAT.Get(model.Id, this.CurrentAnio.Numero);
-
                 using (RecursoCurricular.BaseCurricular.Context context = new RecursoCurricular.BaseCurricular.Context())
                 {
-                    new RecursoCurricular.BaseCurricular.DimensionOAT
+                    RecursoCurricular.BaseCurricular.DimensionOAT dimensionOAT = new RecursoCurricular.BaseCurricular.DimensionOAT
                     {
                         Id = model.Id,
                         AnoNumero = this.CurrentAnio.Numero,
                         Numero = model.Numero,
                         Nombre = model.Nombre.Trim(),
                         Descripcion = string.IsNullOrEmpty(model.Descripcion) ? default(string) : model.Descripcion.Trim()
-                    }.Save(context);
+                    };
+
+                    dimensionOAT.Save(context);
 
                     context.SubmitChanges();
+
+                    dimensionOAT.SyncUp();
                 }
 
                 return this.Json("200", JsonRequestBehavior.DenyGet);
